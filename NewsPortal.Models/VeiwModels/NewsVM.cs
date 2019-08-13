@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewsPortal.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -43,5 +44,13 @@ namespace NewsPortal.Models.VeiwModels
         /// </summary>
         [Required]
         public string Text { get; set; }
+    }
+
+    public class NewsListVM
+    {
+        /// <summary>
+        /// Список новостей 
+        /// </summary>
+        public List<News> NewsList { get; set; }
     }
 }

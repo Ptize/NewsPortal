@@ -7,9 +7,9 @@ using NewsPortal.Models.VeiwModels;
 
 namespace NewsPortal.Domain.Mapping
 {
-    class MappingNews : Profile
+    class MappingProfile : Profile
     {
-        public MappingNews()
+        public MappingProfile()
         {
             CreateMap<News, NewsVM>()
                 .ReverseMap()
