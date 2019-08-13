@@ -12,14 +12,27 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using NewsPortal.Data;
+using NewsPortal.Swagger;
+using NewsPortal.Data.interfaces;
+using NewsPortal.Domain.Storage;
+using NewsPortal.Domain.Storage.Interfaces;
+using NewsPortal.Domain.Builder;
+using NewsPortal.Domain.Mapping;
+using AutoMapper;
 
 namespace NewsPortal
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(hostingEnvironment.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", reloadOnChange: true, optional: true)
+               .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -27,33 +40,40 @@ namespace NewsPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(opt =>
-        opt.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<DataContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("NewsPortalDbConnectionString")));
+
             services.AddMvc();
+
+            SwaggerSettings swaggerConf = new SwaggerSettings(Configuration);
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info
+                c.SwaggerDoc(swaggerConf.Swagger.Version, new Info
                 {
-                    Version = "v1",
-                    Title = "ToDo API",
-                    Description = "A simple example ASP.NET Core Web API",                    
+                    Version = swaggerConf.Swagger.Version,
+                    Title = swaggerConf.Swagger.Title,
+                    Description = swaggerConf.Swagger.Description
                 });
+                c.IncludeXmlComments(string.Format(@"{0}\{1}", System.AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
             });
 
+            services.AddScoped<INewsRepository, NewsRepository>();
+
+            services.AddScoped<INewsStorage, NewsStorage>();
+
+            services.AddScoped<NewsBuilder>();
+
+            services.AddAutoMapper(typeof(MappingProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                SwaggerSettings swaggerConf = new SwaggerSettings(Configuration);
+                c.SwaggerEndpoint(swaggerConf.Swagger.EndPoint, swaggerConf.Swagger.Spec);
                 c.RoutePrefix = string.Empty;
             });
 

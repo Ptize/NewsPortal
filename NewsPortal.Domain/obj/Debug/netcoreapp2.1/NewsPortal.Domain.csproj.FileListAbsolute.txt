@@ -28,3 +28,17 @@ C:\Users\home.PTIZ\Desktop\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\
 C:\Users\home.PTIZ\Desktop\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.pdb
 C:\Users\home.PTIZ\Desktop\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\home.PTIZ\Desktop\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.xml
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Domain.deps.json
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Domain.dll
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Domain.pdb
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Data.dll
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Models.dll
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Data.pdb
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Models.pdb
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.csprojAssemblyReference.cache
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.csproj.CoreCompileInputs.cache
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.AssemblyInfoInputs.cache
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.AssemblyInfo.cs
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.csproj.CopyComplete
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.dll
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.pdb

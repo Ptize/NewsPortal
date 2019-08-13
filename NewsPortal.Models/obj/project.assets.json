@@ -695,11 +695,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj",
+      "projectUniqueName": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj",
       "projectName": "NewsPortal.Models",
-      "projectPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj",
+      "projectPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj",
       "packagesPath": "C:\\Users\\home.PTIZ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal\\NewsPortal.Models\\obj\\",
+      "outputPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
