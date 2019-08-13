@@ -7,7 +7,7 @@ using NewsPortal.Models.VeiwModels;
 
 namespace NewsPortal.Domain.Mapping
 {
-    class MappingProfile : Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {

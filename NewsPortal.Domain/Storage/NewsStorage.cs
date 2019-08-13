@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NewsPortal.Data;
 using NewsPortal.Data.interfaces;
+using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.VeiwModels;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NewsPortal.Domain.Storage
 {
-    public class NewsStorage
+    public class NewsStorage : INewsStorage
     {
         private readonly DataContext _context;
         private readonly INewsRepository _newsRepository;

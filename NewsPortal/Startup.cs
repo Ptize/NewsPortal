@@ -13,6 +13,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using NewsPortal.Data;
 using NewsPortal.Swagger;
+using NewsPortal.Data.interfaces;
+using NewsPortal.Domain.Storage;
+using NewsPortal.Domain.Storage.Interfaces;
+using NewsPortal.Domain.Builder;
+using NewsPortal.Domain.Mapping;
+using AutoMapper;
 
 namespace NewsPortal
 {
@@ -34,7 +40,7 @@ namespace NewsPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("NewsPortalDbConnectionString")));
 
             services.AddMvc();
 
@@ -51,6 +57,13 @@ namespace NewsPortal
                 c.IncludeXmlComments(string.Format(@"{0}\{1}", System.AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
             });
 
+            services.AddScoped<INewsRepository, NewsRepository>();
+
+            services.AddScoped<INewsStorage, NewsStorage>();
+
+            services.AddScoped<NewsBuilder>();
+
+            services.AddAutoMapper(typeof(MappingProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
