@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewsPortal.Data\NewsPortal.Data.csproj" />
+    <ProjectReference Include="..\NewsPortal.Models\NewsPortal.Models.csproj" />
+  </ItemGroup>
+
+</Project>
