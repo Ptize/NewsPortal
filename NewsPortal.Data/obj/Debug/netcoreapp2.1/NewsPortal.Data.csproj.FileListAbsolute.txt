@@ -36,5 +36,5 @@ C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcore
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.csproj.CopyComplete
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.dll
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.pdb
-C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\Microsoft.EntityFrameworkCore.Relational.xml
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.runtimeconfig.json
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.runtimeconfig.dev.json

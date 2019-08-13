@@ -17,7 +17,7 @@ namespace NewsPortal
             using (var serviceScope = webHost.Services.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<DataContext>();
-                //context.Database.Migrate();
+                context.Database.Migrate();
             }
 
             return webHost;
