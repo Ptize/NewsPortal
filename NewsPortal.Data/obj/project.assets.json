@@ -2990,11 +2990,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal\\NewsPortal.Data\\NewsPortal.Data.csproj",
+      "projectUniqueName": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Data\\NewsPortal.Data.csproj",
       "projectName": "NewsPortal.Data",
-      "projectPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal\\NewsPortal.Data\\NewsPortal.Data.csproj",
+      "projectPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Data\\NewsPortal.Data.csproj",
       "packagesPath": "C:\\Users\\home.PTIZ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal\\NewsPortal.Data\\obj\\",
+      "outputPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3013,8 +3013,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj": {
-              "projectPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj"
+            "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj": {
+              "projectPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj"
             }
           }
         }
