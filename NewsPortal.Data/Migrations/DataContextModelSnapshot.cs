@@ -36,6 +36,9 @@ namespace NewsPortal.Data.Migrations
 
                     b.HasKey("NewsId");
 
+                    b.HasIndex("NewsId")
+                        .IsUnique();
+
                     b.ToTable("Newss");
                 });
 #pragma warning restore 612, 618

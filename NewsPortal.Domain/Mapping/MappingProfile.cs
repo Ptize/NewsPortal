@@ -13,7 +13,7 @@ namespace NewsPortal.Domain.Mapping
         {
             CreateMap<News, NewsVM>()
                 .ReverseMap()
-                .ForMember(j => j.NewsId, options => options.Ignore());
+                .ForMember(n => n.NewsId, options => options.Ignore());
         }
     }
 }

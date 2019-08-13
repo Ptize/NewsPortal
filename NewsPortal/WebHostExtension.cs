@@ -30,7 +30,7 @@ namespace NewsPortal
                 var context = serviceScope.ServiceProvider.GetService<DataContext>();
                 var hostingEnvironment = serviceScope.ServiceProvider.GetService<IHostingEnvironment>();
 
-                if (hostingEnvironment.EnvironmentName == "Debug" && !context.Newss.Any())
+                if (!context.Newss.Any())
                 {
                     DataSeeder.InitData(context);
                 }

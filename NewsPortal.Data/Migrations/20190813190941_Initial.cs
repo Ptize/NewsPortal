@@ -22,6 +22,12 @@ namespace NewsPortal.Data.Migrations
                 {
                     table.PrimaryKey("PK_Newss", x => x.NewsId);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Newss_NewsId",
+                table: "Newss",
+                column: "NewsId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -9,7 +9,6 @@ namespace NewsPortal.Data
     public class DataContext : DbContext
     {
         public DbSet<News> Newss { get; set; }
-        public object News { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -23,6 +22,9 @@ namespace NewsPortal.Data
             modelBuilder.Entity<News>()
                 .Property(n => n.NewsId)
                 .ValueGeneratedOnAdd();
+            modelBuilder.Entity<News>()
+                .HasIndex(n => n.NewsId)
+                .IsUnique();
         }
     }
 }
