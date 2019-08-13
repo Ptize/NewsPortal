@@ -19,6 +19,7 @@ namespace NewsPortal.Models.VeiwModels
         /// <summary>
         /// Дата добавления
         /// </summary>
+        [DataType(DataType.Date)]
         public DateTime CreateDate { get; set; }
 
         /// <summary>

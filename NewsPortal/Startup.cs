@@ -32,7 +32,7 @@ namespace NewsPortal
                .AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", reloadOnChange: true, optional: true)
                .AddEnvironmentVariables();
 
-            Configuration = configuration;
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
