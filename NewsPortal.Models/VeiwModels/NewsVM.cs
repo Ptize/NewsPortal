@@ -20,7 +20,7 @@ namespace NewsPortal.Models.VeiwModels
         /// Дата добавления
         /// </summary>
         [DataType(DataType.Date)]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         /// <summary>
         /// Изображение, прикреплённое к новости
