@@ -47,11 +47,14 @@ namespace NewsPortal.Domain.Storage
             return news;
         }
 
-        public async Task<NewsListVM> GetAll()
+        public async Task<NewsListVM> GetAll(int count, int page)
         {
+            var countEntity = await _newsRepository.Count();
+
             var news = new NewsListVM
             {
-                NewsList = await _newsRepository.GetAll()
+                CountPage = countEntity % count == 0 ? countEntity / count : (countEntity / count) + 1,
+                NewsList = await _newsRepository.GetAll(count, page)
             };
             return news;
         }

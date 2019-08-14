@@ -27,9 +27,15 @@ namespace NewsPortal.Domain.Builder
             return OperationResult.Success;
         }
 
-        public async Task<NewsListVM> GetAll()
+        public async Task<NewsListVM> GetAll(int countEntity, int page)
         {
-            return await _newsStorage.GetAll();
+            if (countEntity <= 0 || page <= 0)
+            {
+                NewsListVM listEmpty = new NewsListVM();
+                return listEmpty;
+            }
+            else
+            return await _newsStorage.GetAll(countEntity, page);
         }
 
         public async Task<News> Get(Guid newsid)
