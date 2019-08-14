@@ -42,6 +42,7 @@ namespace NewsPortal.Domain.Storage
         public async Task<News> Update(NewsVM newsVM)
         {
             var news = _mapper.Map(newsVM, await _context.Newss.SingleAsync(n => n.NewsId == newsVM.NewsId));
+            news.CreateDate = DateTime.Now;
             await _context.SaveChangesAsync();
             return news;
         }
