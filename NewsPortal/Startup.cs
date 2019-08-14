@@ -18,6 +18,7 @@ using NewsPortal.Domain.Storage;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Mapping;
+using Microsoft.AspNetCore.Routing;
 using AutoMapper;
 
 namespace NewsPortal
@@ -54,7 +55,7 @@ namespace NewsPortal
                     Title = swaggerConf.Swagger.Title,
                     Description = swaggerConf.Swagger.Description
                 });
-                c.IncludeXmlComments(string.Format(@"{0}\{1}", System.AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
+                c.IncludeXmlComments(string.Format(@"{0}\{1}", AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
             });
 
             services.AddScoped<INewsRepository, NewsRepository>();
@@ -78,6 +79,19 @@ namespace NewsPortal
             });
 
             app.UseMvc();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("api/get", async context =>
+                {
+                    await context.Response.WriteAsync("для обработки использован маршрут api/get");
+                });
+
+                routes.MapRoute("default",
+                    "{controller}/{action}/{id?}",
+                    new { controller = "Home", action = "Index" }
+                );
+            });
         }
     }
 }
