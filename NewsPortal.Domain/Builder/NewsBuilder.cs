@@ -4,8 +4,6 @@ using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Domain.Builder

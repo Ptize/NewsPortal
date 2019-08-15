@@ -42,3 +42,5 @@ C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netco
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.csproj.CopyComplete
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.dll
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\obj\Debug\netcoreapp2.1\NewsPortal.Domain.pdb
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Domain.runtimeconfig.json
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Domain\bin\Debug\netcoreapp2.1\NewsPortal.Domain.runtimeconfig.dev.json
