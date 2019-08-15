@@ -689,23 +689,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\home.PTIZ\\.nuget\\packages\\": {},
+    "C:\\Users\\gvg_r\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj",
+      "projectUniqueName": "C:\\Users\\gvg_r\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj",
       "projectName": "NewsPortal.Models",
-      "projectPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj",
-      "packagesPath": "C:\\Users\\home.PTIZ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\home.PTIZ\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\obj\\",
+      "projectPath": "C:\\Users\\gvg_r\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\NewsPortal.Models.csproj",
+      "packagesPath": "C:\\Users\\gvg_r\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gvg_r\\Documents\\GitHub\\NewsPortal\\NewsPortal.Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\home.PTIZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\gvg_r\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

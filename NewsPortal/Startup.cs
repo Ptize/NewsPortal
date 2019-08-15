@@ -19,6 +19,8 @@ using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Mapping;
 using AutoMapper;
+using System.Reflection;
+using System.IO;
 
 namespace NewsPortal
 {
@@ -54,7 +56,10 @@ namespace NewsPortal
                     Title = swaggerConf.Swagger.Title,
                     Description = swaggerConf.Swagger.Description
                 });
-                c.IncludeXmlComments(string.Format(@"{0}\{1}", System.AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+                //c.IncludeXmlComments(string.Format(@"{0}\{1}", System.AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
             });
 
             services.AddScoped<INewsRepository, NewsRepository>();

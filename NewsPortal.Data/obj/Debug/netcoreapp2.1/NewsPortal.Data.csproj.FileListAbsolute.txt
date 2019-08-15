@@ -38,3 +38,17 @@ C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcore
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.pdb
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.runtimeconfig.json
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.runtimeconfig.dev.json
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.deps.json
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.runtimeconfig.json
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.runtimeconfig.dev.json
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.dll
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Data.pdb
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Models.dll
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\bin\Debug\netcoreapp2.1\NewsPortal.Models.pdb
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.csprojAssemblyReference.cache
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.csproj.CoreCompileInputs.cache
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.AssemblyInfoInputs.cache
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.AssemblyInfo.cs
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.csproj.CopyComplete
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.dll
+C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Data\obj\Debug\netcoreapp2.1\NewsPortal.Data.pdb
