@@ -28,12 +28,12 @@ namespace NewsPortal.Controllers
         /// Метод на получение списка новостей
         /// </summary>
         /// <returns>Список всех новостей</returns>
-        [HttpGet("list/")]
+        [HttpGet("list/pageSize={count}/pageNum={page}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<NewsListVM> GetAll()
+        public async Task<NewsListVM> GetAll([FromRoute]int count, [FromRoute]int page)
         {
-            var news = await _newsBuilder.GetAll();
+            var news = await _newsBuilder.GetAll(count, page);
             return news;
         }
 
@@ -90,6 +90,22 @@ namespace NewsPortal.Controllers
         public async Task Delete([FromRoute]Guid newsId)
         {
             await _newsStorage.Delete(newsId);
+        }
+    }
+
+    [ApiController]
+    [Route("[controller]")]
+    public class BlogController : Controller
+    {
+        /// <summary>
+        /// Метод, отображающий стартовую страницу
+        /// </summary>
+        /// <returns></returns>
+        [Route("")]
+        [Route("Index")]
+        public IActionResult Index()
+        {
+            return View(); // = ~/Views/Blog/Index.cshtml
         }
     }
 }

@@ -18,6 +18,7 @@ using NewsPortal.Domain.Storage;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Mapping;
+using Microsoft.AspNetCore.Routing;
 using AutoMapper;
 
 namespace NewsPortal
@@ -54,7 +55,7 @@ namespace NewsPortal
                     Title = swaggerConf.Swagger.Title,
                     Description = swaggerConf.Swagger.Description
                 });
-                c.IncludeXmlComments(string.Format(@"{0}\{1}", System.AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
+                c.IncludeXmlComments(string.Format(@"{0}\{1}", AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
             });
 
             services.AddScoped<INewsRepository, NewsRepository>();
@@ -74,10 +75,24 @@ namespace NewsPortal
             {
                 SwaggerSettings swaggerConf = new SwaggerSettings(Configuration);
                 c.SwaggerEndpoint(swaggerConf.Swagger.EndPoint, swaggerConf.Swagger.Spec);
-                c.RoutePrefix = string.Empty;
+                //c.RoutePrefix = string.Empty;
             });
 
-            app.UseMvc();
+            //app.UseMvc();
+            app.UseStaticFiles();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("api/get", async context =>
+                {
+                    await context.Response.WriteAsync("для обработки использован маршрут api/get");
+                });
+
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "{controller}/{action}");
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Blog", action = "Index" });
+            });
         }
     }
 }

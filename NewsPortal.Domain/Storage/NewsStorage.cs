@@ -42,15 +42,19 @@ namespace NewsPortal.Domain.Storage
         public async Task<News> Update(NewsVM newsVM)
         {
             var news = _mapper.Map(newsVM, await _context.Newss.SingleAsync(n => n.NewsId == newsVM.NewsId));
+            news.CreateDate = DateTime.Now;
             await _context.SaveChangesAsync();
             return news;
         }
 
-        public async Task<NewsListVM> GetAll()
+        public async Task<NewsListVM> GetAll(int count, int page)
         {
+            var countEntity = await _newsRepository.Count();
+
             var news = new NewsListVM
             {
-                NewsList = await _newsRepository.GetAll()
+                CountPage = countEntity % count == 0 ? countEntity / count : (countEntity / count) + 1,
+                NewsList = await _newsRepository.GetAll(count, page)
             };
             return news;
         }

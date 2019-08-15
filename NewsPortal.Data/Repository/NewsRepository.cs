@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsPortal.Data.interfaces;
 using NewsPortal.Models.Data;
+using NewsPortal.Models.VeiwModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,12 +30,28 @@ namespace NewsPortal.Data
             _context.Newss.Remove(news);
         }
 
-        public async Task<List<News>> GetAll()
+        public async Task<int> Count()
         {
-            var newss = await _context.Newss
-                .ToListAsync();
+            return await _context.Newss.CountAsync();
+        }
 
-            return newss;
+        public async Task<List<BriefNewsVM>> GetAll(int countEntity, int page)
+        {
+            var listBriefNewsVM = _context.Newss
+                .Skip(countEntity * (page - 1))
+                .Take(countEntity);
+
+            var resListBriefNewsVM = (from i in listBriefNewsVM
+                                      select new BriefNewsVM
+                                      {
+                                          NewsId = i.NewsId,
+                                          CreateDate = i.CreateDate,
+                                          Picture = i.Photo,
+                                          Headline = i.Headline,
+                                      }).ToListAsync();
+
+
+            return await resListBriefNewsVM;
         }
 
         public async Task<News> Get(Guid newsId)
