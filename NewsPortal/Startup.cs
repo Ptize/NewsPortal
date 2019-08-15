@@ -78,7 +78,8 @@ namespace NewsPortal
                 //c.RoutePrefix = string.Empty;
             });
 
-            app.UseMvc();
+            //app.UseMvc();
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
@@ -87,10 +88,10 @@ namespace NewsPortal
                     await context.Response.WriteAsync("для обработки использован маршрут api/get");
                 });
 
-                routes.MapRoute("default",
-                    "{controller}/{action}/{id?}",
-                    new { controller = "Home", action = "Index" }
-                );
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "{controller}/{action}");
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Blog", action = "Index" });
             });
         }
     }

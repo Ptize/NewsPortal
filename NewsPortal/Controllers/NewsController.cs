@@ -92,4 +92,20 @@ namespace NewsPortal.Controllers
             await _newsStorage.Delete(newsId);
         }
     }
+
+    [ApiController]
+    [Route("[controller]")]
+    public class BlogController : Controller
+    {
+        /// <summary>
+        /// Метод, отображающий стартовую страницу
+        /// </summary>
+        /// <returns></returns>
+        [Route("")]
+        [Route("Index")]
+        public IActionResult Index()
+        {
+            return View(); // = ~/Views/Blog/Index.cshtml
+        }
+    }
 }
