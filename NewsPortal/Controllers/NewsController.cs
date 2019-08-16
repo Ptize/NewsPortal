@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
@@ -13,6 +14,7 @@ namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class NewsController :Controller
     {
         private readonly INewsStorage _newsStorage;
