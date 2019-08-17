@@ -1,10 +1,12 @@
 'use strict';
 
+// require('babel-core/register');
+// require('babel-polyfill');
 const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: "./src/index.jsx",
+    entry: ["babel-polyfill", "./src/index.jsx"],
     mode: "development",
     devtool: "source-map",
     output: {
