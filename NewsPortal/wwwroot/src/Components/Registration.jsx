@@ -4,8 +4,6 @@ import { Form, Field } from "react-final-form"
 import { Box, Typography, Button, FormLabel, withStyles } from '@material-ui/core'
 
 import { TextField, Radio, useStyles } from './Styles'
-// import TextField from './Styles/TextField'
-// import Radio from './Styles/Radio'
 
 class Registration extends Component {
     render() {
@@ -28,15 +26,6 @@ class Registration extends Component {
                     initialValues={{ role: 'editor' }}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <form onSubmit={handleSubmit}>
-                            {/* <Field name="nickname" validate={required}>
-                        {({ input, meta }) => (
-                            <div className={meta.active ? 'active' : ''}>
-                                <label>Логин</label>
-                                <input {...input} type="text" placeholder="Логин" />
-                                {meta.error && meta.touched && <span>{meta.error}</span>}
-                            </div>
-                        )}
-                    </Field> */}
                             <div className={classes.fields}>
                                 <Field
                                     name="nickname"
@@ -91,7 +80,7 @@ class Registration extends Component {
                                         value="admin"
                                     />{' '}
                                     Администратор
-                    </div>
+                                </div>
                             </div>
                             <div className={classes.buttons}>
                                 <div className={classes.button}>

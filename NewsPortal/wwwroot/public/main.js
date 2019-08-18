@@ -97719,18 +97719,7 @@ function (_Component) {
         }, post.headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
           variant: "subtitle1",
           color: "secondary"
-        }, "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0435\u043D\u0438\u0435...")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Divider"], null)) // <div className={classes.previewNews} key={index}>
-        //   <Typography variant="h6">
-        //     {post.headline}
-        //   </Typography>
-        //   <div className={classes.previewNewsDescr}>
-        //     <Link to={"/Blog/News/" + post.newsId}>
-        //       Смотреть продолжение...
-        //     </Link>
-        //   </div>
-        //   <Divider />
-        // </div>
-        ;
+        }, "\u041F\u0440\u043E\u0434\u043E\u043B\u0436\u0435\u043D\u0438\u0435...")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Divider"], null));
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Grid"], {
         item: true,
         xs: 12,
@@ -97899,24 +97888,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/Authorization",
         className: classes.link
-      }, "\u0412\u043E\u0439\u0442\u0438")))) //     <Toolbar className={classes.toolbar}>
-      //         <Typography
-      //             component="h2"
-      //             variant="h4"
-      //             color="inherit"
-      //             align="center"
-      //             noWrap
-      //             className={classes.toolbarTitle}
-      //         >
-      //             NewsPortal
-      // </Typography>
-      //         <Link to="/Authorization">
-      //             <Button variant="outlined" size="small">
-      //                 Войти
-      //             </Button>
-      //         </Link>
-      //     </Toolbar>
-      ;
+      }, "\u0412\u043E\u0439\u0442\u0438"))));
     }
   }]);
 
@@ -98377,12 +98349,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 var useStyles = function useStyles(theme) {
   return {
-    // root: {
-    //     flexGrow: 1
-    // },
-    // menuButton: {
-    //     marginRight: theme.spacing(2),
-    // },
     // Header styling
     link: {
       textDecoration: 'none',
@@ -98398,36 +98364,6 @@ var useStyles = function useStyles(theme) {
       marginTop: theme.spacing(8),
       padding: theme.spacing(6, 0)
     },
-    // toolbar: {
-    //     borderBottom: `1px solid ${theme.palette.divider}`,
-    // },
-    // toolbarTitle: {
-    //     flex: 1,
-    // },
-    // toolbarSecondary: {
-    //     justifyContent: 'space-between',
-    //     overflowX: 'auto',
-    // },
-    // toolbarLink: {
-    //     padding: theme.spacing(1),
-    //     flexShrink: 0,
-    // },
-    // overlay: {
-    //     position: 'absolute',
-    //     top: 0,
-    //     bottom: 0,
-    //     right: 0,
-    //     left: 0,
-    //     backgroundColor: 'rgba(0,0,0,.3)',
-    // },
-    // mainFeaturedPostContent: {
-    //     position: 'relative',
-    //     padding: theme.spacing(3),
-    //     [theme.breakpoints.up('md')]: {
-    //         padding: theme.spacing(6),
-    //         paddingRight: 0,
-    //     },
-    // },
     // Blog page's styling
     mainGrid: {
       marginTop: theme.spacing(3)
@@ -98444,10 +98380,6 @@ var useStyles = function useStyles(theme) {
     cardMedia: {
       width: 160
     },
-    // markdown: {
-    //     ...theme.typography.body2,
-    //     padding: theme.spacing(3, 0),
-    // },
     sidebarAboutBox: {
       padding: theme.spacing(2),
       backgroundColor: theme.palette.grey[200]
@@ -98480,21 +98412,7 @@ var useStyles = function useStyles(theme) {
     },
     button: {
       marginTop: theme.spacing(3),
-      marginRight: theme.spacing(1) // previewImage: {
-      //     height: 200,
-      //     margin: 5,
-      //     flex: 1,
-      //     align: 'center'
-      // },
-      // previewNews: {
-      //     marginTop: 5,
-      //     marginBottom: 5
-      // },
-      // previewNewsDescr: {
-      //     marginTop: 5,
-      //     display: 'flex'
-      // }
-
+      marginRight: theme.spacing(1)
     }
   };
 };

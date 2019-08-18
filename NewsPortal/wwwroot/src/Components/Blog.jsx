@@ -85,18 +85,6 @@ class Blog extends Component {
                 </CardActionArea>
                 <Divider />
               </Grid>
-              // <div className={classes.previewNews} key={index}>
-              //   <Typography variant="h6">
-              //     {post.headline}
-              //   </Typography>
-
-              //   <div className={classes.previewNewsDescr}>
-              //     <Link to={"/Blog/News/" + post.newsId}>
-              //       Смотреть продолжение...
-              //     </Link>
-              //   </div>
-              //   <Divider />
-              // </div>
             ))}
           </Grid>
           {/* End main content */}

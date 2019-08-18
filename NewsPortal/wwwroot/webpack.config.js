@@ -1,7 +1,5 @@
 'use strict';
 
-// require('babel-core/register');
-// require('babel-polyfill');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -33,23 +31,7 @@ module.exports = {
             test: /\.jsx$/,
             exclude: /(node_modules)/,
             loader: "babel-loader"
-        },
-            // {
-            //     test: /\.css$/,
-            //     use: [
-            //         "style-loader",
-            //         {
-            //             loader: "css-loader",
-            //             options: {
-            //                 modules: true
-            //             }
-            //         }
-            //     ]
-            // },
-            // {
-            //     test: /\.(png|svg|jpg|gif)$/,
-            //     use: ["file-loader"]
-            // }
+        }
         ]
     }
 };

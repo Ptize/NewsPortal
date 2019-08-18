@@ -23,23 +23,6 @@ class Header extends Component {
                     </Button>
                 </Toolbar>
             </AppBar>
-            //     <Toolbar className={classes.toolbar}>
-            //         <Typography
-            //             component="h2"
-            //             variant="h4"
-            //             color="inherit"
-            //             align="center"
-            //             noWrap
-            //             className={classes.toolbarTitle}
-            //         >
-            //             NewsPortal
-            // </Typography>
-            //         <Link to="/Authorization">
-            //             <Button variant="outlined" size="small">
-            //                 Войти
-            //             </Button>
-            //         </Link>
-            //     </Toolbar>
         )
     }
 }
