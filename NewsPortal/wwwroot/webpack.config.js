@@ -11,11 +11,10 @@ module.exports = {
     devtool: "source-map",
     output: {
         filename: "./main.js",
-        publicPath: 'public/',
-        path: path.resolve(__dirname, "./dist/")
+        path: path.resolve(__dirname, "./public/")
     },
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, "public"),
         compress: true,
         port: 9000,
         watchContentBase: true,

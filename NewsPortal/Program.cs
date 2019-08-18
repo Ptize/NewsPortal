@@ -23,7 +23,6 @@ namespace NewsPortal
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseWebRoot("ClientApp"); // установка сетевой папки
+                .UseStartup<Startup>();
     }
 }

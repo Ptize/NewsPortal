@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import useStyles from './makeStyles.js';
+import { Container, Typography } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+
+import useStyles from '../Styles/makeStyles.js'
 
 class Footer extends Component {
     render() {
@@ -19,4 +19,4 @@ class Footer extends Component {
     }
 }
 
-export default withStyles(useStyles)(Footer);
+export default withStyles(useStyles)(Footer)
