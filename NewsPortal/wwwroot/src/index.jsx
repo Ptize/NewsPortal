@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { render } from 'react-dom' //2
-import App from './App.jsx' //3
+import { render } from 'react-dom'
+import App from './Components/App.jsx'
 
 ReactDOM.render(
     <App />,

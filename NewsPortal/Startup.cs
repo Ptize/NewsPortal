@@ -83,13 +83,8 @@ namespace NewsPortal
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("api/get", async context =>
-                {
-                    await context.Response.WriteAsync("для обработки использован маршрут api/get");
-                });
-
                 routes.MapRoute(
-                    name: "DefaultApi",
+                    name: "default",
                     template: "{controller}/{action}");
                 routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Blog", action = "Index" });
             });
