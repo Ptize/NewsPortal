@@ -1,8 +1,93 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <doc>
-  <assembly>
-    <name>NewsPortal.Models</name>
-  </assembly>
-  <members>
-  </members>
+    <assembly>
+        <name>NewsPortal.Models</name>
+    </assembly>
+    <members>
+        <member name="T:NewsPortal.Models.Enums.OperationResult">
+            <summary>
+            Результат операции
+            </summary>
+        </member>
+        <member name="F:NewsPortal.Models.Enums.OperationResult.Success">
+            <summary>
+            операция завершилась успешно
+            </summary>
+        </member>
+        <member name="F:NewsPortal.Models.Enums.OperationResult.InvalidId">
+            <summary>
+            не верный идентификатор
+            </summary>
+        </member>
+        <member name="T:NewsPortal.Models.VeiwModels.NewsVM">
+            <summary>
+            Класс описывает Новость
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.NewsVM.NewsId">
+            <summary>
+            Идентификатор сущности
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.NewsVM.CreateDate">
+            <summary>
+            Дата добавления
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.NewsVM.Photo">
+            <summary>
+            Изображение, прикреплённое к новости
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.NewsVM.Headline">
+            <summary>
+            Заголовок новости
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.NewsVM.Review">
+            <summary>
+            Краткое ревью новости
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.NewsVM.Text">
+            <summary>
+            Основной текст новости
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.NewsListVM.CountPage">
+            <summary>
+            Количество страниц
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.NewsListVM.NewsList">
+            <summary>
+            Список новостей 
+            </summary>
+        </member>
+        <member name="T:NewsPortal.Models.VeiwModels.BriefNewsVM">
+            <summary>
+            Класс описывает сокращённую Новость в списке новостей
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.BriefNewsVM.NewsId">
+            <summary>
+            Идентификатор сущности
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.BriefNewsVM.CreateDate">
+            <summary>
+            Дата добавления
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.BriefNewsVM.Picture">
+            <summary>
+            Изображение, прикреплённое к новости
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.BriefNewsVM.Headline">
+            <summary>
+            Заголовок новости
+            </summary>
+        </member>
+    </members>
 </doc>

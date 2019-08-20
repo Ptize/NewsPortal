@@ -96,3 +96,5 @@ C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.csproj.CopyComplete
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.dll
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.pdb
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\bin\Debug\netcoreapp2.1\NewsPortal.xml
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\bin\Debug\netcoreapp2.1\NewsPortal.Models.xml

@@ -28,3 +28,4 @@ C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Models\obj\Debug\netco
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Models\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Models\bin\Debug\netcoreapp2.1\Microsoft.Extensions.Identity.Stores.xml
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Models\obj\Debug\netcoreapp2.1\NewsPortal.Models.csproj.CopyComplete
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal.Models\bin\Debug\netcoreapp2.1\NewsPortal.Models.xml
