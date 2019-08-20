@@ -98195,9 +98195,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -98223,8 +98223,14 @@ function (_Component) {
     _this.state = {
       news: {},
       isFetching: true,
-      error: null
+      error: null,
+      itemSelected: '0',
+      openDeletion: false,
+      openEditing: false
     };
+    _this.handleOpenDeletion = _this.handleOpenDeletion.bind(_assertThisInitialized(_this));
+    _this.handleCloseDeletion = _this.handleCloseDeletion.bind(_assertThisInitialized(_this));
+    _this.handleConfirmDeletion = _this.handleConfirmDeletion.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -98253,8 +98259,59 @@ function (_Component) {
       });
     }
   }, {
+    key: "handleOpenDeletion",
+    value: function handleOpenDeletion(newsId) {
+      this.setState({
+        itemSelected: newsId,
+        openDeletion: true
+      });
+    }
+  }, {
+    key: "handleCloseDeletion",
+    value: function handleCloseDeletion() {
+      console.log("Btn close");
+      this.setState({
+        openDeletion: false
+      });
+    }
+  }, {
+    key: "handleConfirmDeletion",
+    value: function handleConfirmDeletion() {
+      var _this3 = this;
+
+      var newsId = this.state.itemSelected;
+      console.log("Btn delete");
+      console.log(newsId);
+      this.setState({
+        openDeletion: false
+      });
+      fetch("/api/news/".concat(newsId), {
+        method: 'DELETE'
+      });
+      var pageSize = 10,
+          pageNum = 1;
+      fetch("/api/news/list/pageSize=".concat(pageSize, "/pageNum=").concat(pageNum)).then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        _this3.setState({
+          news: result,
+          isFetching: false
+        });
+      })["catch"](function (e) {
+        console.log(e);
+
+        _this3.setState({
+          news: result,
+          isFetching: false,
+          error: e
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var classes = this.props.classes;
       var _this$state = this.state,
           news = _this$state.news,
@@ -98295,12 +98352,32 @@ function (_Component) {
           align: "left"
         }, row.headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TableCell"], {
           align: "left"
-        }, row.createDate), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        }, row.createData), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_3___default.a, {
           size: "small"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], {
+          onClick: function onClick() {
+            return _this4.handleOpenDeletion(row.newsId);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_2___default.a, {
           size: "small"
         }))));
-      })))));
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Dialog"], {
+        open: this.state.openDeletion,
+        onClose: this.handleCloseDeletion,
+        "aria-labelledby": "alert-dialog-title",
+        "aria-describedby": "alert-dialog-description"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogTitle"], {
+        id: "alert-dialog-title"
+      }, "Вы уверены, что хотите удалить новость?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogContentText"], {
+        id: "alert-dialog-description"
+      }, "\u0423\u0447\u0442\u0438\u0442\u0435, \u0447\u0442\u043E \u043E\u0442\u043C\u0435\u043D\u0438\u0442\u044C \u044D\u0442\u043E \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u0431\u0443\u0434\u0435\u0442 \u043D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        onClick: this.handleCloseDeletion,
+        color: "primary",
+        autoFocus: true
+      }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        onClick: this.handleConfirmDeletion.bind(this),
+        color: "secondary"
+      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"))));
     }
   }]);
 
@@ -98554,7 +98631,6 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TField; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
@@ -98566,23 +98642,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-/*export default ({
-    input: { name, onChange, value, ...restInput },
-    meta,
-    ...rest
-}) => (
-        <TextField
-            {...rest}
-            name={name}
-            helperText={meta.touched ? meta.error : undefined}
-            error={meta.error && meta.touched}
-            InputProps={restInput}
-            onChange={onChange}
-            value={value}
-        />
-)*/
-
-function TField(_ref) {
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var _ref$input = _ref.input,
       name = _ref$input.name,
       onChange = _ref$input.onChange,
@@ -98599,7 +98659,24 @@ function TField(_ref) {
     onChange: onChange,
     value: value
   }));
-}
+});
+/*export default function TField({
+    input: { name, onChange, value, ...restInput },
+    meta,
+    ...rest
+}) {
+    return (
+        <TextField
+            {...rest}
+            name={name}
+            helperText={meta.touched ? meta.error : undefined}
+            error={meta.error && meta.touched}
+            InputProps={restInput}
+            onChange={onChange}
+            value={value}
+        />
+    )
+}*/
 
 /***/ }),
 
