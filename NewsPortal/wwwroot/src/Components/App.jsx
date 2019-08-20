@@ -8,6 +8,7 @@ import Blog from './Blog.jsx'
 import NewsDetail from './NewsDetail.jsx'
 import Registration from './Registration.jsx'
 import Authorization from './Authorization.jsx'
+import NewsManager from './NewsManager.jsx'
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
               <Route path="/Registration" component={Registration} />
               <Route path="/Authorization" component={Authorization} />
               <Route path="/Blog/News/:newsId" component={NewsDetail} />
+              <Route path="/Newsmanager" component={NewsManager} />
             </Switch>
           </Container>
           <Footer />

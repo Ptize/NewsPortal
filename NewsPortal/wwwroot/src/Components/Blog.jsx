@@ -39,12 +39,12 @@ class Blog extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    const { data, isFetching, error } = this.state;
+    const { classes } = this.props
+    const { news, isFetching, error } = this.state
 
-    if (isFetching) return <div>Идет загрузка...</div>;
+    if (isFetching) return <div> Идет загрузка... </div>
 
-    if (error) return <div>{`Error: ${e.message}`}</div>;
+    if (error) return <div>{`Ошибка при попытке получения списка новостей: ${e.message}`}</div>;
 
     return (
       <main>
@@ -55,7 +55,7 @@ class Blog extends Component {
               Блог последних новостей
             </Typography>
             <Divider />
-            {this.state.news.newsList.map((post, index) => (
+            {news.newsList.map(post => (
               <Grid item key={post.newsId} xl>
                 <CardActionArea className={classes.cardArea} >
                   <Link to={"/Blog/News/" + post.newsId} className={classes.link}>
@@ -63,7 +63,7 @@ class Blog extends Component {
                       <Hidden xsDown>
                         <CardMedia
                           className={classes.cardMedia}
-                          image="https://source.unsplash.com/user/erondu"
+                          image="https://source.unsplash.com/random"
                           title="Image title"
                         />
                       </Hidden>
