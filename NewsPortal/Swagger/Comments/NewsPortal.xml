@@ -4,6 +4,26 @@
         <name>NewsPortal</name>
     </assembly>
     <members>
+        <member name="M:NewsPortal.Controllers.AuthorizationController.Authorization(System.String,System.String)">
+            <summary>
+            Метод авторизации
+            </summary>
+            <param name="login">Логин пользователя</param>
+            <param name="password">Пароль пользователя</param>
+            <returns>Информацию о пользователе и Sign в заголовке ответа</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.AuthorizationController.AuthorizationCheck">
+            <summary>
+            Метод проверки авторизации
+            </summary>
+            <returns>Идентификатор авторизованого пользователя</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.AuthorizationController.RoleCheck">
+            <summary>
+            Метод проверки роли в системе
+            </summary>
+            <returns>Роль авторизованного пользователя</returns>
+        </member>
         <member name="M:NewsPortal.Controllers.NewsController.GetAll(System.Int32,System.Int32)">
             <summary>
             Метод на получение списка новостей
