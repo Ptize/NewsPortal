@@ -77,7 +77,7 @@ const useStyles = theme => ({
         minWidth: 650,
     },
     fieldControl: {
-        width: 300
+        width: 500
     }
 });
 

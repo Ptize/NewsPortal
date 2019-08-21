@@ -26,7 +26,7 @@ class Blog extends Component {
   }
 
   componentDidMount() {
-    const pageSize = 10, pageNum = 1;
+    const pageSize = 10, pageNum = 1
     fetch(`/api/news/list/pageSize=${pageSize}/pageNum=${pageNum}`)
       .then(response => response.json())
       .then(result => {
@@ -44,7 +44,7 @@ class Blog extends Component {
 
     if (isFetching) return <div> Идет загрузка... </div>
 
-    if (error) return <div>{`Ошибка при попытке получения списка новостей: ${e.message}`}</div>;
+    if (error) return <div>{`Ошибка при попытке получения списка новостей: ${e.message}`}</div>
 
     return (
       <main>
