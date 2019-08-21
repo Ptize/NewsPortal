@@ -31,10 +31,14 @@ class NewsManager extends Component {
             news: {}, isFetching: true, error: null,
             itemSelected: '0',
             openDeletion: false,
-            openAdding: false
+            openAdding: false,
+            openEditing: false
         }
         this.handleOpenDeletion = this.handleOpenDeletion.bind(this)
         this.handleCloseDeletion = this.handleCloseDeletion.bind(this)
+
+        this.handleOpenEditing = this.handleOpenEditing.bind(this)
+        this.handleCloseEditing = this.handleCloseEditing.bind(this)
 
         this.handleToggleAdding = this.handleToggleAdding.bind(this)
     }
@@ -61,6 +65,25 @@ class NewsManager extends Component {
         this.setState({ openDeletion: false })
     }
 
+    handleOpenEditing(selectedNews) {
+        fetch(`/api/news/${selectedNews.newsId}`) // fetch news' detail
+            .then(response => response.json())
+            .then(result => {
+                this.setState({ itemSelected: result, openEditing: true });
+            })
+            .catch(e => {
+                console.log(e);
+                this.setState({ itemSelected: result, error: e, openEditing: true })
+            })
+        console.log("Btn open")
+        console.log(this.state.itemSelected)
+    }
+
+    handleCloseEditing() {
+        console.log("Btn close")
+        this.setState({ openEditing: false })
+    }
+
     handleToggleAdding() {
         this.setState({ openAdding: !this.state.openAdding })
     }
@@ -82,6 +105,34 @@ class NewsManager extends Component {
                 .then(res => res.text())
                 .then(res => console.log(res))
             this.handleToggleAdding()
+
+            return fetch(`/api/news/list/pageSize=${pageSize}/pageNum=${pageNum}`)
+                .then(response => response.json())
+                .then(result => {
+                    this.setState({ news: result })
+                })
+                .catch(e => {
+                    console.log(e)
+                    this.setState({ news: result, error: e })
+                })
+        }
+
+        const handleConfirmEditing = async values => {
+            await sleep(300)
+            console.log(values)
+            const item = this.state.itemSelected
+            item.headline = values.headline
+            item.review = values.review
+            item.text = values.text
+
+            fetch(`/api/news/`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item)
+            })
+                .then(res => res.text())
+                .then(res => console.log(res))
+            this.setState({ openEditing: false })
 
             return fetch(`/api/news/list/pageSize=${pageSize}/pageNum=${pageNum}`)
                 .then(response => response.json())
@@ -145,7 +196,7 @@ class NewsManager extends Component {
                                     <TableCell component="th" scope="row" align="left">{row.headline}</TableCell>
                                     <TableCell align="left">{row.createDate}</TableCell>
                                     <TableCell>
-                                        <IconButton >
+                                        <IconButton onClick={() => this.handleOpenEditing(row)} >
                                             <EditIcon size="small" />
                                         </IconButton>
                                         <IconButton onClick={() => this.handleOpenDeletion(row)} >
@@ -238,6 +289,73 @@ class NewsManager extends Component {
                             Удалить
                         </Button>
                     </DialogActions>
+                </Dialog>
+                {/* Dialog for managing editing */}
+                <Dialog
+                    open={this.state.openEditing}
+                    onClose={this.handleCloseEditing}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title" align="center">{"Редактирование новости"}</DialogTitle>
+                    <DialogContent>
+                        <Form
+                            onSubmit={handleConfirmEditing}
+                            render={({ handleSubmit, form, submitting, pristine, values }) => (
+                                <form onSubmit={handleSubmit}>
+                                    <div className={classes.fields}>
+                                        <Field
+                                            name="headline"
+                                            component={TextField}
+                                            validate={required}
+                                            type="text"
+                                            label="Заголовок"
+                                            multiline
+                                            rows="2"
+                                            defaultValue={this.state.itemSelected.headline}
+                                            className={classes.fieldControl}
+                                        />
+                                    </div>
+                                    <div className={classes.fields}>
+                                        <Field
+                                            name="review"
+                                            component={TextField}
+                                            validate={required}
+                                            type="text"
+                                            label="Краткое ревью"
+                                            multiline
+                                            rows="5"
+                                            defaultValue={this.state.itemSelected.review}
+                                            className={classes.fieldControl}
+                                        />
+                                    </div>
+                                    <Typography variant="subtitle2">
+                                        Текст
+                                    </Typography>
+                                    <div className={classes.fields}>
+                                        <Field
+                                            name="text"
+                                            component={TextField}
+                                            validate={required}
+                                            type="text"
+                                            label="Текст"
+                                            multiline
+                                            rows="13"
+                                            defaultValue={this.state.itemSelected.text}
+                                            className={classes.fieldControl}
+                                        />
+                                    </div>
+                                    <div className={classes.button}>
+                                        <Button onClick={this.handleCloseEditing} color="secondary">
+                                            Отменить
+                                        </Button>
+                                        <Button color="primary" type="submit" disabled={submitting || pristine}>
+                                            Подтвердить
+                                        </Button>
+                                    </div>
+                                </form>
+                            )}
+                        />
+                    </DialogContent>
                 </Dialog>
             </Container>
         )

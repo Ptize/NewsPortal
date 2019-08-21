@@ -98267,10 +98267,13 @@ function (_Component) {
       error: null,
       itemSelected: '0',
       openDeletion: false,
-      openAdding: false
+      openAdding: false,
+      openEditing: false
     };
     _this.handleOpenDeletion = _this.handleOpenDeletion.bind(_assertThisInitialized(_this));
     _this.handleCloseDeletion = _this.handleCloseDeletion.bind(_assertThisInitialized(_this));
+    _this.handleOpenEditing = _this.handleOpenEditing.bind(_assertThisInitialized(_this));
+    _this.handleCloseEditing = _this.handleCloseEditing.bind(_assertThisInitialized(_this));
     _this.handleToggleAdding = _this.handleToggleAdding.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -98316,6 +98319,39 @@ function (_Component) {
       });
     }
   }, {
+    key: "handleOpenEditing",
+    value: function handleOpenEditing(selectedNews) {
+      var _this3 = this;
+
+      fetch("/api/news/".concat(selectedNews.newsId)) // fetch news' detail
+      .then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        _this3.setState({
+          itemSelected: result,
+          openEditing: true
+        });
+      })["catch"](function (e) {
+        console.log(e);
+
+        _this3.setState({
+          itemSelected: result,
+          error: e,
+          openEditing: true
+        });
+      });
+      console.log("Btn open");
+      console.log(this.state.itemSelected);
+    }
+  }, {
+    key: "handleCloseEditing",
+    value: function handleCloseEditing() {
+      console.log("Btn close");
+      this.setState({
+        openEditing: false
+      });
+    }
+  }, {
     key: "handleToggleAdding",
     value: function handleToggleAdding() {
       this.setState({
@@ -98325,7 +98361,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var sleep = function sleep(ms) {
         return new Promise(function (resolve) {
@@ -98367,18 +98403,18 @@ function (_Component) {
                     return console.log(res);
                   });
 
-                  _this3.handleToggleAdding();
+                  _this4.handleToggleAdding();
 
                   return _context.abrupt("return", fetch("/api/news/list/pageSize=".concat(pageSize, "/pageNum=").concat(pageNum)).then(function (response) {
                     return response.json();
                   }).then(function (result) {
-                    _this3.setState({
+                    _this4.setState({
                       news: result
                     });
                   })["catch"](function (e) {
                     console.log(e);
 
-                    _this3.setState({
+                    _this4.setState({
                       news: result,
                       error: e
                     });
@@ -98397,10 +98433,74 @@ function (_Component) {
         };
       }();
 
-      var handleConfirmDeletion = function handleConfirmDeletion() {
-        var newsId = _this3.state.itemSelected.newsId;
+      var handleConfirmEditing =
+      /*#__PURE__*/
+      function () {
+        var _ref2 = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee2(values) {
+          var item;
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.next = 2;
+                  return sleep(300);
 
-        _this3.handleCloseDeletion();
+                case 2:
+                  console.log(values);
+                  item = _this4.state.itemSelected;
+                  item.headline = values.headline;
+                  item.review = values.review;
+                  item.text = values.text;
+                  fetch("/api/news/", {
+                    method: 'PUT',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(item)
+                  }).then(function (res) {
+                    return res.text();
+                  }).then(function (res) {
+                    return console.log(res);
+                  });
+
+                  _this4.setState({
+                    openEditing: false
+                  });
+
+                  return _context2.abrupt("return", fetch("/api/news/list/pageSize=".concat(pageSize, "/pageNum=").concat(pageNum)).then(function (response) {
+                    return response.json();
+                  }).then(function (result) {
+                    _this4.setState({
+                      news: result
+                    });
+                  })["catch"](function (e) {
+                    console.log(e);
+
+                    _this4.setState({
+                      news: result,
+                      error: e
+                    });
+                  }));
+
+                case 10:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }));
+
+        return function handleConfirmEditing(_x2) {
+          return _ref2.apply(this, arguments);
+        };
+      }();
+
+      var handleConfirmDeletion = function handleConfirmDeletion() {
+        var newsId = _this4.state.itemSelected.newsId;
+
+        _this4.handleCloseDeletion();
 
         return fetch("/api/news/".concat(newsId), {
           method: 'DELETE'
@@ -98411,13 +98511,13 @@ function (_Component) {
           fetch("/api/news/list/pageSize=".concat(pageSize, "/pageNum=").concat(pageNum)).then(function (response) {
             return response.json();
           }).then(function (result) {
-            _this3.setState({
+            _this4.setState({
               news: result
             });
           })["catch"](function (e) {
             console.log(e);
 
-            _this3.setState({
+            _this4.setState({
               news: result,
               error: e
             });
@@ -98464,11 +98564,15 @@ function (_Component) {
           align: "left"
         }, row.headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TableCell"], {
           align: "left"
-        }, row.createDate), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        }, row.createDate), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TableCell"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], {
+          onClick: function onClick() {
+            return _this4.handleOpenEditing(row);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_4___default.a, {
           size: "small"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["IconButton"], {
           onClick: function onClick() {
-            return _this3.handleOpenDeletion(row);
+            return _this4.handleOpenDeletion(row);
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_3___default.a, {
           size: "small"
@@ -98483,12 +98587,12 @@ function (_Component) {
         align: "center"
       }, "Добавление новости"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_final_form__WEBPACK_IMPORTED_MODULE_5__["Form"], {
         onSubmit: handleConfirmAdding,
-        render: function render(_ref2) {
-          var handleSubmit = _ref2.handleSubmit,
-              form = _ref2.form,
-              submitting = _ref2.submitting,
-              pristine = _ref2.pristine,
-              values = _ref2.values;
+        render: function render(_ref3) {
+          var handleSubmit = _ref3.handleSubmit,
+              form = _ref3.form,
+              submitting = _ref3.submitting,
+              pristine = _ref3.pristine,
+              values = _ref3.values;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
             onSubmit: handleSubmit
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -98527,7 +98631,7 @@ function (_Component) {
           })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: classes.button
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-            onClick: _this3.handleToggleAdding,
+            onClick: _this4.handleToggleAdding,
             color: "secondary"
           }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
             color: "primary",
@@ -98551,7 +98655,74 @@ function (_Component) {
       }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: handleConfirmDeletion,
         color: "secondary"
-      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"))));
+      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Dialog"], {
+        open: this.state.openEditing,
+        onClose: this.handleCloseEditing,
+        "aria-labelledby": "alert-dialog-title",
+        "aria-describedby": "alert-dialog-description"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogTitle"], {
+        id: "alert-dialog-title",
+        align: "center"
+      }, "Редактирование новости"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["DialogContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_final_form__WEBPACK_IMPORTED_MODULE_5__["Form"], {
+        onSubmit: handleConfirmEditing,
+        render: function render(_ref4) {
+          var handleSubmit = _ref4.handleSubmit,
+              form = _ref4.form,
+              submitting = _ref4.submitting,
+              pristine = _ref4.pristine,
+              values = _ref4.values;
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+            onSubmit: handleSubmit
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: classes.fields
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_final_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+            name: "headline",
+            component: _Styles__WEBPACK_IMPORTED_MODULE_6__["TextField"],
+            validate: required,
+            type: "text",
+            label: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A",
+            multiline: true,
+            rows: "2",
+            defaultValue: _this4.state.itemSelected.headline,
+            className: classes.fieldControl
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: classes.fields
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_final_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+            name: "review",
+            component: _Styles__WEBPACK_IMPORTED_MODULE_6__["TextField"],
+            validate: required,
+            type: "text",
+            label: "\u041A\u0440\u0430\u0442\u043A\u043E\u0435 \u0440\u0435\u0432\u044C\u044E",
+            multiline: true,
+            rows: "5",
+            defaultValue: _this4.state.itemSelected.review,
+            className: classes.fieldControl
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
+            variant: "subtitle2"
+          }, "\u0422\u0435\u043A\u0441\u0442"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: classes.fields
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_final_form__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+            name: "text",
+            component: _Styles__WEBPACK_IMPORTED_MODULE_6__["TextField"],
+            validate: required,
+            type: "text",
+            label: "\u0422\u0435\u043A\u0441\u0442",
+            multiline: true,
+            rows: "13",
+            defaultValue: _this4.state.itemSelected.text,
+            className: classes.fieldControl
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: classes.button
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+            onClick: _this4.handleCloseEditing,
+            color: "secondary"
+          }, "\u041E\u0442\u043C\u0435\u043D\u0438\u0442\u044C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+            color: "primary",
+            type: "submit",
+            disabled: submitting || pristine
+          }, "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C")));
+        }
+      }))));
     }
   }]);
 
