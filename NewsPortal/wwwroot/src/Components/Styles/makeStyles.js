@@ -63,6 +63,21 @@ const useStyles = theme => ({
     button: {
         marginTop: theme.spacing(3),
         marginRight: theme.spacing(1)
+    },
+    // NewsManager page
+    managerTitle: {
+        marginTop: theme.spacing(1)
+    },
+    tablePaper: {
+        width: '100%',
+        marginTop: theme.spacing(3),
+        overflowX: 'auto',
+    },
+    table: {
+        minWidth: 650,
+    },
+    fieldControl: {
+        width: 500
     }
 });
 

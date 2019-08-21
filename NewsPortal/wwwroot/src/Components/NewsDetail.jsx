@@ -42,7 +42,7 @@ class NewsDetail extends Component {
                             {this.state.newsDetails.createDate}
                         </Typography>
                         <img
-                            src="https://source.unsplash.com/user/erondu"
+                            src="https://source.unsplash.com/random"
                             className={classes.imgCenter}
                         />
                         <Typography gutterBottom align="justify" style={{ textIndent: 30 }}> {this.state.newsDetails.text} </Typography>
