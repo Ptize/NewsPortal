@@ -24,6 +24,9 @@ using Microsoft.AspNetCore.Identity;
 using NewsPortal.Models.Data;
 using NewsPortal.Domain;
 using Microsoft.AspNetCore.Authentication;
+using NewsPortal.Middleware;
+using NewsPortal.Data.Repository.interfaces;
+using NewsPortal.Data.Repository;
 
 namespace NewsPortal
 {
@@ -76,11 +79,14 @@ namespace NewsPortal
             });
 
             services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<INewsStorage, NewsStorage>();
+            services.AddScoped<IUserStorage, UserStorage>();
 
             services.AddScoped<NewsBuilder>();
-            
+            services.AddScoped<UserBuilder>();
+
             services.AddAutoMapper(typeof(MappingProfile));
         }
 
@@ -102,15 +108,14 @@ namespace NewsPortal
                 c.RoutePrefix = string.Empty;
             });
 
+            //app.UseHttpsRedirection();
+            //app.UseStaticFiles();
+            //app.UseAuthentication();
+
             app.UseMvc();
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("api/get", async context =>
-                {
-                    await context.Response.WriteAsync("для обработки использован маршрут api/get");
-                });
-
                 routes.MapRoute("default",
                     "{controller}/{action}/{id?}",
                     new { controller = "Home", action = "Index" }

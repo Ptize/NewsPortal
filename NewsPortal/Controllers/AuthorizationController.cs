@@ -58,5 +58,7 @@ namespace NewsPortal.Controllers
         {
             return _userContext.Role.ToString();
         }
+
+
     }
 }

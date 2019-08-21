@@ -58,6 +58,34 @@
             <param name="newsId">Уникальный идентификатор новости</param>
             <returns></returns>
         </member>
+        <member name="M:NewsPortal.Controllers.UserController.Get(System.Guid)">
+            <summary>
+            Метод на получение информации по конкретному пользователю
+            </summary>
+            <param name="id">Уникальный идентификатор пользователя</param>
+            <returns>Модель искомого пользователя</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Add(NewsPortal.Models.VeiwModels.ApplicationUserVM)">
+            <summary>
+            Добавление нового пользователя
+            </summary>
+            <param name="ApplicationUserVM">Модель нового пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.ApplicationUserVM)">
+            <summary>
+            Метод на редактирование пользователя
+            </summary>
+            <param name="ApplicationUserVM">Изменённая модель пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Delete(System.Guid)">
+            <summary>
+            Метод на удаление пользователя
+            </summary>
+            <param name="userId">Уникальный идентификатор пользователя</param>
+            <returns></returns>
+        </member>
         <member name="T:NewsPortal.Swagger.SwaggerElementDescription">
             <summary>
             Описание разделов swagger

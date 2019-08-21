@@ -24,6 +24,10 @@ namespace NewsPortal.Models.Enums
         /// </summary>
         Admin = 2,
         /// <summary>
+        /// Редактор
+        /// </summary>
+        Editor = 3,
+        /// <summary>
         /// Пользователь
         /// </summary>
         SimpleUser = 3

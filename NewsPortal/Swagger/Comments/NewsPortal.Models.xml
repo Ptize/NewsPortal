@@ -41,9 +41,19 @@
             Администратор
             </summary>
         </member>
+        <member name="F:NewsPortal.Models.Enums.Role.Editor">
+            <summary>
+            Редактор
+            </summary>
+        </member>
         <member name="F:NewsPortal.Models.Enums.Role.SimpleUser">
             <summary>
             Пользователь
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.ApplicationUserVM.Sign">
+            <summary>
+            API токен
             </summary>
         </member>
         <member name="T:NewsPortal.Models.VeiwModels.NewsVM">

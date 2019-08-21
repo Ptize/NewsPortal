@@ -14,7 +14,7 @@ namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class NewsController :Controller
     {
         private readonly INewsStorage _newsStorage;
