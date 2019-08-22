@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,11 +16,10 @@ using Microsoft.AspNetCore.Routing;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using NewsPortal.Models.Data;
-using NewsPortal.Domain;
-using Microsoft.AspNetCore.Authentication;
-using NewsPortal.Middleware;
 using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Data.Repository;
+using NewsPortal.Filters;
+using NewsPortal.Domain.Registration;
 
 namespace NewsPortal
 {
@@ -74,8 +67,8 @@ namespace NewsPortal
                     Type = "apiKey"
                 });
 
-                // Схема ApiKey применяется к методам покрытым атрибутом "ExternalAuthorizeFilterAttribute"
-                c.OperationFilter<SecurityRequirementsOperationFilter>();
+                // Схема ApiKey применяется к методам покрытым атрибутом "AuthorizeFilterAttribute"
+                //c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
             services.AddScoped<INewsRepository, NewsRepository>();
@@ -83,6 +76,8 @@ namespace NewsPortal
 
             services.AddScoped<INewsStorage, NewsStorage>();
             services.AddScoped<IUserStorage, UserStorage>();
+            
+            services.AddScoped<AuthorizeFilterAttribute>();
 
             services.AddScoped<NewsBuilder>();
             services.AddScoped<UserBuilder>();
@@ -98,8 +93,6 @@ namespace NewsPortal
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseMiddleware<AuthorizationMiddleware>();
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -107,19 +100,16 @@ namespace NewsPortal
                 c.SwaggerEndpoint(swaggerConf.Swagger.EndPoint, swaggerConf.Swagger.Spec);
                 c.RoutePrefix = string.Empty;
             });
-
-            //app.UseHttpsRedirection();
-            //app.UseStaticFiles();
+            
             //app.UseAuthentication();
 
             app.UseMvc();
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default",
-                    "{controller}/{action}/{id?}",
-                    new { controller = "Home", action = "Index" }
-                );
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action}/{id?}");
             });
         }
     }

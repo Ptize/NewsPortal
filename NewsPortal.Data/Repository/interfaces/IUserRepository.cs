@@ -8,7 +8,7 @@ namespace NewsPortal.Data.Repository.interfaces
     {
         Task<ApplicationUser> Get(string email);
         Task<ApplicationUser> Get(Guid id);
-        Task Add(ApplicationUser user);
+        Task Add(ApplicationUser user, string password);
         Task Delete(Guid userId);
     }
 }

@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Storage.Interfaces;
+using NewsPortal.Filters;
 using NewsPortal.Models.Data;
-using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Controllers
@@ -41,19 +38,20 @@ namespace NewsPortal.Controllers
             return news;
         }
 
-        /// <summary>
-        /// Добавление нового пользователя
-        /// </summary>
-        /// <param name="ApplicationUserVM">Модель нового пользователя</param>
-        /// <returns></returns>
-        [HttpPost]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public async Task<OperationResult> Add([FromBody]ApplicationUserVM applicationUserVM)
-        {
-            var result = await _userBuilder.Add(applicationUserVM);
-            return result;
-        }
+        ///// <summary>
+        ///// Добавление нового пользователя
+        ///// </summary>
+        ///// <param name="RegisterVM">Модель нового пользователя</param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //[ProducesResponseType(200)]
+        //[ProducesResponseType(400)]
+        //[ServiceFilter(typeof(AuthorizeFilterAttribute))]
+        //public async Task<OperationResult> Add([FromBody]RegisterVM registerVM)
+        //{
+        //    var result = await _userBuilder.Add(registerVM);
+        //    return result;
+        //}
 
         /// <summary>
         /// Метод на редактирование пользователя

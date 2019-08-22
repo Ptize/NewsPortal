@@ -31,4 +31,8 @@
     <ProjectReference Include="..\NewsPortal.Models\NewsPortal.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Middleware\" />
+  </ItemGroup>
+
 </Project>

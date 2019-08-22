@@ -17,7 +17,7 @@ namespace NewsPortal.Swagger
             var requiredScopes = context.MethodInfo
                 .GetCustomAttributes(true)
                 .OfType<ServiceFilterAttribute>()
-                .Where(f => f.ServiceType.FullName == typeof(ExternalAuthorizeFilterAttribute).ToString())
+                .Where(f => f.ServiceType.FullName == typeof(AuthorizeFilterAttribute).ToString())
                 .Select(f => f.ServiceType.FullName)
                 .Distinct();
 

@@ -19,43 +19,6 @@
             не верный идентификатор
             </summary>
         </member>
-        <member name="T:NewsPortal.Models.Enums.Role">
-            <summary>
-            Роль в системе
-            устанавливается вручную
-            </summary>
-        </member>
-        <member name="F:NewsPortal.Models.Enums.Role.Unknown">
-            <summary>
-            Не известный пользователь
-            значение по умолчанию
-            </summary>
-        </member>
-        <member name="F:NewsPortal.Models.Enums.Role.Developer">
-            <summary>
-            Разработчик
-            </summary>
-        </member>
-        <member name="F:NewsPortal.Models.Enums.Role.Admin">
-            <summary>
-            Администратор
-            </summary>
-        </member>
-        <member name="F:NewsPortal.Models.Enums.Role.Editor">
-            <summary>
-            Редактор
-            </summary>
-        </member>
-        <member name="F:NewsPortal.Models.Enums.Role.SimpleUser">
-            <summary>
-            Пользователь
-            </summary>
-        </member>
-        <member name="P:NewsPortal.Models.VeiwModels.ApplicationUserVM.Sign">
-            <summary>
-            API токен
-            </summary>
-        </member>
         <member name="T:NewsPortal.Models.VeiwModels.NewsVM">
             <summary>
             Класс описывает Новость

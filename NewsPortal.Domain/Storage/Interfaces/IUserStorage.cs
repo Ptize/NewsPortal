@@ -9,11 +9,10 @@ namespace NewsPortal.Domain.Storage.Interfaces
 {
     public interface IUserStorage
     {
-        Task Add(ApplicationUserVM authVm);
+        Task Add(RegisterVM registerVM);
         Task<ApplicationUser> Update(ApplicationUserVM authVm);
         Task Delete(Guid userId);
         Task<ApplicationUser> Get(Guid id);
         Task<ApplicationUser> Get(string email);
-        Task UpdateApiKey(ApplicationUser user, string apiKey);
     }
 }

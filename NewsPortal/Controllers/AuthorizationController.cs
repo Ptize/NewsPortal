@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NewsPortal.Data.Registration;
+using NewsPortal.Domain.Registration;
 using NewsPortal.Filters;
 using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Controllers
@@ -14,10 +11,10 @@ namespace NewsPortal.Controllers
     [Route("api/[controller]")]
     public class AuthorizationController : Controller
     {
-        private readonly ExternalAuthorizationProvider _auth;
+        private readonly AuthorizationProvider _auth;
         private readonly UserContext _userContext;
 
-        public AuthorizationController(ExternalAuthorizationProvider auth, UserContext userContext)
+        public AuthorizationController(AuthorizationProvider auth, UserContext userContext)
         {
             _auth = auth;
             _userContext = userContext;
@@ -41,23 +38,23 @@ namespace NewsPortal.Controllers
         /// </summary>
         /// <returns>Идентификатор авторизованого пользователя</returns>
         [HttpGet]
-        [ServiceFilter(typeof(ExternalAuthorizeFilterAttribute))]
+        [ServiceFilter(typeof(AuthorizeFilterAttribute))]
         public async Task<string> AuthorizationCheck()
         {
             return _userContext.UserId.ToString();
         }
 
-        /// <summary>
-        /// Метод проверки роли в системе
-        /// </summary>
-        /// <returns>Роль авторизованного пользователя</returns>
-        [HttpGet("RoleCheck")]
-        [ServiceFilter(typeof(ExternalAuthorizeFilterAttribute)),
-        TypeFilter(typeof(ExternalRoleFilterAttribute), Arguments = new object[] { Role.Developer })]
-        public async Task<string> RoleCheck()
-        {
-            return _userContext.Role.ToString();
-        }
+        ///// <summary>
+        ///// Метод проверки роли в системе
+        ///// </summary>
+        ///// <returns>Роль авторизованного пользователя</returns>
+        //[HttpGet("RoleCheck")]
+        //[ServiceFilter(typeof(AuthorizeFilterAttribute)),
+        //TypeFilter(typeof(ExternalRoleFilterAttribute), Arguments = new object[] { Role.Developer })]
+        //public async Task<string> RoleCheck()
+        //{
+        //    return _userContext.Role.ToString();
+        //}
 
 
     }

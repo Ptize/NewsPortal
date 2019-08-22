@@ -19,9 +19,9 @@ namespace NewsPortal.Domain.Builder
             _userStorage = userStorage;
         }
 
-        public async Task<OperationResult> Add(ApplicationUserVM applicationUserVM)
+        public async Task<OperationResult> Add(RegisterVM registerVM)
         {
-            await _userStorage.Add(applicationUserVM);
+            await _userStorage.Add(registerVM);
             return OperationResult.Success;
         }
 

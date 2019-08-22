@@ -133,8 +133,6 @@ namespace NewsPortal.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("ApiKey");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -160,8 +158,6 @@ namespace NewsPortal.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
-
-                    b.Property<int>("SystemRole");
 
                     b.Property<bool>("TwoFactorEnabled");
 

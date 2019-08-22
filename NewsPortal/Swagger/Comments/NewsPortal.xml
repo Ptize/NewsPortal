@@ -18,12 +18,6 @@
             </summary>
             <returns>Идентификатор авторизованого пользователя</returns>
         </member>
-        <member name="M:NewsPortal.Controllers.AuthorizationController.RoleCheck">
-            <summary>
-            Метод проверки роли в системе
-            </summary>
-            <returns>Роль авторизованного пользователя</returns>
-        </member>
         <member name="M:NewsPortal.Controllers.NewsController.GetAll(System.Int32,System.Int32)">
             <summary>
             Метод на получение списка новостей
@@ -64,13 +58,6 @@
             </summary>
             <param name="id">Уникальный идентификатор пользователя</param>
             <returns>Модель искомого пользователя</returns>
-        </member>
-        <member name="M:NewsPortal.Controllers.UserController.Add(NewsPortal.Models.VeiwModels.ApplicationUserVM)">
-            <summary>
-            Добавление нового пользователя
-            </summary>
-            <param name="ApplicationUserVM">Модель нового пользователя</param>
-            <returns></returns>
         </member>
         <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.ApplicationUserVM)">
             <summary>

@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Models.Data;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Data.Repository
@@ -11,15 +10,16 @@ namespace NewsPortal.Data.Repository
     public class UserRepository :IUserRepository
     {
         private readonly DataContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserRepository(DataContext context)
+        public UserRepository(DataContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
         }
 
-        public async Task Add(ApplicationUser user)
+        public async Task Add(ApplicationUser user, string password)
         {
-            await _context.Users.AddAsync(user);
+            await _userManager.CreateAsync(user, password); 
         }
 
         public async Task Delete(Guid userId)

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NewsPortal.Data;
 using NewsPortal.Data.Repository.interfaces;
@@ -17,23 +18,26 @@ namespace NewsPortal.Domain.Storage
         private readonly DataContext _context;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public UserStorage(DataContext context, IUserRepository userRepository, IMapper mapper)
+        public UserStorage(DataContext context, IUserRepository userRepository, IMapper mapper, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _userRepository = userRepository;
             _mapper = mapper;
+            _signInManager = signInManager;
         }
 
-        public async Task Add(ApplicationUserVM authVm)
+        public async Task Add(RegisterVM registerVM)
         {
             var user = new ApplicationUser()
             {
-                UserName = authVm.UserName,
-                Email = authVm.Email,
-                ApiKey = authVm.Sign
+                Email = registerVM.Email,
+                UserName = registerVM.Email,
             };
-            await _userRepository.Add(user);
+            
+            await _userRepository.Add(user, registerVM.Password);
+            //await _signInManager.SignInAsync(user, false);
             await _context.SaveChangesAsync();
         }
 
@@ -55,15 +59,9 @@ namespace NewsPortal.Domain.Storage
 
         public async Task<ApplicationUser> Update(ApplicationUserVM authVm)
         {
-            var user = _mapper.Map(authVm, await _context.Users.SingleAsync(n => n.Id == authVm.Id));
+            ApplicationUser user = null;// _mapper.Map(authVm, await _context.Users.SingleAsync(n => n.Id == authVm.Id));
             await _context.SaveChangesAsync();
             return user;
-        }
-
-        public async Task UpdateApiKey(ApplicationUser user, string apiKey)
-        {
-            user.ApiKey = apiKey;
-            await _context.SaveChangesAsync();
         }
     }
 }
