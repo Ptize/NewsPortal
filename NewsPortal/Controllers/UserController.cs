@@ -25,6 +25,19 @@ namespace NewsPortal.Controllers
         }
 
         /// <summary>
+        /// Метод на получение списка пользователей
+        /// </summary>
+        /// <returns>Список всех пользователей</returns>
+        [HttpGet("list/pageSize={count}/pageNum={page}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<UsersListVM> GetAll([FromRoute]int count, [FromRoute]int page)
+        {
+            var news = await _userBuilder.GetAll(count, page);
+            return news;
+        }
+
+        /// <summary>
         /// Метод на получение информации по конкретному пользователю
         /// </summary>
         /// <param name="id">Уникальный идентификатор пользователя</param>
@@ -40,7 +53,7 @@ namespace NewsPortal.Controllers
         }
 
         /// <summary>
-        /// Добавление нового пользователя
+        /// Добавление нового пользователя (РЕГИСТРАЦИЯ)
         /// </summary>
         /// <param name="RegisterVM">Модель нового пользователя</param>
         /// <returns></returns>
@@ -52,32 +65,6 @@ namespace NewsPortal.Controllers
         {
             var result = await _userBuilder.Add(registerVM);
             return result;
-        }
-
-        /// <summary>
-        /// Метод на редактирование пользователя
-        /// </summary>
-        /// <param name="ApplicationUserVM">Изменённая модель пользователя</param>
-        /// <returns></returns>
-        [HttpPut]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public async Task Put([FromBody]ApplicationUserVM applicationUserVM)
-        {
-            await _userBuilder.Update(applicationUserVM);
-        }
-
-        /// <summary>
-        /// Метод на удаление пользователя
-        /// </summary>
-        /// <param name="userId">Уникальный идентификатор пользователя</param>
-        /// <returns></returns>
-        [HttpDelete("{userId}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public async Task Delete([FromRoute]Guid userId)
-        {
-            await _userStorage.Delete(userId);
         }
 
         /// <summary>
@@ -107,6 +94,60 @@ namespace NewsPortal.Controllers
         {
             var result = await _userBuilder.Logout();
             return result;
+        }
+
+        /// <summary>
+        /// Изменение пароля пользователя
+        /// </summary>
+        /// <param name="ChangePasswordVM">Модель изменения пароля</param>
+        /// <returns></returns>
+        [HttpPost("ChangePassword")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<OperationResult> ChangePassword([FromBody]ChangePasswordVM changePasswordVM)
+        {
+            var result = await _userBuilder.ChangePassword(changePasswordVM);
+            return result;
+        }
+
+        /// <summary>
+        /// Изменение пароля пользователя на случай если забыл пароль
+        /// </summary>
+        /// <param name="ChangeForgotPasswordVM">Модель изменения пароля</param>
+        /// <returns></returns>
+        [HttpPost("ChangeForgotPassword")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<OperationResult> ChangeForgotPassword([FromBody]ChangeForgotPasswordVM сhangeForgotPasswordVM)
+        {
+            var result = await _userBuilder.ChangeForgotPassword(сhangeForgotPasswordVM);
+            return result;
+        }
+
+        /// <summary>
+        /// Метод на редактирование пользователя
+        /// </summary>
+        /// <param name="EditUserVM">Изменённая модель пользователя</param>
+        /// <returns></returns>
+        [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task Put([FromBody]EditUserVM editUserVM)
+        {
+            await _userBuilder.Update(editUserVM);
+        }
+
+        /// <summary>
+        /// Метод на удаление пользователя
+        /// </summary>
+        /// <param name="userId">Уникальный идентификатор пользователя</param>
+        /// <returns></returns>
+        [HttpDelete("{userId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task Delete([FromRoute]Guid userId)
+        {
+            await _userStorage.Delete(userId);
         }
     }
 }

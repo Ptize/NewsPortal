@@ -29,6 +29,18 @@ namespace NewsPortal.Domain.Storage
             _signInManager = signInManager;
         }
 
+        public async Task<UsersListVM> GetAll(int count, int page)
+        {
+            var countEntity = await _userRepository.Count();
+
+            var users = new UsersListVM
+            {
+                CountPage = countEntity % count == 0 ? countEntity / count : (countEntity / count) + 1,
+                UsersList = await _userRepository.GetAll(count, page)
+            };
+            return users;
+        }
+
         public async Task<OperationResult> Add(RegisterVM registerVM)
         {
             var user = new ApplicationUser()
@@ -36,7 +48,7 @@ namespace NewsPortal.Domain.Storage
                 Email = registerVM.Email,
                 UserName = registerVM.Email,
             };
-            
+
             var result = await _userRepository.Add(user, registerVM.Password);
             if (result.Succeeded)
             {
@@ -46,9 +58,9 @@ namespace NewsPortal.Domain.Storage
             }
             else
             {
-                return OperationResult.InvalidPassword ;
+                return OperationResult.InvalidPassword;
             }
-           
+
         }
 
         public async Task Delete(Guid userId)
@@ -67,9 +79,9 @@ namespace NewsPortal.Domain.Storage
             return await _userRepository.Get(email);
         }
 
-        public async Task<ApplicationUser> Update(ApplicationUserVM authVm)
+        public async Task<ApplicationUser> Update(EditUserVM editUserVM)
         {
-            ApplicationUser user = null;// _mapper.Map(authVm, await _context.Users.SingleAsync(n => n.Id == authVm.Id));
+            var user = await _userRepository.Update(editUserVM);
             await _context.SaveChangesAsync();
             return user;
         }
@@ -87,13 +99,40 @@ namespace NewsPortal.Domain.Storage
             {
                 return OperationResult.InvalidPassword;
             }
-
         }
 
         public async Task<OperationResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return OperationResult.Success;
+        }
+
+        public async Task<OperationResult> ChangePassword(ChangePasswordVM changePasswordVM)
+        {
+            var result = await _userRepository.UpdatePassword(changePasswordVM);
+            if (result.Succeeded)
+            {
+                await _context.SaveChangesAsync();
+                return OperationResult.Success;
+            }
+            else
+            {
+                return OperationResult.InvalidPassword;
+            }
+        }
+
+        public async Task<OperationResult> ChangeForgotPassword(ChangeForgotPasswordVM changeForgotPasswordVM)
+        {
+            var result = await _userRepository.UpdateForgotPassword(changeForgotPasswordVM);
+            if (result.Succeeded)
+            {
+                await _context.SaveChangesAsync();
+                return OperationResult.Success;
+            }
+            else
+            {
+                return OperationResult.InvalidPassword;
+            }
         }
     }
 }

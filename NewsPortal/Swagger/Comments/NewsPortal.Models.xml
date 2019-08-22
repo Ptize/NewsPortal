@@ -24,6 +24,41 @@
             недопустимый пароль
             </summary>
         </member>
+        <member name="P:NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM.Id">
+            <summary>
+            Идентификатор сущности
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM.Email">
+            <summary>
+            Логин пользоваателя(он же почта)
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM.NewPassword">
+            <summary>
+            Новый пароль пользователя
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.ChangePasswordVM.Id">
+            <summary>
+            Идентификатор сущности
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.ChangePasswordVM.Email">
+            <summary>
+            Логин пользоваателя(он же почта)
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.ChangePasswordVM.NewPassword">
+            <summary>
+            Новый пароль пользователя
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.ChangePasswordVM.OldPassword">
+            <summary>
+            Старый пароль пользователя
+            </summary>
+        </member>
         <member name="T:NewsPortal.Models.VeiwModels.NewsVM">
             <summary>
             Класс описывает Новость
@@ -92,6 +127,26 @@
         <member name="P:NewsPortal.Models.VeiwModels.BriefNewsVM.Headline">
             <summary>
             Заголовок новости
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.UsersListVM.CountPage">
+            <summary>
+            Количество страниц
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.UsersListVM.UsersList">
+            <summary>
+            Список пользователей 
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.BriefUserVM.Id">
+            <summary>
+            Идентификатор сущности
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.BriefUserVM.Email">
+            <summary>
+            Логин пользоваателя(он же почта)
             </summary>
         </member>
     </members>

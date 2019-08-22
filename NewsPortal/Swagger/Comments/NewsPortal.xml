@@ -38,6 +38,12 @@
             <param name="newsId">Уникальный идентификатор новости</param>
             <returns></returns>
         </member>
+        <member name="M:NewsPortal.Controllers.UserController.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Метод на получение списка пользователей
+            </summary>
+            <returns>Список всех пользователей</returns>
+        </member>
         <member name="M:NewsPortal.Controllers.UserController.Get(System.Guid)">
             <summary>
             Метод на получение информации по конкретному пользователю
@@ -47,23 +53,9 @@
         </member>
         <member name="M:NewsPortal.Controllers.UserController.Add(NewsPortal.Models.VeiwModels.RegisterVM)">
             <summary>
-            Добавление нового пользователя
+            Добавление нового пользователя (РЕГИСТРАЦИЯ)
             </summary>
             <param name="RegisterVM">Модель нового пользователя</param>
-            <returns></returns>
-        </member>
-        <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.ApplicationUserVM)">
-            <summary>
-            Метод на редактирование пользователя
-            </summary>
-            <param name="ApplicationUserVM">Изменённая модель пользователя</param>
-            <returns></returns>
-        </member>
-        <member name="M:NewsPortal.Controllers.UserController.Delete(System.Guid)">
-            <summary>
-            Метод на удаление пользователя
-            </summary>
-            <param name="userId">Уникальный идентификатор пользователя</param>
             <returns></returns>
         </member>
         <member name="M:NewsPortal.Controllers.UserController.Login(NewsPortal.Models.VeiwModels.LoginVM)">
@@ -77,6 +69,34 @@
             <summary>
             Выход
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.ChangePassword(NewsPortal.Models.VeiwModels.ChangePasswordVM)">
+            <summary>
+            Изменение пароля пользователя
+            </summary>
+            <param name="ChangePasswordVM">Модель изменения пароля</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.ChangeForgotPassword(NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM)">
+            <summary>
+            Изменение пароля пользователя на случай если забыл пароль
+            </summary>
+            <param name="ChangeForgotPasswordVM">Модель изменения пароля</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.EditUserVM)">
+            <summary>
+            Метод на редактирование пользователя
+            </summary>
+            <param name="EditUserVM">Изменённая модель пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Delete(System.Guid)">
+            <summary>
+            Метод на удаление пользователя
+            </summary>
+            <param name="userId">Уникальный идентификатор пользователя</param>
             <returns></returns>
         </member>
         <member name="T:NewsPortal.Swagger.SwaggerElementDescription">
