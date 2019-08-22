@@ -19,6 +19,11 @@
             не верный идентификатор
             </summary>
         </member>
+        <member name="F:NewsPortal.Models.Enums.OperationResult.InvalidPassword">
+            <summary>
+            не допустимый пароль
+            </summary>
+        </member>
         <member name="T:NewsPortal.Models.VeiwModels.NewsVM">
             <summary>
             Класс описывает Новость

@@ -15,11 +15,13 @@ namespace NewsPortal.Data.Repository
         public UserRepository(DataContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public async Task Add(ApplicationUser user, string password)
+        public async Task<IdentityResult> Add(ApplicationUser user, string password)
         {
-            await _userManager.CreateAsync(user, password); 
+            var result = await _userManager.CreateAsync(user, password);
+            return result;
         }
 
         public async Task Delete(Guid userId)

@@ -1,4 +1,5 @@
 ﻿using NewsPortal.Models.Data;
+using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace NewsPortal.Domain.Storage.Interfaces
 {
     public interface IUserStorage
     {
-        Task Add(RegisterVM registerVM);
+        Task<OperationResult> Add(RegisterVM registerVM);
         Task<ApplicationUser> Update(ApplicationUserVM authVm);
         Task Delete(Guid userId);
         Task<ApplicationUser> Get(Guid id);

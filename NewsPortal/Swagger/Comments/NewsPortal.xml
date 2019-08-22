@@ -59,6 +59,13 @@
             <param name="id">Уникальный идентификатор пользователя</param>
             <returns>Модель искомого пользователя</returns>
         </member>
+        <member name="M:NewsPortal.Controllers.UserController.Add(NewsPortal.Models.VeiwModels.RegisterVM)">
+            <summary>
+            Добавление нового пользователя
+            </summary>
+            <param name="RegisterVM">Модель нового пользователя</param>
+            <returns></returns>
+        </member>
         <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.ApplicationUserVM)">
             <summary>
             Метод на редактирование пользователя

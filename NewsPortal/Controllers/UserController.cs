@@ -3,6 +3,7 @@ using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Filters;
 using NewsPortal.Models.Data;
+using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
 using System.Threading.Tasks;
@@ -38,20 +39,20 @@ namespace NewsPortal.Controllers
             return news;
         }
 
-        ///// <summary>
-        ///// Добавление нового пользователя
-        ///// </summary>
-        ///// <param name="RegisterVM">Модель нового пользователя</param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[ProducesResponseType(200)]
-        //[ProducesResponseType(400)]
+        /// <summary>
+        /// Добавление нового пользователя
+        /// </summary>
+        /// <param name="RegisterVM">Модель нового пользователя</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         //[ServiceFilter(typeof(AuthorizeFilterAttribute))]
-        //public async Task<OperationResult> Add([FromBody]RegisterVM registerVM)
-        //{
-        //    var result = await _userBuilder.Add(registerVM);
-        //    return result;
-        //}
+        public async Task<OperationResult> Add([FromBody]RegisterVM registerVM)
+        {
+            var result = await _userBuilder.Add(registerVM);
+            return result;
+        }
 
         /// <summary>
         /// Метод на редактирование пользователя

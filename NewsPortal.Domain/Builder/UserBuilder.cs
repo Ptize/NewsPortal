@@ -21,8 +21,8 @@ namespace NewsPortal.Domain.Builder
 
         public async Task<OperationResult> Add(RegisterVM registerVM)
         {
-            await _userStorage.Add(registerVM);
-            return OperationResult.Success;
+            var result = await _userStorage.Add(registerVM);
+            return result;
         }
 
         public async Task<ApplicationUser> Get(Guid newsid)

@@ -5,6 +5,7 @@ using NewsPortal.Data;
 using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
+using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace NewsPortal.Domain.Storage
             _signInManager = signInManager;
         }
 
-        public async Task Add(RegisterVM registerVM)
+        public async Task<OperationResult> Add(RegisterVM registerVM)
         {
             var user = new ApplicationUser()
             {
@@ -36,9 +37,18 @@ namespace NewsPortal.Domain.Storage
                 UserName = registerVM.Email,
             };
             
-            await _userRepository.Add(user, registerVM.Password);
-            //await _signInManager.SignInAsync(user, false);
-            await _context.SaveChangesAsync();
+            var result = await _userRepository.Add(user, registerVM.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, false);
+                await _context.SaveChangesAsync();
+                return OperationResult.Success;
+            }
+            else
+            {
+                return OperationResult.InvalidPassword ;
+            }
+           
         }
 
         public async Task Delete(Guid userId)
