@@ -4,20 +4,6 @@
         <name>NewsPortal</name>
     </assembly>
     <members>
-        <member name="M:NewsPortal.Controllers.AuthorizationController.Authorization(System.String,System.String)">
-            <summary>
-            Метод авторизации
-            </summary>
-            <param name="login">Логин пользователя</param>
-            <param name="password">Пароль пользователя</param>
-            <returns>Информацию о пользователе и Sign в заголовке ответа</returns>
-        </member>
-        <member name="M:NewsPortal.Controllers.AuthorizationController.AuthorizationCheck">
-            <summary>
-            Метод проверки авторизации
-            </summary>
-            <returns>Идентификатор авторизованого пользователя</returns>
-        </member>
         <member name="M:NewsPortal.Controllers.NewsController.GetAll(System.Int32,System.Int32)">
             <summary>
             Метод на получение списка новостей
@@ -78,6 +64,19 @@
             Метод на удаление пользователя
             </summary>
             <param name="userId">Уникальный идентификатор пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Login(NewsPortal.Models.VeiwModels.LoginVM)">
+            <summary>
+            Вход
+            </summary>
+            <param name="LoginVM">Модель login</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Logout">
+            <summary>
+            Выход
+            </summary>
             <returns></returns>
         </member>
         <member name="T:NewsPortal.Swagger.SwaggerElementDescription">

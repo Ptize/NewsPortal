@@ -19,7 +19,7 @@ using NewsPortal.Models.Data;
 using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Data.Repository;
 using NewsPortal.Filters;
-using NewsPortal.Domain.Registration;
+using NewsPortal.Domain.Authorization;
 
 namespace NewsPortal
 {

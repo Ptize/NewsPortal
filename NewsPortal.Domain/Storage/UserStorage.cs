@@ -73,5 +73,27 @@ namespace NewsPortal.Domain.Storage
             await _context.SaveChangesAsync();
             return user;
         }
+
+        public async Task<OperationResult> Login(LoginVM loginVM)
+        {
+            var result = await _signInManager.PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.RememberMe, false);
+
+            if (result.Succeeded)
+            {
+                await _context.SaveChangesAsync();
+                return OperationResult.Success;
+            }
+            else
+            {
+                return OperationResult.InvalidPassword;
+            }
+
+        }
+
+        public async Task<OperationResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return OperationResult.Success;
+        }
     }
 }

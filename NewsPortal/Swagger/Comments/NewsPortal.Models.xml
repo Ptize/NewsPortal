@@ -16,12 +16,12 @@
         </member>
         <member name="F:NewsPortal.Models.Enums.OperationResult.InvalidId">
             <summary>
-            не верный идентификатор
+            неверный идентификатор
             </summary>
         </member>
         <member name="F:NewsPortal.Models.Enums.OperationResult.InvalidPassword">
             <summary>
-            не допустимый пароль
+            недопустимый пароль
             </summary>
         </member>
         <member name="T:NewsPortal.Models.VeiwModels.NewsVM">

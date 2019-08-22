@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using NewsPortal.Domain.Registration;
+using NewsPortal.Domain.Authorization;
 
 namespace NewsPortal.Filters
 {

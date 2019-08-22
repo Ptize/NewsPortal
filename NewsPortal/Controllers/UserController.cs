@@ -79,5 +79,34 @@ namespace NewsPortal.Controllers
         {
             await _userStorage.Delete(userId);
         }
+
+        /// <summary>
+        /// Вход
+        /// </summary>
+        /// <param name="LoginVM">Модель login</param>
+        /// <returns></returns>
+        [HttpPost("login")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        //[ServiceFilter(typeof(AuthorizeFilterAttribute))]
+        public async Task<OperationResult> Login([FromBody]LoginVM loginVM)
+        {
+            var result = await _userBuilder.Login(loginVM);
+            return result;
+        }
+
+        /// <summary>
+        /// Выход
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("logout")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        //[ServiceFilter(typeof(AuthorizeFilterAttribute))]
+        public async Task<OperationResult> Logout()
+        {
+            var result = await _userBuilder.Logout();
+            return result;
+        }
     }
 }

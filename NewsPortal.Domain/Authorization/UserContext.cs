@@ -1,6 +1,6 @@
 ﻿using NewsPortal.Models.Enums;
 
-namespace NewsPortal.Domain.Registration
+namespace NewsPortal.Domain.Authorization
 {
     public class UserContext
     {

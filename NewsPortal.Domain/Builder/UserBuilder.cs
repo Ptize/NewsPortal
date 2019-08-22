@@ -35,5 +35,17 @@ namespace NewsPortal.Domain.Builder
             await _userStorage.Update(applicationUserVM);
             return OperationResult.Success;
         }
+
+        public async Task<OperationResult> Login(LoginVM loginVM)
+        {
+            var result = await _userStorage.Login(loginVM);
+            return result;
+        }
+
+        public async Task<OperationResult> Logout()
+        {
+            var result = await _userStorage.Logout();
+            return result;
+        }
     }
 }

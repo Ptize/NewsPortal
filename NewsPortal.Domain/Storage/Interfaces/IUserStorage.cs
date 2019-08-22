@@ -15,5 +15,7 @@ namespace NewsPortal.Domain.Storage.Interfaces
         Task Delete(Guid userId);
         Task<ApplicationUser> Get(Guid id);
         Task<ApplicationUser> Get(string email);
+        Task<OperationResult> Login(LoginVM loginVM);
+        Task<OperationResult> Logout();
     }
 }
