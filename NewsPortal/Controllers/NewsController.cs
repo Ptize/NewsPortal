@@ -93,4 +93,16 @@ namespace NewsPortal.Controllers
             await _newsStorage.Delete(newsId);
         }
     }
+        
+    public class BlogController : Controller
+    {
+        /// <summary>
+        /// Метод, отображающий стартовую страницу
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Index()
+        {
+            return View(); // = ~/Views/Blog/Index.cshtml
+        }
+    }
 }

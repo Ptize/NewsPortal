@@ -102,13 +102,15 @@ namespace NewsPortal
             
             app.UseAuthentication();
 
-            app.UseMvc();
+            //app.UseMvc();
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}");
+                    template: "{controller}/{action}");
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Blog", action = "Index" });
             });
         }
     }
