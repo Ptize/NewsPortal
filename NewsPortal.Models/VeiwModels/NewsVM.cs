@@ -1,8 +1,6 @@
-﻿using NewsPortal.Models.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace NewsPortal.Models.VeiwModels
 {
@@ -19,13 +17,12 @@ namespace NewsPortal.Models.VeiwModels
         /// <summary>
         /// Дата добавления
         /// </summary>
-        [DataType(DataType.Date)]
         public DateTime? CreateDate { get; set; }
 
         /// <summary>
         /// Изображение, прикреплённое к новости
         /// </summary>
-        public byte Photo { get; set; }
+        public byte[] Photo { get; set; }
 
         /// <summary>
         /// Заголовок новости
@@ -71,13 +68,12 @@ namespace NewsPortal.Models.VeiwModels
         /// <summary>
         /// Дата добавления
         /// </summary>
-        [DataType(DataType.Date)]
         public DateTime? CreateDate { get; set; }
 
         /// <summary>
         /// Изображение, прикреплённое к новости
         /// </summary>
-        public byte Picture { get; set; }
+        public byte[] Picture { get; set; }
 
         /// <summary>
         /// Заголовок новости

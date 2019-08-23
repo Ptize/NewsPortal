@@ -1,8 +1,168 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <doc>
-  <assembly>
-    <name>NewsPortal</name>
-  </assembly>
-  <members>
-  </members>
+    <assembly>
+        <name>NewsPortal</name>
+    </assembly>
+    <members>
+        <member name="M:NewsPortal.Controllers.NewsController.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Метод на получение списка новостей
+            </summary>
+            <returns>Список всех новостей</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.Get(System.Guid)">
+            <summary>
+            Метод на получение информации по конкретной новости
+            </summary>
+            <param name="id">Уникальный идентификатор новости</param>
+            <returns>Модель искомой новости</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.Add(NewsPortal.Models.VeiwModels.NewsVM)">
+            <summary>
+            Добавление новой новости
+            </summary>
+            <param name="NewsVM">Модель новой новости</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.Put(NewsPortal.Models.VeiwModels.NewsVM)">
+            <summary>
+            Метод на редактирование новости
+            </summary>
+            <param name="NewsVM">Изменённая модель новости</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.Delete(System.Guid)">
+            <summary>
+            Метод на удаление новости
+            </summary>
+            <param name="newsId">Уникальный идентификатор новости</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.RolesController.Get(System.Guid)">
+            <summary>
+            Метод на получение информации по ролям конкретного пользователя
+            </summary>
+            <param name="userId">Уникальный идентификатор пользователя</param>
+            <returns>Модель искомого изменяемой роли</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.RolesController.Add(System.String)">
+            <summary>
+            Добавление новой роли в систему
+            </summary>
+            <param name="nameRole">Название новой роли</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.RolesController.Put(System.Guid,System.Collections.Generic.List{System.String})">
+            <summary>
+            Метод для изменения ролей пользователя
+            </summary>
+            <param name="userId">Id пользователя</param>
+            <param name="roles">Список ролей пользователя (которые у него должны быть)</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.RolesController.Delete(System.Guid)">
+            <summary>
+            Метод на удаление роли
+            </summary>
+            <param name="roleId">Уникальный идентификатор роли</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Метод на получение списка пользователей
+            </summary>
+            <returns>Список всех пользователей</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Get(System.Guid)">
+            <summary>
+            Метод на получение информации по конкретному пользователю
+            </summary>
+            <param name="id">Уникальный идентификатор пользователя</param>
+            <returns>Модель искомого пользователя</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Add(NewsPortal.Models.VeiwModels.RegisterVM)">
+            <summary>
+            Добавление нового пользователя (РЕГИСТРАЦИЯ)
+            </summary>
+            <param name="RegisterVM">Модель нового пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Login(NewsPortal.Models.VeiwModels.LoginVM)">
+            <summary>
+            Вход
+            </summary>
+            <param name="LoginVM">Модель login</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Logout">
+            <summary>
+            Выход
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.ChangePassword(NewsPortal.Models.VeiwModels.ChangePasswordVM)">
+            <summary>
+            Изменение пароля пользователя
+            </summary>
+            <param name="ChangePasswordVM">Модель изменения пароля</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.ChangeForgotPassword(NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM)">
+            <summary>
+            Изменение пароля пользователя на случай если забыл пароль
+            </summary>
+            <param name="ChangeForgotPasswordVM">Модель изменения пароля</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.EditUserVM)">
+            <summary>
+            Метод на редактирование пользователя
+            </summary>
+            <param name="EditUserVM">Изменённая модель пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Delete(System.Guid)">
+            <summary>
+            Метод на удаление пользователя
+            </summary>
+            <param name="userId">Уникальный идентификатор пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="T:NewsPortal.Swagger.SwaggerElementDescription">
+            <summary>
+            Описание разделов swagger
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Swagger.SwaggerElementDescription.EndPoint">
+            <summary>
+            Путь к json файлу
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Swagger.SwaggerElementDescription.Spec">
+            <summary>
+            Название страницы в выпадающем списке
+            </summary>
+        </member>
+        <member name="T:NewsPortal.Swagger.SwaggerSettings">
+            <summary>
+            Класс для описания настроек Swagger
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Swagger.SwaggerSettings.RoutePrefix">
+            <summary>
+            Путь к ресурсу Swagger
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Swagger.SwaggerSettings.Swagger">
+            <summary>
+            Список из ресурсов Swagger
+            </summary>
+        </member>
+        <member name="M:NewsPortal.Swagger.SwaggerSettings.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Считывание настроек из appsettings.json
+            </summary>
+            <param name="Configuration">Переменная конфигурации для взаимодействия с appconfig.json</param>
+        </member>
+    </members>
 </doc>

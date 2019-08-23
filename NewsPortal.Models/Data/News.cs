@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NewsPortal.Models.Data
 {
@@ -8,7 +6,7 @@ namespace NewsPortal.Models.Data
     {
         public Guid NewsId { get; set; }
         public DateTime CreateDate { get; set; }
-        public byte Photo { get; set; }
+        public byte[] Photo { get; set; }
         public string Headline { get; set; }
         public string Review { get; set; }
         public string Text { get; set; }

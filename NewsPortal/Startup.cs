@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +14,10 @@ using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Mapping;
 using Microsoft.AspNetCore.Routing;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using NewsPortal.Models.Data;
+using NewsPortal.Data.Repository.interfaces;
+using NewsPortal.Data.Repository;
 
 namespace NewsPortal
 {
@@ -43,6 +41,10 @@ namespace NewsPortal
         {
             services.AddDbContext<DataContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("NewsPortalDbConnectionString")));
 
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
+
             services.AddMvc();
 
             SwaggerSettings swaggerConf = new SwaggerSettings(Configuration);
@@ -56,13 +58,28 @@ namespace NewsPortal
                     Description = swaggerConf.Swagger.Description
                 });
                 c.IncludeXmlComments(string.Format(@"{0}\{1}", AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
+                //c.AddSecurityDefinition("ApiKey", new ApiKeyScheme
+                //{
+                //    Name = "ApiKey",
+                //    In = "header",
+                //    Type = "apiKey"
+                //});
+
+                // Схема ApiKey применяется к методам покрытым атрибутом "AuthorizeFilterAttribute"
+                //c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
 
             services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             services.AddScoped<INewsStorage, NewsStorage>();
+            services.AddScoped<IUserStorage, UserStorage>();
+            services.AddScoped<IRoleStorage, RoleStorage>();
 
             services.AddScoped<NewsBuilder>();
+            services.AddScoped<UserBuilder>();
+            services.AddScoped<RoleBuilder>();
 
             services.AddAutoMapper(typeof(MappingProfile));
         }
@@ -70,13 +87,20 @@ namespace NewsPortal
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 SwaggerSettings swaggerConf = new SwaggerSettings(Configuration);
                 c.SwaggerEndpoint(swaggerConf.Swagger.EndPoint, swaggerConf.Swagger.Spec);
-                //c.RoutePrefix = string.Empty;
+                c.RoutePrefix = string.Empty;
             });
+            
+            app.UseAuthentication();
 
             //app.UseMvc();
             app.UseStaticFiles();
