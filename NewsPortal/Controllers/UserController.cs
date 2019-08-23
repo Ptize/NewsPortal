@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Storage.Interfaces;
-using NewsPortal.Filters;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
@@ -12,7 +12,7 @@ namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize(Roles = "admin")]
     public class UserController : Controller
     {
         private readonly IUserStorage _userStorage;
@@ -48,8 +48,8 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(404)]
         public async Task<ApplicationUser> Get([FromRoute]Guid userId)
         {
-            var news = await _userBuilder.Get(userId);
-            return news;
+            var user = await _userBuilder.Get(userId);
+            return user;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace NewsPortal.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        //[ServiceFilter(typeof(AuthorizeFilterAttribute))]
+        [AllowAnonymous]
         public async Task<OperationResult> Add([FromBody]RegisterVM registerVM)
         {
             var result = await _userBuilder.Add(registerVM);
@@ -75,7 +75,7 @@ namespace NewsPortal.Controllers
         [HttpPost("login")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        //[ServiceFilter(typeof(AuthorizeFilterAttribute))]
+        [AllowAnonymous]
         public async Task<OperationResult> Login([FromBody]LoginVM loginVM)
         {
             var result = await _userBuilder.Login(loginVM);
@@ -89,7 +89,6 @@ namespace NewsPortal.Controllers
         [HttpPost("logout")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        //[ServiceFilter(typeof(AuthorizeFilterAttribute))]
         public async Task<OperationResult> Logout()
         {
             var result = await _userBuilder.Logout();

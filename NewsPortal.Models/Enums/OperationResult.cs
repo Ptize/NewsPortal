@@ -20,6 +20,10 @@ namespace NewsPortal.Models.Enums
         /// <summary>
         /// недопустимый пароль
         /// </summary>
-        InvalidPassword = 2
+        InvalidPassword = 2,
+        /// <summary>
+        /// недопустимый пароль
+        /// </summary>
+        UnknounError = 3
     }
 }

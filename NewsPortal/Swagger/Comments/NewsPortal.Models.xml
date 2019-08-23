@@ -24,6 +24,11 @@
             недопустимый пароль
             </summary>
         </member>
+        <member name="F:NewsPortal.Models.Enums.OperationResult.UnknounError">
+            <summary>
+            недопустимый пароль
+            </summary>
+        </member>
         <member name="P:NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM.Id">
             <summary>
             Идентификатор сущности

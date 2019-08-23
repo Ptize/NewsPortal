@@ -18,8 +18,6 @@ using Microsoft.AspNetCore.Identity;
 using NewsPortal.Models.Data;
 using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Data.Repository;
-using NewsPortal.Filters;
-using NewsPortal.Domain.Authorization;
 
 namespace NewsPortal
 {
@@ -60,12 +58,12 @@ namespace NewsPortal
                     Description = swaggerConf.Swagger.Description
                 });
                 c.IncludeXmlComments(string.Format(@"{0}\{1}", AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
-                c.AddSecurityDefinition("ApiKey", new ApiKeyScheme
-                {
-                    Name = "ApiKey",
-                    In = "header",
-                    Type = "apiKey"
-                });
+                //c.AddSecurityDefinition("ApiKey", new ApiKeyScheme
+                //{
+                //    Name = "ApiKey",
+                //    In = "header",
+                //    Type = "apiKey"
+                //});
 
                 // Схема ApiKey применяется к методам покрытым атрибутом "AuthorizeFilterAttribute"
                 //c.OperationFilter<SecurityRequirementsOperationFilter>();
@@ -73,14 +71,15 @@ namespace NewsPortal
 
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             services.AddScoped<INewsStorage, NewsStorage>();
             services.AddScoped<IUserStorage, UserStorage>();
-            
-            services.AddScoped<AuthorizeFilterAttribute>();
+            services.AddScoped<IRoleStorage, RoleStorage>();
 
             services.AddScoped<NewsBuilder>();
             services.AddScoped<UserBuilder>();
+            services.AddScoped<RoleBuilder>();
 
             services.AddAutoMapper(typeof(MappingProfile));
         }

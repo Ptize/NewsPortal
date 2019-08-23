@@ -1,11 +1,13 @@
-﻿using NewsPortal.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using NewsPortal.Data;
 using NewsPortal.Models.Data;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NewsPortal.Domain
 {
-    public class DataSeeder
+    public static class DataSeeder
     {
         public static void InitData(DataContext context)
         {
@@ -54,9 +56,32 @@ namespace NewsPortal.Domain
                 },
             };
             #endregion
-
+            
             context.AddRange(news);
             context.SaveChanges();
+        }
+
+        public static void InitializeAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            string adminEmail = "admin@gmail.com";
+            string password = "_Aa123456";
+            if (roleManager.FindByNameAsync("admin").Result == null)
+            {
+                roleManager.CreateAsync(new IdentityRole("admin"));
+            }
+            if (roleManager.FindByNameAsync("user").Result == null)
+            {
+                roleManager.CreateAsync(new IdentityRole("user"));
+            }
+            if (userManager.FindByNameAsync(adminEmail).Result == null)
+            {
+                ApplicationUser admin = new ApplicationUser { Email = adminEmail, UserName = adminEmail };
+                IdentityResult result = userManager.CreateAsync(admin, password).Result;
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(admin, "admin");
+                }
+            }
         }
     }
 }
