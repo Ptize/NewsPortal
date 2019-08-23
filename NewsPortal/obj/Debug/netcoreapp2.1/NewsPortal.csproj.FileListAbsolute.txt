@@ -98,3 +98,10 @@ C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.pdb
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\bin\Debug\netcoreapp2.1\NewsPortal.xml
 C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\bin\Debug\netcoreapp2.1\NewsPortal.Models.xml
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\bin\Debug\netcoreapp2.1\NewsPortal.Views.pdb
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.TagHelpers.input.cache
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.TagHelpers.output.cache
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.RazorCoreGenerate.cache
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\Razor\Views\Blog\Index.g.cshtml.cs
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.RazorTargetAssemblyInfo.cs
+C:\Users\home.PTIZ\Documents\GitHub\NewsPortal\NewsPortal\obj\Debug\netcoreapp2.1\NewsPortal.Views.pdb

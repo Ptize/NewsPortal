@@ -97,7 +97,7 @@ namespace NewsPortal
             {
                 SwaggerSettings swaggerConf = new SwaggerSettings(Configuration);
                 c.SwaggerEndpoint(swaggerConf.Swagger.EndPoint, swaggerConf.Swagger.Spec);
-                c.RoutePrefix = string.Empty;
+                //c.RoutePrefix = string.Empty;
             });
             
             app.UseAuthentication();

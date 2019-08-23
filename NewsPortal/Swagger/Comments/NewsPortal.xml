@@ -38,6 +38,12 @@
             <param name="newsId">Уникальный идентификатор новости</param>
             <returns></returns>
         </member>
+        <member name="M:NewsPortal.Controllers.BlogController.Index">
+            <summary>
+            Метод, отображающий стартовую страницу
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:NewsPortal.Controllers.RolesController.Get(System.Guid)">
             <summary>
             Метод на получение информации по ролям конкретного пользователя
