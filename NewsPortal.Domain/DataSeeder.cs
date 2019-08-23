@@ -79,7 +79,7 @@ namespace NewsPortal.Domain
                 IdentityResult result = userManager.CreateAsync(admin, password).Result;
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(admin, "admin");
+                    result = userManager.AddToRoleAsync(admin, "admin").Result;
                 }
             }
         }

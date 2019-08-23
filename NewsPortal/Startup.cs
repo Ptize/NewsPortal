@@ -100,7 +100,7 @@ namespace NewsPortal
                 c.RoutePrefix = string.Empty;
             });
             
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseMvc();
 

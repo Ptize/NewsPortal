@@ -42,17 +42,24 @@
             <summary>
             Метод на получение информации по ролям конкретного пользователя
             </summary>
-            <param name="id">Уникальный идентификатор пользователя</param>
+            <param name="userId">Уникальный идентификатор пользователя</param>
             <returns>Модель искомого изменяемой роли</returns>
         </member>
         <member name="M:NewsPortal.Controllers.RolesController.Add(System.String)">
             <summary>
             Добавление новой роли в систему
             </summary>
-            <param name="NameRole">Название новой роли</param>
+            <param name="nameRole">Название новой роли</param>
             <returns></returns>
         </member>
-        <!-- Проигнорирован некорректный комментарий XML для члена "M:NewsPortal.Controllers.RolesController.Put(System.Guid,System.Collections.Generic.List{System.String})" -->
+        <member name="M:NewsPortal.Controllers.RolesController.Put(System.Guid,System.Collections.Generic.List{System.String})">
+            <summary>
+            Метод для изменения ролей пользователя
+            </summary>
+            <param name="userId">Id пользователя</param>
+            <param name="roles">Список ролей пользователя (которые у него должны быть)</param>
+            <returns></returns>
+        </member>
         <member name="M:NewsPortal.Controllers.RolesController.Delete(System.Guid)">
             <summary>
             Метод на удаление роли
