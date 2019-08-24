@@ -14,8 +14,16 @@ namespace NewsPortal.Models.Enums
         /// </summary>
         Success = 0,
         /// <summary>
-        /// не верный идентификатор
+        /// неверный идентификатор
         /// </summary>
-        InvalidId = 1
+        InvalidId = 1,
+        /// <summary>
+        /// недопустимый пароль
+        /// </summary>
+        InvalidPassword = 2,
+        /// <summary>
+        /// недопустимый пароль
+        /// </summary>
+        UnknounError = 3
     }
 }

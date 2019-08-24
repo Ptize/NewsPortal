@@ -4,20 +4,17 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
-  </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    
-    <DocumentationFile>bin\$(Configuration)\NewsPortal.xml</DocumentationFile>
+    <DocumentationFile>Swagger\Comments\NewsPortal.xml</DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MailKit" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
@@ -32,6 +29,11 @@
     <ProjectReference Include="..\NewsPortal.Data\NewsPortal.Data.csproj" />
     <ProjectReference Include="..\NewsPortal.Domain\NewsPortal.Domain.csproj" />
     <ProjectReference Include="..\NewsPortal.Models\NewsPortal.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Filters\" />
+    <Folder Include="Middleware\" />
   </ItemGroup>
 
 </Project>

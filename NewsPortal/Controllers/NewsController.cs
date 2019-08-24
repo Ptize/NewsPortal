@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "editor, admin")]
     public class NewsController :Controller
     {
         private readonly INewsStorage _newsStorage;
@@ -28,12 +28,13 @@ namespace NewsPortal.Controllers
         /// Метод на получение списка новостей
         /// </summary>
         /// <returns>Список всех новостей</returns>
-        [HttpGet("list/")]
+        [HttpGet("list/pageSize={count}/pageNum={page}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<NewsListVM> GetAll()
+        [AllowAnonymous]
+        public async Task<NewsListVM> GetAll([FromRoute]int count, [FromRoute]int page)
         {
-            var news = await _newsBuilder.GetAll();
+            var news = await _newsBuilder.GetAll(count, page);
             return news;
         }
 
@@ -90,6 +91,18 @@ namespace NewsPortal.Controllers
         public async Task Delete([FromRoute]Guid newsId)
         {
             await _newsStorage.Delete(newsId);
+        }
+    }
+        
+    public class BlogController : Controller
+    {
+        /// <summary>
+        /// Метод, отображающий стартовую страницу
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Index()
+        {
+            return View(); // = ~/Views/Blog/Index.cshtml
         }
     }
 }
