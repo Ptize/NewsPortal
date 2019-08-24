@@ -9,7 +9,7 @@ namespace NewsPortal.Domain
 {
     public static class DataSeeder
     {
-        public static void InitData(DataContext context)
+        public static async Task InitData(DataContext context)
         {
             #region News
             List<News> news = new List<News>
@@ -57,29 +57,32 @@ namespace NewsPortal.Domain
             };
             #endregion
             
-            context.AddRange(news);
-            context.SaveChanges();
+            await context.AddRangeAsync(news);
+            await context.SaveChangesAsync();
         }
 
-        public static void InitializeAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task InitializeAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             string adminEmail = "admin@gmail.com";
             string password = "_Aa123456";
-            if (roleManager.FindByNameAsync("admin").Result == null)
+            string[] roleNames = new string[] { "admin", "user" };
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
             {
-                roleManager.CreateAsync(new IdentityRole("admin"));
+                var roleExist = await roleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+                }
             }
-            if (roleManager.FindByNameAsync("user").Result == null)
-            {
-                roleManager.CreateAsync(new IdentityRole("user"));
-            }
-            if (userManager.FindByNameAsync(adminEmail).Result == null)
+            if (await userManager.FindByNameAsync(adminEmail) == null)
             {
                 ApplicationUser admin = new ApplicationUser { Email = adminEmail, UserName = adminEmail };
-                IdentityResult result = userManager.CreateAsync(admin, password).Result;
+                IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
-                    result = userManager.AddToRoleAsync(admin, "admin").Result;
+                    await userManager.AddToRoleAsync(admin, "admin");
                 }
             }
         }

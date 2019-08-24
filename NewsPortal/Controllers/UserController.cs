@@ -40,7 +40,7 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Метод на получение информации по конкретному пользователю
         /// </summary>
-        /// <param name="id">Уникальный идентификатор пользователя</param>
+        /// <param name="userId">Уникальный идентификатор пользователя</param>
         /// <returns>Модель искомого пользователя</returns>
         [HttpGet("{userId}")]
         [ProducesResponseType(200)]
@@ -55,7 +55,7 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Добавление нового пользователя (РЕГИСТРАЦИЯ)
         /// </summary>
-        /// <param name="RegisterVM">Модель нового пользователя</param>
+        /// <param name="registerVM">Модель нового пользователя</param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(200)]
@@ -70,7 +70,7 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Вход
         /// </summary>
-        /// <param name="LoginVM">Модель login</param>
+        /// <param name="loginVM">Модель login</param>
         /// <returns></returns>
         [HttpPost("login")]
         [ProducesResponseType(200)]
@@ -98,7 +98,7 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Изменение пароля пользователя
         /// </summary>
-        /// <param name="ChangePasswordVM">Модель изменения пароля</param>
+        /// <param name="changePasswordVM">Модель изменения пароля</param>
         /// <returns></returns>
         [HttpPost("ChangePassword")]
         [ProducesResponseType(200)]
@@ -112,7 +112,7 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Изменение пароля пользователя на случай если забыл пароль
         /// </summary>
-        /// <param name="ChangeForgotPasswordVM">Модель изменения пароля</param>
+        /// <param name="сhangeForgotPasswordVM">Модель изменения пароля</param>
         /// <returns></returns>
         [HttpPost("ChangeForgotPassword")]
         [ProducesResponseType(200)]
@@ -126,7 +126,7 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Метод на редактирование пользователя
         /// </summary>
-        /// <param name="EditUserVM">Изменённая модель пользователя</param>
+        /// <param name="editUserVM">Изменённая модель пользователя</param>
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(200)]

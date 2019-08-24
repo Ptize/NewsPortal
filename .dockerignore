@@ -1,6 +1,5 @@
-**/bin
-**/obj
-**/out
-**/.vscode
-**/.vs
-.dotnet
+bin\
+obj\
+.vs\
+.git\
+.env

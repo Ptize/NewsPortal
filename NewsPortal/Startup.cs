@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Identity;
 using NewsPortal.Models.Data;
 using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Data.Repository;
+using System.Reflection;
+using System.IO;
 
 namespace NewsPortal
 {
@@ -57,7 +59,11 @@ namespace NewsPortal
                     Title = swaggerConf.Swagger.Title,
                     Description = swaggerConf.Swagger.Description
                 });
-                c.IncludeXmlComments(string.Format(@"{0}\{1}", AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+                //c.IncludeXmlComments(string.Format(@"{0}\{1}", AppDomain.CurrentDomain.BaseDirectory, swaggerConf.Swagger.AppComments));
+
                 //c.AddSecurityDefinition("ApiKey", new ApiKeyScheme
                 //{
                 //    Name = "ApiKey",
