@@ -13,9 +13,9 @@ COPY NewsPortal/ ./NewsPortal/
 COPY NewsPortal.Domain/ ./NewsPortal.Domain/
 COPY NewsPortal.Data/ ./NewsPortal.Data/
 COPY NewsPortal.Models/ ./NewsPortal.Models/
-RUN dotnet publish -c Debug -o out
+RUN dotnet publish -c release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS runtime
 # WORKDIR /app
 COPY --from=build /app/NewsPortal/out ./
-CMD dotnet NewsPortal.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet NewsPortal.dll
