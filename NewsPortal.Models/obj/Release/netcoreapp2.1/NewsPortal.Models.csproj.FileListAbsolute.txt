@@ -1,9 +1,0 @@
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\bin\Release\netcoreapp2.1\NewsPortal.Models.deps.json
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\bin\Release\netcoreapp2.1\NewsPortal.Models.dll
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\bin\Release\netcoreapp2.1\NewsPortal.Models.pdb
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\obj\Release\netcoreapp2.1\NewsPortal.Models.csprojAssemblyReference.cache
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\obj\Release\netcoreapp2.1\NewsPortal.Models.csproj.CoreCompileInputs.cache
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\obj\Release\netcoreapp2.1\NewsPortal.Models.AssemblyInfoInputs.cache
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\obj\Release\netcoreapp2.1\NewsPortal.Models.AssemblyInfo.cs
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\obj\Release\netcoreapp2.1\NewsPortal.Models.dll
-C:\Users\gvg_r\Documents\GitHub\NewsPortal\NewsPortal.Models\obj\Release\netcoreapp2.1\NewsPortal.Models.pdb
