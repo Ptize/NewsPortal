@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { AppBar, Toolbar, Typography, Button, withStyles } from '@material-ui/core'
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Button,
+    withStyles
+} from '@material-ui/core'
+import ExpandableSettings from './ExpandableSettings.jsx'
 
 import useStyles from '../Styles/makeStyles.js'
 import UserContext from '../UserContext'
@@ -9,29 +16,14 @@ class Header extends Component {
     static contextType = UserContext
     constructor(props) {
         super(props)
+        this.state = {
+            open: false
+        }
     }
 
     render() {
         const { classes } = this.props
 
-        const handleLogOut = () => {
-            fetch('/api/User/logout', { method: 'POST' })
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error(res.status)
-                    }
-                    else
-                        return res.text()
-                })
-                .then(res => {
-                    console.log('res = ' + res)
-                    this.context.updateValue('')
-                    localStorage.removeItem('currentUser')
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }
         return (
             <UserContext.Consumer>
                 {({ currentUser }) => (
@@ -50,11 +42,7 @@ class Header extends Component {
                                     </Button>
                                 </Link>
                                 :
-                                <Link to="/Blog" className={classes.link}>
-                                    <Button variant="outlined" style={{ borderColor: '#FFF', color: '#FFF' }} onClick={handleLogOut}>
-                                        Выход
-                                    </Button>
-                                </Link>
+                                <ExpandableSettings />
                             }
                         </Toolbar>
                     </AppBar>

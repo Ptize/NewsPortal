@@ -19,6 +19,7 @@ class Authorization extends Component {
         const { classes } = this.props
 
         const onSubmit = async values => {
+            values["rememberMe"] = false
             fetch('/api/User/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -60,7 +61,8 @@ class Authorization extends Component {
                     onSubmit={onSubmit}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <form onSubmit={handleSubmit}
-                            initialvalues={{ rememberMe: true }}>
+                        // initialvalues={{ rememberMe: false }}
+                        >
                             <div className={classes.fields}>
                                 <Field
                                     name="email"

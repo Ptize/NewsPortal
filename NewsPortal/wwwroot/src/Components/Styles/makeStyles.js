@@ -78,6 +78,13 @@ const useStyles = theme => ({
     },
     fieldControl: {
         width: 500
+    },
+    // Dashboard
+    dashTitle: {
+        marginTop: theme.spacing(2)
+    },
+    dashboard: {
+        minHeight: 800
     }
 });
 

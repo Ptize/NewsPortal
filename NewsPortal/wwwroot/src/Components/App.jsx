@@ -8,6 +8,7 @@ import Blog from './Blog.jsx'
 import NewsDetail from './NewsDetail.jsx'
 import Registration from './Registration.jsx'
 import Authorization from './Authorization.jsx'
+import Dashboard from './Dashboard.jsx'
 import NewsManager from './NewsManager.jsx'
 import UserContext from './UserContext'
 import { ProtectedRoute } from './ProtectedRoute'
@@ -41,6 +42,7 @@ class App extends Component {
                 <Route path="/Authorization" component={Authorization} />
                 <ProtectedRoute path="/Blog/News/:newsId" component={NewsDetail} />
                 <ProtectedRoute path="/Newsmanager" component={NewsManager} />
+                <ProtectedRoute path="/Dashboard" component={Dashboard} />
               </Switch>
             </Container>
             <Footer />
