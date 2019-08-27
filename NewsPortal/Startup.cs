@@ -20,6 +20,7 @@ using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Data.Repository;
 using System.Reflection;
 using System.IO;
+using NewsPortal.Domain;
 
 namespace NewsPortal
 {
@@ -87,6 +88,8 @@ namespace NewsPortal
             services.AddScoped<UserBuilder>();
             services.AddScoped<RoleBuilder>();
 
+            services.AddScoped<EmailService>();
+
             services.AddAutoMapper(typeof(MappingProfile));
         }
 
@@ -105,7 +108,9 @@ namespace NewsPortal
                 c.SwaggerEndpoint(swaggerConf.Swagger.EndPoint, swaggerConf.Swagger.Spec);
                 //c.RoutePrefix = string.Empty;
             });
-            
+
+            app.UseHttpsRedirection();
+
             app.UseAuthentication();
 
             //app.UseMvc();

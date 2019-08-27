@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NewsPortal.Data;
 using NewsPortal.Data.Repository.interfaces;
@@ -41,7 +43,7 @@ namespace NewsPortal.Domain.Storage
             return users;
         }
 
-        public async Task<OperationResult> Add(RegisterVM registerVM)
+        public async Task<OperationResult> Add(RegisterVM registerVM, HttpContext httpContext, IUrlHelper Url)
         {
             var user = new ApplicationUser()
             {
@@ -49,18 +51,27 @@ namespace NewsPortal.Domain.Storage
                 UserName = registerVM.Email,
             };
 
+            EmailService emailService = new EmailService();
+            string callbackUrl = "";
+
             var result = await _userRepository.Add(user, registerVM.Password);
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, false);
-                await _context.SaveChangesAsync();
-                return OperationResult.Success;
+                callbackUrl = await _userRepository.CallBackUrlGen(user, httpContext, Url);
+
+                if (callbackUrl != null)
+                {
+                    //await emailService.SendEmailAsync(user.Email, "Confirm your account", $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+
+                    await _signInManager.SignInAsync(user, false);
+                    await _context.SaveChangesAsync();
+                    return OperationResult.Success;
+                }
+                else
+                    return OperationResult.InvalidUrl;
             }
             else
-            {
                 return OperationResult.InvalidPassword;
-            }
-
         }
 
         public async Task Delete(Guid userId)
@@ -92,13 +103,16 @@ namespace NewsPortal.Domain.Storage
 
             if (result.Succeeded)
             {
-                await _context.SaveChangesAsync();
-                return OperationResult.Success;
+                //if (await _userRepository.CheckEmail(loginVM.Email))
+                //{
+                    await _context.SaveChangesAsync();
+                    return OperationResult.Success;
+                //}
+                //else
+                   // return OperationResult.MailNotConfirmed;
             }
             else
-            {
                 return OperationResult.InvalidPassword;
-            }
         }
 
         public async Task<OperationResult> Logout()

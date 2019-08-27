@@ -26,12 +26,17 @@
         </member>
         <member name="F:NewsPortal.Models.Enums.OperationResult.UnknounError">
             <summary>
-            недопустимый пароль
+            неизвестная ошибка
             </summary>
         </member>
-        <member name="P:NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM.Id">
+        <member name="F:NewsPortal.Models.Enums.OperationResult.MailNotConfirmed">
             <summary>
-            Идентификатор сущности
+            не подтверждёна почта
+            </summary>
+        </member>
+        <member name="F:NewsPortal.Models.Enums.OperationResult.InvalidUrl">
+            <summary>
+            не создался URL
             </summary>
         </member>
         <member name="P:NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM.Email">
@@ -42,11 +47,6 @@
         <member name="P:NewsPortal.Models.VeiwModels.ChangeForgotPasswordVM.NewPassword">
             <summary>
             Новый пароль пользователя
-            </summary>
-        </member>
-        <member name="P:NewsPortal.Models.VeiwModels.ChangePasswordVM.Id">
-            <summary>
-            Идентификатор сущности
             </summary>
         </member>
         <member name="P:NewsPortal.Models.VeiwModels.ChangePasswordVM.Email">

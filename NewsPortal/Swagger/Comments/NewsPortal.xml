@@ -51,6 +51,13 @@
             <param name="userId">Уникальный идентификатор пользователя</param>
             <returns>Модель искомого изменяемой роли</returns>
         </member>
+        <member name="M:NewsPortal.Controllers.RolesController.GetMyRole(System.String)">
+            <summary>
+            Метод на получение информации по ролям конкретного пользователя через логин
+            </summary>
+            <param name="login">Логин пользователя</param>
+            <returns>Модель искомого изменяемой роли</returns>
+        </member>
         <member name="M:NewsPortal.Controllers.RolesController.Add(System.String)">
             <summary>
             Добавление новой роли в систему
@@ -91,6 +98,14 @@
             Добавление нового пользователя (РЕГИСТРАЦИЯ)
             </summary>
             <param name="registerVM">Модель нового пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.ConfirmEmail(System.Guid,System.String)">
+            <summary>
+            Подтверждение Email
+            </summary>
+            <param name="userId">id пользователя</param>
+            <param name="code">подтверждающий токен</param>
             <returns></returns>
         </member>
         <member name="M:NewsPortal.Controllers.UserController.Login(NewsPortal.Models.VeiwModels.LoginVM)">

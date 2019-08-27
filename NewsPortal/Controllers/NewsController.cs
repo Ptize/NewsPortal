@@ -12,7 +12,7 @@ namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "editor, admin")]
+    [Authorize]
     public class NewsController :Controller
     {
         private readonly INewsStorage _newsStorage;
@@ -47,6 +47,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize(Roles = "user")]
         public async Task<News> Get([FromRoute]Guid newsId)
         {
             var news = await _newsBuilder.Get(newsId);
@@ -61,6 +62,7 @@ namespace NewsPortal.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task<OperationResult> Add([FromBody]NewsVM newsVM)
         {
             var result = await _newsBuilder.Add(newsVM);
@@ -75,6 +77,7 @@ namespace NewsPortal.Controllers
         [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task Put([FromBody]NewsVM newsVM)
         {
             await _newsBuilder.Update(newsVM);
@@ -88,6 +91,7 @@ namespace NewsPortal.Controllers
         [HttpDelete("{newsId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task Delete([FromRoute]Guid newsId)
         {
             await _newsStorage.Delete(newsId);

@@ -65,7 +65,7 @@ namespace NewsPortal.Domain
         {
             string adminEmail = "admin@gmail.com";
             string password = "_Aa123456";
-            string[] roleNames = new string[] { "admin", "user" };
+            string[] roleNames = new string[] { "admin", "user", "editor" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
@@ -79,10 +79,13 @@ namespace NewsPortal.Domain
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
                 ApplicationUser admin = new ApplicationUser { Email = adminEmail, UserName = adminEmail };
+                admin.EmailConfirmed = true;
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, "admin");
+                    await userManager.AddToRoleAsync(admin, "user");
+                    await userManager.AddToRoleAsync(admin, "editor");
                 }
             }
         }
