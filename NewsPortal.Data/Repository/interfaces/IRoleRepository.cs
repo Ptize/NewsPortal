@@ -11,6 +11,7 @@ namespace NewsPortal.Data.Repository.interfaces
     public interface IRoleRepository
     {
         Task<ChangeRoleVM> Get(Guid id);
+        Task<MyRoleVM> GetMyRole(string login);
         Task<IdentityResult> Create(string nameRole);
         Task<ApplicationUser> Update(Guid userId, List<string> roles);
         Task Delete(Guid roleId);

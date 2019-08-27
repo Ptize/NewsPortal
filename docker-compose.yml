@@ -1,0 +1,32 @@
+version: '3.4'
+
+networks:
+    dockerapi-dev:
+        driver: bridge
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432"
+    restart: always
+    environment:
+        POSTGRES_USER: "postgres"
+        POSTGRES_PASSWORD: "postgres"
+        POSTGRES_DB: "newsportaldb"
+    networks:
+        - dockerapi-dev
+
+  app:
+    image: newsportal
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    environment:
+      DB_CONNECTION_STRING: "host=db;port=5432;database=newsportaldb;username=postgres;password=postgres;"      
+    networks:
+        - dockerapi-dev
+    depends_on:
+      - db

@@ -43,6 +43,25 @@ namespace NewsPortal.Data.Repository
             return model;
         }
 
+        public async Task<MyRoleVM> GetMyRole(string login)
+        {
+            // получаем пользователя
+            ApplicationUser user = await _userManager.FindByEmailAsync(login);
+            MyRoleVM model = new MyRoleVM();
+            if (user != null)
+            {
+                // получем список ролей пользователя
+                var userRoles = await _userManager.GetRolesAsync(user);
+                model = new MyRoleVM
+                {
+                    UserId = user.Id,
+                    UserEmail = user.Email,
+                    UserRoles = userRoles
+                };
+            }
+            return model;
+        }
+
         public async Task<IdentityResult> Create(string nameRole)
         {
             var result = await _roleManager.CreateAsync(new IdentityRole(nameRole));

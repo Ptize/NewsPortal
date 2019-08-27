@@ -1,4 +1,6 @@
-﻿using NewsPortal.Data.Repository.interfaces;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
@@ -30,9 +32,9 @@ namespace NewsPortal.Domain.Builder
                 return await _userStorage.GetAll(countEntity, page);
         }
 
-        public async Task<OperationResult> Add(RegisterVM registerVM)
+        public async Task<OperationResult> Add(RegisterVM registerVM, HttpContext httpContext, IUrlHelper Url)
         {
-            var result = await _userStorage.Add(registerVM);
+            var result = await _userStorage.Add(registerVM, httpContext, Url);
             return result;
         }
 

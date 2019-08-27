@@ -1,4 +1,6 @@
-﻿using NewsPortal.Models.Data;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
@@ -11,7 +13,7 @@ namespace NewsPortal.Domain.Storage.Interfaces
     public interface IUserStorage
     {
         Task<UsersListVM> GetAll(int count, int page);
-        Task<OperationResult> Add(RegisterVM registerVM);
+        Task<OperationResult> Add(RegisterVM registerVM, HttpContext httpContext, IUrlHelper Url);
         Task<ApplicationUser> Update(EditUserVM editUserVM);
         Task Delete(Guid userId);
         Task<ApplicationUser> Get(Guid id);
