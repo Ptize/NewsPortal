@@ -37,9 +37,9 @@ namespace NewsPortal.Data
         public async Task<List<BriefNewsVM>> GetAll(int countEntity, int page)
         {
             var listBriefNewsVM = _context.Newss
+                .OrderBy(x => x.NewsId)
                 .Skip(countEntity * (page - 1))
-                .Take(countEntity)
-                .OrderBy(x => x.NewsId);
+                .Take(countEntity);
 
             var resListBriefNewsVM = (from i in listBriefNewsVM
                                       select new BriefNewsVM

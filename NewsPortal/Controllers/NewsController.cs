@@ -39,7 +39,7 @@ namespace NewsPortal.Controllers
         [AllowAnonymous]
         public async Task<NewsListVM> GetAll([FromRoute]int count, [FromRoute]int page)
         {
-            _logger.GetAllRequestReceived(LoggerNewsEntity.TrimEnd());
+            _logger.GetAllRequestReceived("new");
             var news = await _newsBuilder.GetAll(count, page);
             return news;
         }
