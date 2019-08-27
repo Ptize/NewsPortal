@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Logging.LoggerExtensions.Controllers;
 using NewsPortal.Domain.Storage.Interfaces;
@@ -21,11 +23,13 @@ namespace NewsPortal.Controllers
         private readonly UserBuilder _userBuilder;
         private readonly ILogger _logger;
         private const string LoggerUserEntity = "user";
+        private readonly IUserRepository _userRepository;
 
-        public UserController(IUserStorage userStorage, UserBuilder userBuilder, ILogger<UserController> logger)
+        public UserController(IUserStorage userStorage, UserBuilder userBuilder, IUserRepository userRepository, ILogger<UserController> logger)
         {
             _userStorage = userStorage;
             _userBuilder = userBuilder;
+            _userRepository = userRepository;
             _logger = logger;
         }
 
@@ -70,8 +74,23 @@ namespace NewsPortal.Controllers
         [AllowAnonymous]
         public async Task<OperationResult> Add([FromBody]RegisterVM registerVM)
         {
-            _logger.AddRequestReceived(LoggerUserEntity);
-            var result = await _userBuilder.Add(registerVM);
+            var result = await _userBuilder.Add(registerVM, HttpContext, Url);
+            return result;
+        }
+        
+        /// <summary>
+        /// Подтверждение Email
+        /// </summary>
+        /// <param name="userId">id пользователя</param>
+        /// <param name="code">подтверждающий токен</param>
+        /// <returns></returns>
+        [HttpGet("confirmemail/userId={userId}/code={code}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [AllowAnonymous]
+        public async Task<bool> ConfirmEmail([FromRoute]Guid userId, [FromRoute]string code)
+        {
+            var result = await _userRepository.ConfirmEmail(userId, code);
             return result;
         }
 
@@ -141,6 +160,7 @@ namespace NewsPortal.Controllers
         [HttpPost("ChangePassword")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "user")]
         public async Task<OperationResult> ChangePassword([FromBody]ChangePasswordVM changePasswordVM)
         {
             _logger.ChangePasswordRequestReceived();
@@ -156,6 +176,7 @@ namespace NewsPortal.Controllers
         [HttpPost("ChangeForgotPassword")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [AllowAnonymous]
         public async Task<OperationResult> ChangeForgotPassword([FromBody]ChangeForgotPasswordVM сhangeForgotPasswordVM)
         {
             _logger.ChangeForgotPasswordRequestReceived();

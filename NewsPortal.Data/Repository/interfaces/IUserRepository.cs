@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.VeiwModels;
 using System;
@@ -18,5 +20,8 @@ namespace NewsPortal.Data.Repository.interfaces
         Task Delete(Guid userId);
         Task<IdentityResult> UpdatePassword(ChangePasswordVM changePasswordVM);
         Task<IdentityResult> UpdateForgotPassword(ChangeForgotPasswordVM changeForgotPasswordVM);
+        Task<bool> CheckEmail(string Email);
+        Task<string> CallBackUrlGen(ApplicationUser user, HttpContext httpContext, IUrlHelper Url);
+        Task<bool> ConfirmEmail(Guid userId, string code);
     }
 }

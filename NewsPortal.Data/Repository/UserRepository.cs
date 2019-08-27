@@ -8,10 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Policy;
 
 namespace NewsPortal.Data.Repository
 {
-    public class UserRepository :IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -48,6 +51,10 @@ namespace NewsPortal.Data.Repository
         public async Task<IdentityResult> Add(ApplicationUser user, string password)
         {
             var result = await _userManager.CreateAsync(user, password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "user");
+            }
             return result;
         }
 
@@ -84,7 +91,7 @@ namespace NewsPortal.Data.Repository
 
         public async Task<IdentityResult> UpdatePassword(ChangePasswordVM changePasswordVM)
         {
-            ApplicationUser user = await _userManager.FindByIdAsync(changePasswordVM.Id);
+            ApplicationUser user = await _userManager.FindByEmailAsync(changePasswordVM.Email);
             IdentityResult result = IdentityResult.Failed();
             if (user != null)
             {
@@ -96,7 +103,7 @@ namespace NewsPortal.Data.Repository
 
         public async Task<IdentityResult> UpdateForgotPassword(ChangeForgotPasswordVM changeForgotPasswordVM)
         {
-            ApplicationUser user = await _userManager.FindByIdAsync(changeForgotPasswordVM.Id);
+            ApplicationUser user = await _userManager.FindByEmailAsync(changeForgotPasswordVM.Email);
             IdentityResult result = IdentityResult.Failed();
             if (user != null)
             {
@@ -112,6 +119,49 @@ namespace NewsPortal.Data.Repository
                 }
             }
             return result;
+        }
+
+        public async Task<bool> ConfirmEmail(Guid userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return false;
+            }
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return false;
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+                return true;
+            else
+                return false;
+        }
+
+        public async Task<bool> CheckEmail(string Email)
+        {
+            ApplicationUser user = await _userManager.FindByNameAsync(Email);
+            // проверяем, подтвержден ли email
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<string> CallBackUrlGen(ApplicationUser user, HttpContext httpContext, IUrlHelper Url)
+        {
+            var prot = httpContext.Request.Scheme;
+            // генерация токена для пользователя
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var callbackUrl = Url.Action(
+                "ConfirmEmail",
+                "UserController",
+                new { userId = user.Id, code = code },
+                protocol: prot);
+            Console.WriteLine(callbackUrl);
+            return callbackUrl;
         }
     }
 }

@@ -22,6 +22,7 @@ using System.Reflection;
 using System.IO;
 using Microsoft.Extensions.Logging;
 using static NewsPortal.Domain.Logging.LoggerExtensions.Main.StartupLogger;
+using NewsPortal.Domain;
 
 namespace NewsPortal
 {
@@ -97,6 +98,8 @@ namespace NewsPortal
             services.AddScoped<RoleBuilder>();
             _logger.AddedBuilders();
 
+            services.AddScoped<EmailService>();
+
             services.AddAutoMapper(typeof(MappingProfile));
             _logger.AddedAutomapper();
         }
@@ -117,7 +120,9 @@ namespace NewsPortal
                 c.SwaggerEndpoint(swaggerConf.Swagger.EndPoint, swaggerConf.Swagger.Spec);
                 //c.RoutePrefix = string.Empty;
             });
-            
+
+            app.UseHttpsRedirection();
+
             app.UseAuthentication();
 
             //app.UseMvc();

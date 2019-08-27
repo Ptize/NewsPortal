@@ -19,9 +19,13 @@ namespace NewsPortal.Domain.Builder
             _roleStorage = roleStorage;
         }
 
-        public async Task<ChangeRoleVM> Get(Guid newsid)
+        public async Task<ChangeRoleVM> Get(Guid userid)
         {
-            return await _roleRepository.Get(newsid);
+            return await _roleRepository.Get(userid);
+        }
+        public async Task<MyRoleVM> GetMyRole(string login)
+        {
+            return await _roleRepository.GetMyRole(login);
         }
 
         public async Task<OperationResult> Add(string nameRole)

@@ -51,6 +51,13 @@
             <param name="userId">Уникальный идентификатор пользователя</param>
             <returns>Модель искомого изменяемой роли</returns>
         </member>
+        <member name="M:NewsPortal.Controllers.RolesController.GetMyRole(System.String)">
+            <summary>
+            Метод на получение информации по ролям конкретного пользователя через логин
+            </summary>
+            <param name="login">Логин пользователя</param>
+            <returns>Модель искомого изменяемой роли</returns>
+        </member>
         <member name="M:NewsPortal.Controllers.RolesController.Add(System.String)">
             <summary>
             Добавление новой роли в систему
@@ -93,18 +100,12 @@
             <param name="registerVM">Модель нового пользователя</param>
             <returns></returns>
         </member>
-        <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.EditUserVM)">
+        <member name="M:NewsPortal.Controllers.UserController.ConfirmEmail(System.Guid,System.String)">
             <summary>
-            Метод на редактирование пользователя
+            Подтверждение Email
             </summary>
-            <param name="editUserVM">Изменённая модель пользователя</param>
-            <returns></returns>
-        </member>
-        <member name="M:NewsPortal.Controllers.UserController.Delete(System.Guid)">
-            <summary>
-            Метод на удаление пользователя
-            </summary>
-            <param name="userId">Уникальный идентификатор пользователя</param>
+            <param name="userId">id пользователя</param>
+            <param name="code">подтверждающий токен</param>
             <returns></returns>
         </member>
         <member name="M:NewsPortal.Controllers.UserController.Login(NewsPortal.Models.VeiwModels.LoginVM)">
@@ -132,6 +133,20 @@
             Изменение пароля пользователя на случай если забыл пароль
             </summary>
             <param name="сhangeForgotPasswordVM">Модель изменения пароля</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.EditUserVM)">
+            <summary>
+            Метод на редактирование пользователя
+            </summary>
+            <param name="editUserVM">Изменённая модель пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Delete(System.Guid)">
+            <summary>
+            Метод на удаление пользователя
+            </summary>
+            <param name="userId">Уникальный идентификатор пользователя</param>
             <returns></returns>
         </member>
         <member name="T:NewsPortal.Swagger.SwaggerElementDescription">

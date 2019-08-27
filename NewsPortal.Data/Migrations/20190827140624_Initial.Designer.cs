@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NewsPortal.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190822100116_Initial")]
+    [Migration("20190827140624_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

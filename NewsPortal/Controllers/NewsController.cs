@@ -53,6 +53,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize(Roles = "user")]
         public async Task<News> Get([FromRoute]Guid newsId)
         {
             _logger.GetRequestReceived(LoggerNewsEntity);
@@ -68,6 +69,7 @@ namespace NewsPortal.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task<OperationResult> Add([FromBody]NewsVM newsVM)
         {
             _logger.AddRequestReceived(LoggerNewsEntity);
@@ -83,6 +85,7 @@ namespace NewsPortal.Controllers
         [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task Put([FromBody]NewsVM newsVM)
         {
             _logger.PutRequestReceived(LoggerNewsEntity);
@@ -97,6 +100,7 @@ namespace NewsPortal.Controllers
         [HttpDelete("{newsId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task Delete([FromRoute]Guid newsId)
         {
             _logger.DeleteRequestReceived(LoggerNewsEntity);

@@ -14,7 +14,7 @@ namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class RolesController:Controller
     {
         private readonly IRoleStorage _roleStorage;
@@ -38,10 +38,27 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize(Roles = "admin")]
         public async Task<ChangeRoleVM> Get([FromRoute]Guid userId)
         {
             _logger.GetRequestReceived(LoggerRoleEntity);
             var role = await _roleBuilder.Get(userId);
+            return role;
+        }
+
+        /// <summary>
+        /// Метод на получение информации по ролям конкретного пользователя через логин
+        /// </summary>
+        /// <param name="login">Логин пользователя</param>
+        /// <returns>Модель искомого изменяемой роли</returns>
+        [HttpGet("{login}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [Authorize(Roles = "user")]
+        public async Task<MyRoleVM> GetMyRole([FromRoute]string login)
+        {
+            var role = await _roleBuilder.GetMyRole(login);
             return role;
         }
 
@@ -53,6 +70,7 @@ namespace NewsPortal.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "admin")]
         public async Task<OperationResult> Add([FromBody]string nameRole)
         {
             _logger.AddRequestReceived(LoggerRoleEntity);
@@ -69,6 +87,7 @@ namespace NewsPortal.Controllers
         [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "admin")]
         public async Task Put([FromBody]Guid userId, List<string> roles)
         {
             _logger.PutRequestReceived(LoggerRoleEntity);
@@ -83,6 +102,7 @@ namespace NewsPortal.Controllers
         [HttpDelete("{roleId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "admin")]
         public async Task Delete([FromRoute]Guid roleId)
         {
             _logger.DeleteRequestReceived(LoggerRoleEntity);
