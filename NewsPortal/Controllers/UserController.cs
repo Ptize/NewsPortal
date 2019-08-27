@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NewsPortal.Domain.Builder;
+using NewsPortal.Domain.Logging.LoggerExtensions.Controllers;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
@@ -17,11 +19,14 @@ namespace NewsPortal.Controllers
     {
         private readonly IUserStorage _userStorage;
         private readonly UserBuilder _userBuilder;
+        private readonly ILogger _logger;
+        private const string LoggerUserEntity = "user";
 
-        public UserController(IUserStorage userStorage, UserBuilder userBuilder)
+        public UserController(IUserStorage userStorage, UserBuilder userBuilder, ILogger<UserController> logger)
         {
             _userStorage = userStorage;
             _userBuilder = userBuilder;
+            _logger = logger;
         }
 
         /// <summary>
@@ -33,6 +38,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task<UsersListVM> GetAll([FromRoute]int count, [FromRoute]int page)
         {
+            _logger.GetAllRequestReceived(LoggerUserEntity);
             var news = await _userBuilder.GetAll(count, page);
             return news;
         }
@@ -48,6 +54,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(404)]
         public async Task<ApplicationUser> Get([FromRoute]Guid userId)
         {
+            _logger.GetRequestReceived(LoggerUserEntity);
             var user = await _userBuilder.Get(userId);
             return user;
         }
@@ -63,8 +70,37 @@ namespace NewsPortal.Controllers
         [AllowAnonymous]
         public async Task<OperationResult> Add([FromBody]RegisterVM registerVM)
         {
+            _logger.AddRequestReceived(LoggerUserEntity);
             var result = await _userBuilder.Add(registerVM);
             return result;
+        }
+
+        /// <summary>
+        /// Метод на редактирование пользователя
+        /// </summary>
+        /// <param name="editUserVM">Изменённая модель пользователя</param>
+        /// <returns></returns>
+        [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task Put([FromBody]EditUserVM editUserVM)
+        {
+            _logger.PutRequestReceived(LoggerUserEntity);
+            await _userBuilder.Update(editUserVM);
+        }
+
+        /// <summary>
+        /// Метод на удаление пользователя
+        /// </summary>
+        /// <param name="userId">Уникальный идентификатор пользователя</param>
+        /// <returns></returns>
+        [HttpDelete("{userId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task Delete([FromRoute]Guid userId)
+        {
+            _logger.DeleteRequestReceived(LoggerUserEntity);
+            await _userStorage.Delete(userId);
         }
 
         /// <summary>
@@ -78,6 +114,7 @@ namespace NewsPortal.Controllers
         [AllowAnonymous]
         public async Task<OperationResult> Login([FromBody]LoginVM loginVM)
         {
+            _logger.LoginRequestReceived();
             var result = await _userBuilder.Login(loginVM);
             return result;
         }
@@ -91,6 +128,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task<OperationResult> Logout()
         {
+            _logger.LogoutRequestReceived();
             var result = await _userBuilder.Logout();
             return result;
         }
@@ -105,6 +143,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task<OperationResult> ChangePassword([FromBody]ChangePasswordVM changePasswordVM)
         {
+            _logger.ChangePasswordRequestReceived();
             var result = await _userBuilder.ChangePassword(changePasswordVM);
             return result;
         }
@@ -119,34 +158,11 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task<OperationResult> ChangeForgotPassword([FromBody]ChangeForgotPasswordVM сhangeForgotPasswordVM)
         {
+            _logger.ChangeForgotPasswordRequestReceived();
             var result = await _userBuilder.ChangeForgotPassword(сhangeForgotPasswordVM);
             return result;
         }
 
-        /// <summary>
-        /// Метод на редактирование пользователя
-        /// </summary>
-        /// <param name="editUserVM">Изменённая модель пользователя</param>
-        /// <returns></returns>
-        [HttpPut]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public async Task Put([FromBody]EditUserVM editUserVM)
-        {
-            await _userBuilder.Update(editUserVM);
-        }
-
-        /// <summary>
-        /// Метод на удаление пользователя
-        /// </summary>
-        /// <param name="userId">Уникальный идентификатор пользователя</param>
-        /// <returns></returns>
-        [HttpDelete("{userId}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public async Task Delete([FromRoute]Guid userId)
-        {
-            await _userStorage.Delete(userId);
-        }
+       
     }
 }

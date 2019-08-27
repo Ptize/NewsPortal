@@ -36,10 +36,10 @@ namespace NewsPortal
 
                 if (!context.Newss.Any())
                 {
-                    await DataSeeder.InitData(context);
+                    await DataSeeder.InitNews(context);
                 }
 
-                await DataSeeder.InitializeAsync(userManager, rolesManager);
+                await DataSeeder.InitUsers(userManager, rolesManager);
             }
 
             return webHost;

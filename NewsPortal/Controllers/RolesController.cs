@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NewsPortal.Domain.Builder;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Enums;
@@ -7,6 +8,7 @@ using NewsPortal.Models.VeiwModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NewsPortal.Domain.Logging.LoggerExtensions.Controllers;
 
 namespace NewsPortal.Controllers
 {
@@ -17,11 +19,14 @@ namespace NewsPortal.Controllers
     {
         private readonly IRoleStorage _roleStorage;
         private readonly RoleBuilder _roleBuilder;
+        private readonly ILogger _logger;
+        private const string LoggerRoleEntity = "role";
 
-        public RolesController(IRoleStorage roleStorage, RoleBuilder roleBuilder)
+        public RolesController(IRoleStorage roleStorage, RoleBuilder roleBuilder, ILogger<RolesController> logger)
         {
             _roleStorage = roleStorage;
             _roleBuilder = roleBuilder;
+            _logger = logger;
         }
 
         /// <summary>
@@ -35,6 +40,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(404)]
         public async Task<ChangeRoleVM> Get([FromRoute]Guid userId)
         {
+            _logger.GetRequestReceived(LoggerRoleEntity);
             var role = await _roleBuilder.Get(userId);
             return role;
         }
@@ -49,6 +55,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task<OperationResult> Add([FromBody]string nameRole)
         {
+            _logger.AddRequestReceived(LoggerRoleEntity);
             var result = await _roleBuilder.Add(nameRole);
             return result;
         }
@@ -64,6 +71,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task Put([FromBody]Guid userId, List<string> roles)
         {
+            _logger.PutRequestReceived(LoggerRoleEntity);
             await _roleBuilder.Update(userId, roles);
         }
 
@@ -77,6 +85,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task Delete([FromRoute]Guid roleId)
         {
+            _logger.DeleteRequestReceived(LoggerRoleEntity);
             await _roleStorage.Delete(roleId);
         }
     }

@@ -20,12 +20,16 @@ using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Data.Repository;
 using System.Reflection;
 using System.IO;
+using Microsoft.Extensions.Logging;
+using static NewsPortal.Domain.Logging.LoggerExtensions.Main.StartupLogger;
 
 namespace NewsPortal
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        private readonly ILogger _logger;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment, ILogger<Startup> logger)
         {
             var builder = new ConfigurationBuilder()
                .SetBasePath(hostingEnvironment.ContentRootPath)
@@ -34,6 +38,8 @@ namespace NewsPortal
                .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+
+            _logger = logger;
         }
 
         public IConfiguration Configuration { get; }
@@ -74,20 +80,25 @@ namespace NewsPortal
                 // Схема ApiKey применяется к методам покрытым атрибутом "AuthorizeFilterAttribute"
                 //c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
+            _logger.AddedSwagger();
 
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            _logger.AddedRepositories();
 
             services.AddScoped<INewsStorage, NewsStorage>();
             services.AddScoped<IUserStorage, UserStorage>();
             services.AddScoped<IRoleStorage, RoleStorage>();
+            _logger.AddedStorages();
 
             services.AddScoped<NewsBuilder>();
             services.AddScoped<UserBuilder>();
             services.AddScoped<RoleBuilder>();
+            _logger.AddedBuilders();
 
             services.AddAutoMapper(typeof(MappingProfile));
+            _logger.AddedAutomapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,6 +106,7 @@ namespace NewsPortal
         {
             if (env.IsDevelopment())
             {
+                _logger.InDevelopment();
                 app.UseDeveloperExceptionPage();
             }
 

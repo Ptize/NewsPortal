@@ -32,7 +32,6 @@ namespace NewsPortal.Domain.Builder
                 NewsListVM listEmpty = new NewsListVM();
                 return listEmpty;
             }
-            else
             return await _newsStorage.GetAll(countEntity, page);
         }
 

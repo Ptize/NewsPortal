@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NewsPortal.Domain.Builder;
+using NewsPortal.Domain.Logging.LoggerExtensions.Controllers;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
@@ -13,15 +15,18 @@ namespace NewsPortal.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize(Roles = "editor, admin")]
-    public class NewsController :Controller
+    public class NewsController : Controller
     {
         private readonly INewsStorage _newsStorage;
         private readonly NewsBuilder _newsBuilder;
+        private readonly ILogger _logger;
+        private const string LoggerNewsEntity = "news";
 
-        public NewsController(INewsStorage newsStorage, NewsBuilder newsBuilder)
+        public NewsController(INewsStorage newsStorage, NewsBuilder newsBuilder, ILogger<NewsController> logger)
         {
             _newsStorage = newsStorage;
             _newsBuilder = newsBuilder;
+            _logger = logger;
         }
 
         /// <summary>
@@ -34,6 +39,7 @@ namespace NewsPortal.Controllers
         [AllowAnonymous]
         public async Task<NewsListVM> GetAll([FromRoute]int count, [FromRoute]int page)
         {
+            _logger.GetAllRequestReceived(LoggerNewsEntity.TrimEnd());
             var news = await _newsBuilder.GetAll(count, page);
             return news;
         }
@@ -49,6 +55,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(404)]
         public async Task<News> Get([FromRoute]Guid newsId)
         {
+            _logger.GetRequestReceived(LoggerNewsEntity);
             var news = await _newsBuilder.Get(newsId);
             return news;
         }
@@ -63,6 +70,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task<OperationResult> Add([FromBody]NewsVM newsVM)
         {
+            _logger.AddRequestReceived(LoggerNewsEntity);
             var result = await _newsBuilder.Add(newsVM);
             return result;
         }
@@ -77,6 +85,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task Put([FromBody]NewsVM newsVM)
         {
+            _logger.PutRequestReceived(LoggerNewsEntity);
             await _newsBuilder.Update(newsVM);
         }
 
@@ -90,18 +99,26 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         public async Task Delete([FromRoute]Guid newsId)
         {
+            _logger.DeleteRequestReceived(LoggerNewsEntity);
             await _newsStorage.Delete(newsId);
         }
     }
         
     public class BlogController : Controller
     {
+        private readonly ILogger _logger;
+
+        public BlogController(ILogger<BlogController> logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// Метод, отображающий стартовую страницу
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
+            _logger.IndexPageRequestReceived();   
             return View(); // = ~/Views/Blog/Index.cshtml
         }
     }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NewsPortal.Data
 {
-    public class NewsRepository :INewsRepository
+    public class NewsRepository : INewsRepository
     {
         private readonly DataContext _context;
 
@@ -38,7 +38,8 @@ namespace NewsPortal.Data
         {
             var listBriefNewsVM = _context.Newss
                 .Skip(countEntity * (page - 1))
-                .Take(countEntity);
+                .Take(countEntity)
+                .OrderBy(x => x.NewsId);
 
             var resListBriefNewsVM = (from i in listBriefNewsVM
                                       select new BriefNewsVM

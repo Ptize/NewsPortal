@@ -9,7 +9,7 @@ namespace NewsPortal.Domain
 {
     public static class DataSeeder
     {
-        public static async Task InitData(DataContext context)
+        public static async Task InitNews(DataContext context)
         {
             #region News
             List<News> news = new List<News>
@@ -61,7 +61,7 @@ namespace NewsPortal.Domain
             await context.SaveChangesAsync();
         }
 
-        public static async Task InitializeAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task InitUsers(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             string adminEmail = "admin@gmail.com";
             string password = "_Aa123456";
