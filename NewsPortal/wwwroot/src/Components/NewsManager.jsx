@@ -16,7 +16,7 @@ import {
     DialogTitle,
     Button,
     withStyles
-} from '@material-ui/core';
+} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddTwoTone'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
@@ -61,7 +61,6 @@ class NewsManager extends Component {
     }
 
     handleCloseDeletion() {
-        console.log("Btn close")
         this.setState({ openDeletion: false })
     }
 
@@ -69,18 +68,16 @@ class NewsManager extends Component {
         fetch(`/api/news/${selectedNews.newsId}`) // fetch news' detail
             .then(response => response.json())
             .then(result => {
-                this.setState({ itemSelected: result, openEditing: true });
+                this.setState({ itemSelected: result, openEditing: true })
             })
             .catch(e => {
                 console.log(e);
                 this.setState({ itemSelected: result, error: e, openEditing: true })
             })
-        console.log("Btn open")
         console.log(this.state.itemSelected)
     }
 
     handleCloseEditing() {
-        console.log("Btn close")
         this.setState({ openEditing: false })
     }
 
@@ -218,7 +215,7 @@ class NewsManager extends Component {
                     <DialogContent>
                         <Form
                             onSubmit={handleConfirmAdding}
-                            render={({ handleSubmit, form, submitting, pristine, values }) => (
+                            render={({ mutators, handleSubmit, form, submitting, pristine, values, ...rest }) => (
                                 <form onSubmit={handleSubmit}>
                                     <div className={classes.fields}>
                                         <Field
@@ -264,6 +261,7 @@ class NewsManager extends Component {
                                             Подтвердить
                                         </Button>
                                     </div>
+                                    {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                                 </form>
                             )}
                         />
@@ -328,9 +326,6 @@ class NewsManager extends Component {
                                             className={classes.fieldControl}
                                         />
                                     </div>
-                                    <Typography variant="subtitle2">
-                                        Текст
-                                    </Typography>
                                     <div className={classes.fields}>
                                         <Field
                                             name="text"

@@ -1,6 +1,6 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { Grid, Paper, Typography, Divider, withStyles } from '@material-ui/core'
-import useStyles from './Styles/makeStyles.js'
+import useStyles from './Styles/makeStyles'
 
 class NewsDetail extends Component {
     constructor() {
@@ -11,13 +11,12 @@ class NewsDetail extends Component {
     }
 
     componentDidMount() {
-        const { newsId } = this.props.match.params;
-        console.log("Requested id: " + newsId)
+        const { newsId } = this.props.match.params
 
         fetch(`/api/news/${newsId}`)
             .then(response => response.json())
             .then(result => {
-                this.setState({ newsDetails: result, isFetching: false });
+                this.setState({ newsDetails: result, isFetching: false })
             })
             .catch(e => {
                 console.log(e);
@@ -26,12 +25,12 @@ class NewsDetail extends Component {
     }
 
     render() {
-        const { classes } = this.props;
-        const { data, isFetching, error } = this.state;
+        const { classes } = this.props
+        const { data, isFetching, error } = this.state
 
-        if (isFetching) return <div>Идет загрузка...</div>;
+        if (isFetching) return <div>Идет загрузка...</div>
 
-        if (error) return <div>{`Error: ${e.message}`}</div>;
+        if (error) return <div>{`Error: ${e.message}`}</div>
 
         return (
             <main>
@@ -45,6 +44,9 @@ class NewsDetail extends Component {
                             src="https://source.unsplash.com/random"
                             className={classes.imgCenter}
                         />
+                        {/* <img
+                            src={`data:image/jpeg;base64,${this.state.newsDetails.photo.toString(64)}`}
+                            className={classes.imgCenter} /> */}
                         <Typography gutterBottom align="justify" style={{ textIndent: 30 }}> {this.state.newsDetails.text} </Typography>
                     </Paper>
                 </Grid>
