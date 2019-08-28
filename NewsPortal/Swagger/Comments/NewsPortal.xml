@@ -38,6 +38,36 @@
             <param name="newsId">Уникальный идентификатор новости</param>
             <returns></returns>
         </member>
+        <member name="M:NewsPortal.Controllers.NewsController.Get(System.Guid,System.Guid)">
+            <summary>
+            Метод на получение информации по конкретному комментарию
+            </summary>
+            <param name="newsId">Уникальный идентификатор новости</param>
+            <param name="userId">Уникальный идентификатор пользователя</param>
+            <returns>Модель искомого комментария</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.Add(NewsPortal.Models.VeiwModels.CommentVM)">
+            <summary>
+            Добавление нового комментария
+            </summary>
+            <param name="commentVM">Модель нового комментария</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.Put(NewsPortal.Models.VeiwModels.CommentVM)">
+            <summary>
+            Метод на редактирование комментария
+            </summary>
+            <param name="commentVM">Изменённая модель комментария</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.Delete(System.Guid,System.Guid)">
+            <summary>
+            Метод на удаление комментария
+            </summary>
+            <param name="newsId">Уникальный идентификатор новости</param>
+            <param name="userId">Уникальный идентификатор пользователя</param>
+            <returns></returns>
+        </member>
         <member name="M:NewsPortal.Controllers.BlogController.Index">
             <summary>
             Метод, отображающий стартовую страницу

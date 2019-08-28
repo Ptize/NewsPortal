@@ -79,14 +79,17 @@ namespace NewsPortal
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddScoped<INewsStorage, NewsStorage>();
             services.AddScoped<IUserStorage, UserStorage>();
             services.AddScoped<IRoleStorage, RoleStorage>();
+            services.AddScoped<ICommentStorage, CommentStorage>();
 
             services.AddScoped<NewsBuilder>();
             services.AddScoped<UserBuilder>();
             services.AddScoped<RoleBuilder>();
+            services.AddScoped<CommentBuilder>();
 
             services.AddScoped<EmailService>();
 
