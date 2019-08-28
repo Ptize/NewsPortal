@@ -14,7 +14,6 @@ namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "editor, admin")]
     public class NewsController : Controller
     {
         private readonly INewsStorage _newsStorage;

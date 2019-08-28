@@ -150,7 +150,6 @@ namespace NewsPortal.Controllers
         [HttpPost("logout")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Authorize]
         public async Task<OperationResult> Logout()
         {
             _logger.LogoutRequestReceived();

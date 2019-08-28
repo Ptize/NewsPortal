@@ -20,11 +20,10 @@ namespace NewsPortal.Data.Repository
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly HttpContext _httpContext;
 
-        public UserRepository(DataContext context, UserManager<ApplicationUser> userManager, HttpContext httpContext)
+        public UserRepository(DataContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
-            _httpContext = httpContext;
         }
 
         public async Task<int> Count()
