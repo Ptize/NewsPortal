@@ -34,13 +34,31 @@ class Authorization extends Component {
                         return res.text()
                 })
                 .then(res => {
-                    console.log(res)
                     if (res != 0)
                         this.setState({ errorInfo: 'Неправильно введена почта или пароль' })
                     else {
                         this.context.updateValue(values.email)
                         localStorage.setItem('currentUser', values.email)
                         this.props.history.push('/Blog')
+
+                        // remember roles of logged in user
+                        fetch(`/api/Roles/${values.email}`)
+                            .then(res => {
+                                if (!res.ok) {
+                                    throw new Error(res.status)
+                                }
+                                else
+                                    return res.text()
+                            })
+                            .then(res => {
+                                const obj = JSON.parse(res)
+                                const roles = JSON.stringify(obj.userRoles)
+                                this.context.updateRoles(roles)
+                                localStorage.setItem('currentRoles', roles)
+                            })
+                            .catch(er => {
+                                console.log(er)
+                            })
                     }
                 })
                 .catch(err => {

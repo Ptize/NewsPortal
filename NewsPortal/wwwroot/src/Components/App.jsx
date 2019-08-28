@@ -22,9 +22,17 @@ class App extends Component {
       })
     }
 
+    this.updateRoles = (val) => {
+      this.setState({
+        currentRoles: val
+      })
+    }
+
     this.state = {
       currentUser: '',
+      currentRoles: '',
       updateValue: this.updateValue,
+      updateRoles: this.updateRoles
     }
   }
 
@@ -37,9 +45,9 @@ class App extends Component {
               <Header />
               <Switch>
                 <Route exact path="/" component={Blog} />
-                <Route exact path="/Blog" component={Blog} />
                 <Route path="/Registration" component={Registration} />
                 <Route path="/Authorization" component={Authorization} />
+                <ProtectedRoute exact path="/Blog" component={Blog} />
                 <ProtectedRoute path="/Blog/News/:newsId" component={NewsDetail} />
                 <ProtectedRoute path="/Newsmanager" component={NewsManager} />
                 <ProtectedRoute path="/Dashboard" component={Dashboard} />

@@ -112,7 +112,7 @@ class Dashboard extends Component {
 
         return (
             <UserContext.Consumer>
-                {({ currentUser }) => (
+                {({ currentUser, currentRoles }) => (
                     <Grid className={classes.dashboard}>
                         <Typography variant="h4" className={classes.dashTitle}>Личный кабинет</Typography>
                         <List>
@@ -123,16 +123,18 @@ class Dashboard extends Component {
                                     />
                                 </Link>
                             </ListItem>
-                            <ListItem>
-                                <Link to="/NewsManager" style={{ textDecoration: 'none' }}>
-                                    <ListItemText
-                                        primary="Перейти к странице управления новостями"
-                                    />
-                                </Link>
-                            </ListItem>
+                            {(currentRoles.includes('editor') || currentRoles.includes('admin')) ?
+                                <ListItem>
+                                    <Link to="/NewsManager" style={{ textDecoration: 'none' }}>
+                                        <ListItemText
+                                            primary="Перейти к странице управления новостями"
+                                        />
+                                    </Link>
+                                </ListItem> : null}
                         </List>
                         <Typography variant="h5">Ваши учетные данные </Typography>
                         <Typography className={classes.dashTitle}>E-mail: {currentUser}</Typography>
+                        <Typography className={classes.dashTitle}>Роли: {currentRoles}</Typography>
                         <Button color="primary" onClick={toggleSettings} className={classes.dashTitle}>
                             <Typography>Изменить пароль</Typography>
                         </Button>

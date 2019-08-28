@@ -33,7 +33,9 @@ export default function ExpandableSettings() {
                 console.log('res = ' + res)
                 handleClose()
                 contextType.updateValue('')
+                contextType.updateRoles('')
                 localStorage.removeItem('currentUser')
+                localStorage.removeItem('currentRoles')
             })
             .catch(err => {
                 console.log(err)
@@ -77,7 +79,7 @@ export default function ExpandableSettings() {
                 <Link to="/Dashboard" style={{ textDecoration: 'none', color: '#000' }}>
                     <MenuItem onClick={handleClose}>Личный кабинет</MenuItem>
                 </Link>
-                <Link to="/Blog" style={{ textDecoration: 'none', color: '#000' }}>
+                <Link to="/" style={{ textDecoration: 'none', color: '#000' }}>
                     <MenuItem onClick={handleLogOut}>Выход</MenuItem>
                 </Link>
             </Menu>
