@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using NewsPortal.Data;
 using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Domain.Storage.Interfaces;

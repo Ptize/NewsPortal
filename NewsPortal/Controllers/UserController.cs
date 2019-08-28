@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NewsPortal.Data.Repository.interfaces;
 using NewsPortal.Domain.Builder;
-using NewsPortal.Domain.Logging.LoggerExtensions.Controllers;
+using NewsPortal.Logging.LoggerExtensions.Controllers;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
@@ -16,7 +16,6 @@ namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "admin")]
     public class UserController : Controller
     {
         private readonly IUserStorage _userStorage;
@@ -40,6 +39,7 @@ namespace NewsPortal.Controllers
         [HttpGet("list/pageSize={count}/pageNum={page}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "admin")]
         public async Task<UsersListVM> GetAll([FromRoute]int count, [FromRoute]int page)
         {
             _logger.GetAllRequestReceived(LoggerUserEntity);
@@ -56,6 +56,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize(Roles = "admin")]
         public async Task<ApplicationUser> Get([FromRoute]Guid userId)
         {
             _logger.GetRequestReceived(LoggerUserEntity);
@@ -74,6 +75,7 @@ namespace NewsPortal.Controllers
         [AllowAnonymous]
         public async Task<OperationResult> Add([FromBody]RegisterVM registerVM)
         {
+            _logger.AddRequestReceived(LoggerUserEntity);
             var result = await _userBuilder.Add(registerVM, HttpContext, Url);
             return result;
         }
@@ -90,6 +92,7 @@ namespace NewsPortal.Controllers
         [AllowAnonymous]
         public async Task<bool> ConfirmEmail([FromRoute]Guid userId, [FromRoute]string code)
         {
+            _logger.ConfirmEmailRequestReceived();
             var result = await _userRepository.ConfirmEmail(userId, code);
             return result;
         }
@@ -102,6 +105,7 @@ namespace NewsPortal.Controllers
         [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "admin")]
         public async Task Put([FromBody]EditUserVM editUserVM)
         {
             _logger.PutRequestReceived(LoggerUserEntity);
@@ -116,6 +120,7 @@ namespace NewsPortal.Controllers
         [HttpDelete("{userId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "admin")]
         public async Task Delete([FromRoute]Guid userId)
         {
             _logger.DeleteRequestReceived(LoggerUserEntity);
@@ -145,6 +150,7 @@ namespace NewsPortal.Controllers
         [HttpPost("logout")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize]
         public async Task<OperationResult> Logout()
         {
             _logger.LogoutRequestReceived();

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NewsPortal.Domain.Logging.LoggerExtensions.Controllers
+namespace NewsPortal.Logging.LoggerExtensions.Controllers
 {
     public static class ControllerLogger
     {
@@ -12,6 +12,7 @@ namespace NewsPortal.Domain.Logging.LoggerExtensions.Controllers
         private static readonly Action<ILogger, string, Exception> _addRequestReceived;
         private static readonly Action<ILogger, string, Exception> _putRequestReceived;
         private static readonly Action<ILogger, string, Exception> _deleteRequestReceived;
+        private static readonly Action<ILogger, Exception> _confirmEmailRequestReceived;
         private static readonly Action<ILogger, Exception> _loginRequestReceived;
         private static readonly Action<ILogger, Exception> _logoutRequestReceived;
         private static readonly Action<ILogger, Exception> _changePasswordRequestReceived;
@@ -44,6 +45,11 @@ namespace NewsPortal.Domain.Logging.LoggerExtensions.Controllers
                 LogLevel.Information,
                 new EventId(LoggingEvents.DeleteItem, nameof(DeleteRequestReceived)),
                 "DELETE request for deleting the existing {Entity}");
+
+            _confirmEmailRequestReceived = LoggerMessage.Define(
+                LogLevel.Information,
+                new EventId(LoggingEvents.ConfirmEmail, nameof(ConfirmEmailRequestReceived)),
+                "GET request for confirming email of the user");
 
             _loginRequestReceived = LoggerMessage.Define(
                LogLevel.Information,
@@ -94,6 +100,11 @@ namespace NewsPortal.Domain.Logging.LoggerExtensions.Controllers
         public static void DeleteRequestReceived(this ILogger logger, string entity)
         {
             _deleteRequestReceived(logger, entity, null);
+        }
+
+        public static void ConfirmEmailRequestReceived(this ILogger logger)
+        {
+            _confirmEmailRequestReceived(logger, null);
         }
 
         public static void LoginRequestReceived(this ILogger logger)

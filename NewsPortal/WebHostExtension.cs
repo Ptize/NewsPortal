@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NewsPortal.Data;
 using NewsPortal.Domain;
 using NewsPortal.Models.Data;
@@ -33,13 +34,15 @@ namespace NewsPortal
                 var rolesManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var context = serviceScope.ServiceProvider.GetService<DataContext>();
                 var hostingEnvironment = serviceScope.ServiceProvider.GetService<IHostingEnvironment>();
+                var logger = serviceScope.ServiceProvider.GetRequiredService<ILogger<DataSeeder>>();
+                var dataSeeder = new DataSeeder(logger);
 
                 if (!context.Newss.Any())
                 {
-                    await DataSeeder.InitNews(context);
+                    await dataSeeder.InitNews(context);
                 }
 
-                await DataSeeder.InitUsers(userManager, rolesManager);
+                await dataSeeder.InitUsers(userManager, rolesManager);
             }
 
             return webHost;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NewsPortal.Domain.Logging.LoggerExtensions.Main
+namespace NewsPortal.Logging.LoggerExtensions.Main
 {
     public static class StartupLogger
     {
@@ -11,6 +11,7 @@ namespace NewsPortal.Domain.Logging.LoggerExtensions.Main
         private static readonly Action<ILogger, Exception> _addedRepositories;
         private static readonly Action<ILogger, Exception> _addedStorages;
         private static readonly Action<ILogger, Exception> _addedBuilders;
+        private static readonly Action<ILogger, Exception> _addedEmailService;
         private static readonly Action<ILogger, Exception> _addedAutomapper;
 
         private static readonly Action<ILogger, Exception> _inDevelopment;
@@ -37,10 +38,16 @@ namespace NewsPortal.Domain.Logging.LoggerExtensions.Main
                 new EventId(LoggingEvents.AddService, nameof(AddedBuilders)),
                 "Added the builders to services.");
 
+            _addedEmailService = LoggerMessage.Define(
+                LogLevel.Information,
+                new EventId(LoggingEvents.AddService, nameof(AddedEmailService)),
+                "Added email service to services.");
+
             _addedAutomapper = LoggerMessage.Define(
                 LogLevel.Debug,
                 new EventId(LoggingEvents.AddService, nameof(AddedAutomapper)),
                 "Added automapper to services.");
+
             _inDevelopment = LoggerMessage.Define(
                 LogLevel.Information,
                 new EventId(LoggingEvents.DevelopmentMode, nameof(InDevelopment)),
@@ -67,6 +74,11 @@ namespace NewsPortal.Domain.Logging.LoggerExtensions.Main
             _addedBuilders(logger, null);
         }
 
+        public static void AddedEmailService(this ILogger logger)
+        {
+            _addedEmailService(logger, null);
+        }
+        
         public static void AddedAutomapper(this ILogger logger)
         {
             _addedAutomapper(logger, null);

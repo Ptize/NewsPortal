@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NewsPortal.Domain.Builder;
-using NewsPortal.Domain.Logging.LoggerExtensions.Controllers;
+using NewsPortal.Logging.LoggerExtensions.Controllers;
 using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;

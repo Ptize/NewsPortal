@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NewsPortal.Data\NewsPortal.Data.csproj" />
     <ProjectReference Include="..\NewsPortal.Domain\NewsPortal.Domain.csproj" />
+    <ProjectReference Include="..\NewsPortal.Logging\NewsPortal.Logging.csproj" />
     <ProjectReference Include="..\NewsPortal.Models\NewsPortal.Models.csproj" />
   </ItemGroup>
 

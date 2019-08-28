@@ -1,15 +1,24 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using NewsPortal.Data;
 using NewsPortal.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static NewsPortal.Logging.LoggerExtensions.Data.DataSeedLogger;
 
 namespace NewsPortal.Domain
 {
-    public static class DataSeeder
+    public class DataSeeder
     {
-        public static async Task InitNews(DataContext context)
+        private readonly ILogger _logger;
+        
+        public DataSeeder(ILogger<DataSeeder> logger)
+        {
+            _logger = logger;
+        }
+
+        public async Task InitNews(DataContext context)
         {
             #region News
             List<News> news = new List<News>
@@ -56,36 +65,63 @@ namespace NewsPortal.Domain
                 },
             };
             #endregion
-            
+
+            _logger.AddingNews();
             await context.AddRangeAsync(news);
             await context.SaveChangesAsync();
+            _logger.NewsAdded(news.Count);
         }
 
-        public static async Task InitUsers(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public async Task InitUsers(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             string adminEmail = "admin@gmail.com";
             string password = "_Aa123456";
             string[] roleNames = new string[] { "admin", "user", "editor" };
             IdentityResult roleResult;
 
-            foreach (var roleName in roleNames)
+            _logger.CheckingIfRolesExist(roleNames);
+            using (_logger.AllRolesExistScope(roleNames.Length)) 
             {
-                var roleExist = await roleManager.RoleExistsAsync(roleName);
-                if (!roleExist)
+                foreach (var roleName in roleNames)
                 {
-                    roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+                    var roleExists = await roleManager.RoleExistsAsync(roleName);
+                    if (roleExists)
+                    {
+                        _logger.RoleExists(roleName);
+                    }
+                    else 
+                    {
+                        roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+                        if (roleResult.Succeeded)
+                        {
+                            _logger.RoleAdded(roleName);
+                        } 
+                        else
+                        {
+                            _logger.AddingRoleFailed(roleName, null);
+                        }
+                    }
                 }
             }
+            _logger.CheckingIfAdminExists();
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
                 ApplicationUser admin = new ApplicationUser { Email = adminEmail, UserName = adminEmail };
                 admin.EmailConfirmed = true;
+                _logger.CreatingAdmin(admin.Email, admin.UserName);
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(admin, "admin");
-                    await userManager.AddToRoleAsync(admin, "user");
-                    await userManager.AddToRoleAsync(admin, "editor");
+                    _logger.AddingRolesToAdmin();
+                    result = await userManager.AddToRolesAsync(admin, roleNames);
+                    if (!result.Succeeded)
+                    {
+                        _logger.AddingRolesToAdminFailed(null);
+                    }
+                }
+                else
+                {
+                    _logger.CreatingAdminFailed(null);
                 }
             }
         }

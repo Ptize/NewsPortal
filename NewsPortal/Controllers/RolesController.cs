@@ -8,7 +8,7 @@ using NewsPortal.Models.VeiwModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NewsPortal.Domain.Logging.LoggerExtensions.Controllers;
+using NewsPortal.Logging.LoggerExtensions.Controllers;
 
 namespace NewsPortal.Controllers
 {

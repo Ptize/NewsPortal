@@ -108,6 +108,20 @@
             <param name="code">подтверждающий токен</param>
             <returns></returns>
         </member>
+        <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.EditUserVM)">
+            <summary>
+            Метод на редактирование пользователя
+            </summary>
+            <param name="editUserVM">Изменённая модель пользователя</param>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.Delete(System.Guid)">
+            <summary>
+            Метод на удаление пользователя
+            </summary>
+            <param name="userId">Уникальный идентификатор пользователя</param>
+            <returns></returns>
+        </member>
         <member name="M:NewsPortal.Controllers.UserController.Login(NewsPortal.Models.VeiwModels.LoginVM)">
             <summary>
             Вход
@@ -133,20 +147,6 @@
             Изменение пароля пользователя на случай если забыл пароль
             </summary>
             <param name="сhangeForgotPasswordVM">Модель изменения пароля</param>
-            <returns></returns>
-        </member>
-        <member name="M:NewsPortal.Controllers.UserController.Put(NewsPortal.Models.VeiwModels.EditUserVM)">
-            <summary>
-            Метод на редактирование пользователя
-            </summary>
-            <param name="editUserVM">Изменённая модель пользователя</param>
-            <returns></returns>
-        </member>
-        <member name="M:NewsPortal.Controllers.UserController.Delete(System.Guid)">
-            <summary>
-            Метод на удаление пользователя
-            </summary>
-            <param name="userId">Уникальный идентификатор пользователя</param>
             <returns></returns>
         </member>
         <member name="T:NewsPortal.Swagger.SwaggerElementDescription">

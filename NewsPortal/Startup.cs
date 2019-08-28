@@ -21,7 +21,7 @@ using NewsPortal.Data.Repository;
 using System.Reflection;
 using System.IO;
 using Microsoft.Extensions.Logging;
-using static NewsPortal.Domain.Logging.LoggerExtensions.Main.StartupLogger;
+using static NewsPortal.Logging.LoggerExtensions.Main.StartupLogger;
 using NewsPortal.Domain;
 
 namespace NewsPortal
@@ -99,6 +99,7 @@ namespace NewsPortal
             _logger.AddedBuilders();
 
             services.AddScoped<EmailService>();
+            _logger.AddedEmailService();
 
             services.AddAutoMapper(typeof(MappingProfile));
             _logger.AddedAutomapper();

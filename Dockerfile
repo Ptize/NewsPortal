@@ -5,6 +5,7 @@ COPY *.sln .
 COPY NewsPortal/*.csproj ./NewsPortal/
 COPY NewsPortal.Domain/*.csproj ./NewsPortal.Domain/
 COPY NewsPortal.Data/*.csproj ./NewsPortal.Data/
+COPY NewsPortal.Logging/*.csproj ./NewsPortal.Logging/
 COPY NewsPortal.Models/*.csproj ./NewsPortal.Models/
 RUN dotnet restore
 
@@ -12,6 +13,7 @@ RUN dotnet restore
 COPY NewsPortal/ ./NewsPortal/
 COPY NewsPortal.Domain/ ./NewsPortal.Domain/
 COPY NewsPortal.Data/ ./NewsPortal.Data/
+COPY NewsPortal.Logging/ ./NewsPortal.Logging/
 COPY NewsPortal.Models/ ./NewsPortal.Models/
 RUN dotnet publish -c release -o out
 

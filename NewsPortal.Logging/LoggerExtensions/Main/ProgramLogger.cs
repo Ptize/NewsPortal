@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NewsPortal.Domain.Logging.LoggerExtensions.Main
+namespace NewsPortal.Logging.LoggerExtensions.Main
 {
     public static class ProgramLogger
     {

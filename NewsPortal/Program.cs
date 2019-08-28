@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using static NewsPortal.Domain.Logging.LoggerExtensions.Main.ProgramLogger;
+using static NewsPortal.Logging.LoggerExtensions.Main.ProgramLogger;
 
 namespace NewsPortal
 {
