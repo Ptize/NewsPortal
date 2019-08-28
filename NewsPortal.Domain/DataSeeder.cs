@@ -3,12 +3,16 @@ using NewsPortal.Data;
 using NewsPortal.Models.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Domain
 {
     public static class DataSeeder
     {
+        private static Guid nId;
+        private static Guid uId;
+
         public static async Task InitData(DataContext context)
         {
             #region News
@@ -56,11 +60,15 @@ namespace NewsPortal.Domain
                 },
             };
             #endregion
-            
+           
+            nId = news.First().NewsId;
+
             await context.AddRangeAsync(news);
             await context.SaveChangesAsync();
         }
 
+
+        #region Admin
         public static async Task InitializeAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             string adminEmail = "admin@gmail.com";
@@ -87,7 +95,26 @@ namespace NewsPortal.Domain
                     await userManager.AddToRoleAsync(admin, "user");
                     await userManager.AddToRoleAsync(admin, "editor");
                 }
+
+                uId = Guid.Parse(userManager.FindByEmailAsync("admin@gmail.com").Result.Id);
             }
         }
+        #endregion
+
+        #region Comment
+        public static async Task InitComment(DataContext context)
+        {
+            Comment comment = new Comment()
+            {
+                NewsId = nId,
+                UserId = uId,
+                CreateDate = DateTime.Now,
+                Text = "Вот такие новости !)",
+            };
+
+            await context.AddRangeAsync(comment);
+            await context.SaveChangesAsync();
+        }
+        #endregion
     }
 }

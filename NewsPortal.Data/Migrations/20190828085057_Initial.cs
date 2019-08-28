@@ -48,6 +48,20 @@ namespace NewsPortal.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    Text = table.Column<string>(nullable: true),
+                    NewsId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => new { x.NewsId, x.UserId });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Newss",
                 columns: table => new
                 {
@@ -223,6 +237,9 @@ namespace NewsPortal.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Newss");

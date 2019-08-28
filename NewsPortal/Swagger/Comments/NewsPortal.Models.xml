@@ -64,6 +64,31 @@
             Старый пароль пользователя
             </summary>
         </member>
+        <member name="T:NewsPortal.Models.VeiwModels.CommentVM">
+            <summary>
+            Класс описывающий сущность комментария
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.CommentVM.CreateDate">
+            <summary>
+            Дата добавления
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.CommentVM.Text">
+            <summary>
+            Текст комментария
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.CommentVM.NewsId">
+            <summary>
+            Идентификатор новости к которой оставлен комментарий
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.CommentVM.UserId">
+            <summary>
+            Идентификатор сущности пользователя, коорый оставил комментарий
+            </summary>
+        </member>
         <member name="T:NewsPortal.Models.VeiwModels.NewsVM">
             <summary>
             Класс описывает Новость

@@ -176,6 +176,21 @@ namespace NewsPortal.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("NewsPortal.Models.Data.Comment", b =>
+                {
+                    b.Property<Guid>("NewsId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("NewsId", "UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("NewsPortal.Models.Data.News", b =>
                 {
                     b.Property<Guid>("NewsId")

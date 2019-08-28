@@ -11,6 +11,9 @@ namespace NewsPortal.Domain.Mapping
             CreateMap<News, NewsVM>()
                 .ReverseMap()
                 .ForMember(n => n.NewsId, options => options.Ignore());
+
+            CreateMap<Comment, CommentVM>()
+               .ReverseMap();
         }
     }
 }

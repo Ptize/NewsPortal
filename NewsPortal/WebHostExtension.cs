@@ -40,8 +40,12 @@ namespace NewsPortal
                 }
 
                 await DataSeeder.InitializeAsync(userManager, rolesManager);
-            }
 
+                if (!context.Comments.Any())
+                {
+                    await DataSeeder.InitComment(context);
+                }
+            }
             return webHost;
         }
     }

@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NewsPortal.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190827140624_Initial")]
+    [Migration("20190828085057_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,6 +176,21 @@ namespace NewsPortal.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("NewsPortal.Models.Data.Comment", b =>
+                {
+                    b.Property<Guid>("NewsId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("NewsId", "UserId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("NewsPortal.Models.Data.News", b =>

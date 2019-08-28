@@ -16,12 +16,16 @@ namespace NewsPortal.Controllers
     public class NewsController :Controller
     {
         private readonly INewsStorage _newsStorage;
+        private readonly ICommentStorage _commentStorage;
         private readonly NewsBuilder _newsBuilder;
+        private readonly CommentBuilder _commentBuilder;
 
-        public NewsController(INewsStorage newsStorage, NewsBuilder newsBuilder)
+        public NewsController(INewsStorage newsStorage, NewsBuilder newsBuilder, CommentBuilder commentBuilder, ICommentStorage commentStorage)
         {
             _newsStorage = newsStorage;
             _newsBuilder = newsBuilder;
+            _commentBuilder = commentBuilder;
+            _commentStorage = commentStorage;
         }
 
         /// <summary>
@@ -95,6 +99,67 @@ namespace NewsPortal.Controllers
         public async Task Delete([FromRoute]Guid newsId)
         {
             await _newsStorage.Delete(newsId);
+        }
+
+        /// <summary>
+        /// Метод на получение информации по конкретному комментарию
+        /// </summary>
+        /// <param name="newsId">Уникальный идентификатор новости</param>
+        /// <param name="userId">Уникальный идентификатор пользователя</param>
+        /// <returns>Модель искомого комментария</returns>
+        [HttpGet("getComment/newsId={newsId}/userId={userId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [Authorize(Roles = "user")]
+        public async Task<Comment> Get([FromRoute]Guid newsId, [FromRoute]Guid userId)
+        {
+            var comment = await _commentBuilder.Get(newsId, userId);
+            return comment;
+        }
+
+        /// <summary>
+        /// Добавление нового комментария
+        /// </summary>
+        /// <param name="commentVM">Модель нового комментария</param>
+        /// <returns></returns>
+        [HttpPost("newComment")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [Authorize(Roles = "user")]
+        public async Task<OperationResult> Add([FromBody]CommentVM commentVM)
+        {
+            var result = await _commentBuilder.Add(commentVM);
+            return result;
+        }
+
+        /// <summary>
+        /// Метод на редактирование комментария
+        /// </summary>
+        /// <param name="commentVM">Изменённая модель комментария</param>
+        /// <returns></returns>
+        [HttpPut("updeteComment")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [Authorize(Roles = "user")]
+        public async Task Put([FromBody]CommentVM commentVM)
+        {
+            await _commentBuilder.Update(commentVM);
+        }
+
+        /// <summary>
+        /// Метод на удаление комментария
+        /// </summary>
+        /// <param name="newsId">Уникальный идентификатор новости</param>
+        /// <param name="userId">Уникальный идентификатор пользователя</param>
+        /// <returns></returns>
+        [HttpDelete("remove/newsId={newsId}/userId={userId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [Authorize(Roles = "admin")]
+        public async Task Delete([FromRoute]Guid newsId, [FromRoute]Guid userId)
+        {
+            await _commentStorage.Delete(newsId, userId);
         }
     }
         
