@@ -25,7 +25,7 @@ namespace NewsPortal
             return webHost;
         }
 
-        public static IWebHost SeedingData(this IWebHost webHost)
+        public static async Task<IWebHost> SeedingData(this IWebHost webHost)
         {
             using (var serviceScope = webHost.Services.CreateScope())
             {
@@ -36,10 +36,10 @@ namespace NewsPortal
 
                 if (!context.Newss.Any())
                 {
-                    DataSeeder.InitData(context);
+                    await DataSeeder.InitData(context);
                 }
 
-                DataSeeder.InitializeAsync(userManager, rolesManager);
+                await DataSeeder.InitializeAsync(userManager, rolesManager);
             }
 
             return webHost;

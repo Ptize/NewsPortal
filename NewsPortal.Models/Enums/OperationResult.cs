@@ -22,8 +22,16 @@ namespace NewsPortal.Models.Enums
         /// </summary>
         InvalidPassword = 2,
         /// <summary>
-        /// недопустимый пароль
+        /// неизвестная ошибка
         /// </summary>
-        UnknounError = 3
+        UnknounError = 3,
+        /// <summary>
+        /// не подтверждёна почта
+        /// </summary>
+        MailNotConfirmed = 4,
+        /// <summary>
+        /// не создался URL
+        /// </summary>
+        InvalidUrl = 5
     }
 }

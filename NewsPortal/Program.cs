@@ -14,11 +14,12 @@ namespace NewsPortal
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args)
-                .Build()
-                .Migrate()
-                .SeedingData()
-                .Run();
+            var host = CreateWebHostBuilder(args).Build();
+            
+            host.Migrate()
+                .SeedingData().Wait();
+
+            host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

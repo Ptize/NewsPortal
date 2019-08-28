@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 import {
-  Toolbar,
   Paper,
   Typography,
   Grid,
-  Button,
   Divider,
-  Container,
   withStyles,
   Hidden,
   CardActionArea,
@@ -19,10 +16,10 @@ import useStyles from './Styles/makeStyles.js'
 
 class Blog extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       news: {}, isFetching: true, error: null
-    };
+    }
   }
 
   componentDidMount() {

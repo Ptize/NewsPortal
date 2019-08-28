@@ -12,7 +12,7 @@ namespace NewsPortal.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "editor, admin")]
+    [Authorize]
     public class NewsController :Controller
     {
         private readonly INewsStorage _newsStorage;
@@ -41,12 +41,13 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Метод на получение информации по конкретной новости
         /// </summary>
-        /// <param name="id">Уникальный идентификатор новости</param>
+        /// <param name="newsId">Уникальный идентификатор новости</param>
         /// <returns>Модель искомой новости</returns>
         [HttpGet("{newsId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [Authorize(Roles = "user")]
         public async Task<News> Get([FromRoute]Guid newsId)
         {
             var news = await _newsBuilder.Get(newsId);
@@ -56,11 +57,12 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Добавление новой новости
         /// </summary>
-        /// <param name="NewsVM">Модель новой новости</param>
+        /// <param name="newsVM">Модель новой новости</param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task<OperationResult> Add([FromBody]NewsVM newsVM)
         {
             var result = await _newsBuilder.Add(newsVM);
@@ -70,11 +72,12 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Метод на редактирование новости
         /// </summary>
-        /// <param name="NewsVM">Изменённая модель новости</param>
+        /// <param name="newsVM">Изменённая модель новости</param>
         /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task Put([FromBody]NewsVM newsVM)
         {
             await _newsBuilder.Update(newsVM);
@@ -88,6 +91,7 @@ namespace NewsPortal.Controllers
         [HttpDelete("{newsId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = "editor, admin")]
         public async Task Delete([FromRoute]Guid newsId)
         {
             await _newsStorage.Delete(newsId);

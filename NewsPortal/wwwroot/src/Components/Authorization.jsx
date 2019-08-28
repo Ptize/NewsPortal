@@ -1,22 +1,72 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom"
-import { Form, Field } from "react-final-form"
+import { Link } from 'react-router-dom'
+import { Form, Field } from 'react-final-form'
 import { Box, Typography, Button, withStyles } from '@material-ui/core'
 
-import { TextField, Radio, useStyles } from './Styles'
+import { TextField, Checkbox, useStyles } from './Styles'
+import UserContext from './UserContext'
 
 class Authorization extends Component {
+    static contextType = UserContext
+    constructor() {
+        super()
+        this.state = {
+            errorInfo: ''
+        }
+    }
+
     render() {
         const { classes } = this.props
 
-        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
         const onSubmit = async values => {
-            await sleep(300)
-            window.alert(JSON.stringify(values, 0, 2))
+            values["rememberMe"] = false
+            fetch('/api/User/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(values)
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        this.setState({ errorInfo: 'Что-то случилось. Повторите попытку позже' })
+                        throw new Error(res.status)
+                    }
+                    else
+                        return res.text()
+                })
+                .then(res => {
+                    if (res != 0)
+                        this.setState({ errorInfo: 'Неправильно введена почта или пароль' })
+                    else {
+                        this.context.updateValue(values.email)
+                        localStorage.setItem('currentUser', values.email)
+                        this.props.history.push('/Blog')
+
+                        // remember roles of logged in user
+                        fetch(`/api/Roles/${values.email}`)
+                            .then(res => {
+                                if (!res.ok) {
+                                    throw new Error(res.status)
+                                }
+                                else
+                                    return res.text()
+                            })
+                            .then(res => {
+                                const obj = JSON.parse(res)
+                                const roles = JSON.stringify(obj.userRoles)
+                                this.context.updateRoles(roles)
+                                localStorage.setItem('currentRoles', roles)
+                            })
+                            .catch(er => {
+                                console.log(er)
+                            })
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
 
-        const required = value => (value ? undefined : "Заполните это поле");
+        const required = value => (value ? undefined : "Заполните это поле")
 
         return (
             <Box height="85%" className={classes.forms}>
@@ -24,17 +74,20 @@ class Authorization extends Component {
                 <Typography className={classes.fields}>
                     Нет учетной записи? <Link to="Registration">Зарегистрируйтесь</Link>
                 </Typography>
+                <Typography className={classes.fields} color="secondary">{this.state.errorInfo}</Typography>
                 <Form
                     onSubmit={onSubmit}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}
+                        // initialvalues={{ rememberMe: false }}
+                        >
                             <div className={classes.fields}>
                                 <Field
-                                    name="nickname"
+                                    name="email"
                                     component={TextField}
                                     validate={required}
-                                    type="text"
-                                    label="Логин"
+                                    type="email"
+                                    label="E-mail"
                                 />
                             </div>
                             <div className={classes.fields}>
@@ -46,6 +99,14 @@ class Authorization extends Component {
                                     label="Пароль"
                                 />
                             </div>
+                            {/* <div className={classes.fields}>
+                                <Field
+                                    name="rememberMe"
+                                    component={Checkbox}
+                                    type="checkbox"
+                                />{' '}
+                                Запомнить меня
+                            </div> */}
                             <div className={classes.button}>
                                 <Button variant="outlined" color="primary" type="submit" disabled={submitting || pristine}>
                                     Войти
