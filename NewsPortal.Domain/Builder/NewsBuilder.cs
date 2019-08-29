@@ -36,6 +36,17 @@ namespace NewsPortal.Domain.Builder
             return await _newsStorage.GetAll(countEntity, page);
         }
 
+        public async Task<NewsListVM> GetLimitAll(int countEntity, int page)
+        {
+            if (countEntity <= 0 || page <= 0)
+            {
+                NewsListVM listEmpty = new NewsListVM();
+                return listEmpty;
+            }
+            else
+                return await _newsStorage.GetLimitAll(countEntity, page);
+        }
+
         public async Task<News> Get(Guid newsid)
         {
             return await _newsRepository.Get(newsid);

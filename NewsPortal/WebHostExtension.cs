@@ -5,8 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NewsPortal.Data;
 using NewsPortal.Domain;
 using NewsPortal.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

@@ -198,6 +198,8 @@ namespace NewsPortal.Data.Migrations
 
                     b.Property<DateTime>("CreateDate");
 
+                    b.Property<bool>("ForUser");
+
                     b.Property<string>("Headline");
 
                     b.Property<byte[]>("Photo");

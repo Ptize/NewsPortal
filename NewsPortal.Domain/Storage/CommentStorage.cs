@@ -6,6 +6,7 @@ using NewsPortal.Domain.Storage.Interfaces;
 using NewsPortal.Models.Data;
 using NewsPortal.Models.VeiwModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Domain.Storage
@@ -44,9 +45,34 @@ namespace NewsPortal.Domain.Storage
             await _context.SaveChangesAsync();
             return comment;
         }
+
         public async Task<Comment> Get(Guid newsId, Guid userId)
         {
             return await _commentRepository.Get(newsId, userId);
+        }
+
+        public async Task<CommentsListVM> GetCommentsNews(Guid newsId, int count, int page)
+        {
+            var countEntity = await _commentRepository.CountNewsId(newsId);
+
+            var comments = new CommentsListVM
+            {
+                CountPage = countEntity % count == 0 ? countEntity / count : (countEntity / count) + 1,
+                CommentsList = await _commentRepository.GetCommentsNews(newsId, count, page)
+            };
+            return comments;
+        }
+
+        public async Task<CommentsListVM> GetCommentsUser(Guid userId, int count, int page)
+        {
+            var countEntity = await _commentRepository.CountUserId(userId);
+
+            var comments = new CommentsListVM
+            {
+                CountPage = countEntity % count == 0 ? countEntity / count : (countEntity / count) + 1,
+                CommentsList = await _commentRepository.GetCommentsUser(userId, count, page)
+            };
+            return comments;
         }
     }
 }

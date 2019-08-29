@@ -14,5 +14,7 @@ namespace NewsPortal.Data.interfaces
         Task Add(News news);
         Task Delete(Guid newsId);
         Task<int> Count();
+        Task<int> CountLimit();
+        Task<List<BriefNewsVM>> GetLimitAll(int countEntity, int page);
     }
 }

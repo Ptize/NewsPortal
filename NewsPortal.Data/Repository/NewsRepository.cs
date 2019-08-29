@@ -53,6 +53,31 @@ namespace NewsPortal.Data
             return await resListBriefNewsVM;
         }
 
+        public async Task<int> CountLimit()
+        {
+            return await _context.Newss.CountAsync(n => n.ForUser == false);
+        }
+
+        public async Task<List<BriefNewsVM>> GetLimitAll(int countEntity, int page)
+        {
+            var listBriefNewsVM = _context.Newss
+                .Where(n => n.ForUser == false)
+                .Skip(countEntity * (page - 1))
+                .Take(countEntity);
+
+            var resListBriefNewsVM = (from i in listBriefNewsVM
+                                      select new BriefNewsVM
+                                      {
+                                          NewsId = i.NewsId,
+                                          CreateDate = i.CreateDate,
+                                          Picture = i.Photo,
+                                          Headline = i.Headline,
+                                      }).ToListAsync();
+
+
+            return await resListBriefNewsVM;
+        }
+
         public async Task<News> Get(Guid newsId)
         {
             return await _context.Newss.SingleAsync(n => n.NewsId == newsId);
