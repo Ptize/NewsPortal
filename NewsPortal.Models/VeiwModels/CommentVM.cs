@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NewsPortal.Models.Data;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NewsPortal.Models.VeiwModels
@@ -30,5 +32,17 @@ namespace NewsPortal.Models.VeiwModels
         /// </summary>
         [Required]
         public Guid? UserId { get; set; }
+    }
+
+    public class CommentsListVM
+    {
+        /// <summary>
+        /// Количество страниц
+        /// </summary>
+        public int CountPage { get; set; }
+        /// <summary>
+        /// Список комментариев 
+        /// </summary>
+        public List<Comment> CommentsList { get; set; }
     }
 }

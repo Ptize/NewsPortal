@@ -16,25 +16,26 @@ import { ProtectedRoute } from './ProtectedRoute'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.updateValue = (val) => {
+    this.c = (val) => {
       this.setState({
         currentUser: val
       })
     }
-
-    this.updateRoles = (val) => {
-      this.setState({
-        currentRoles: val
-      })
-    }
+     
 
     this.state = {
       currentUser: '',
       currentRoles: '',
       updateValue: this.updateValue,
       updateRoles: this.updateRoles
+      }
     }
-  }
+
+    updateRoles = (val) => {
+        this.setState({
+            currentRoles: val
+        })
+    }
 
   render() {
     return (

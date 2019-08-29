@@ -4,6 +4,7 @@ using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Domain.Builder
@@ -31,6 +32,28 @@ namespace NewsPortal.Domain.Builder
         public async Task<Comment> Get(Guid newsid, Guid userid)
         {
             return await _commentRepository.Get(newsid, userid);
+        }
+
+        public async Task<CommentsListVM> GetCommentsNews(Guid newsId, int countEntity, int page)
+        {
+            if (countEntity <= 0 || page <= 0)
+            {
+                CommentsListVM listEmpty = new CommentsListVM();
+                return listEmpty;
+            }
+            else
+                return await _commentStorage.GetCommentsNews(newsId, countEntity, page);
+        }
+
+        public async Task<CommentsListVM> GetCommentsUser(Guid userId, int countEntity, int page)
+        {
+            if (countEntity <= 0 || page <= 0)
+            {
+                CommentsListVM listEmpty = new CommentsListVM();
+                return listEmpty;
+            }
+            else
+                return await _commentStorage.GetCommentsUser(userId, countEntity, page);
         }
 
         public async Task<OperationResult> Update(CommentVM commentVM)

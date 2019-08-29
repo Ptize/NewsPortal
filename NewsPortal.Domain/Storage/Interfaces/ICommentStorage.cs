@@ -11,5 +11,7 @@ namespace NewsPortal.Domain.Storage.Interfaces
         Task Delete(Guid newsId, Guid userId);
         Task<Comment> Update(CommentVM commentVM);
         Task<Comment> Get(Guid newsId, Guid userId);
+        Task<CommentsListVM> GetCommentsNews(Guid newsId, int count, int page);
+        Task<CommentsListVM> GetCommentsUser(Guid userId, int count, int page);
     }
 }

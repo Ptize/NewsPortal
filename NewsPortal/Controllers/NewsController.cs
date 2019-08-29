@@ -6,6 +6,7 @@ using NewsPortal.Models.Data;
 using NewsPortal.Models.Enums;
 using NewsPortal.Models.VeiwModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NewsPortal.Controllers
@@ -31,6 +32,8 @@ namespace NewsPortal.Controllers
         /// <summary>
         /// Метод на получение списка новостей
         /// </summary>
+        /// <param name="count">Количество записей на странице</param>
+        /// <param name="page">Страница</param>
         /// <returns>Список всех новостей</returns>
         [HttpGet("list/pageSize={count}/pageNum={page}")]
         [ProducesResponseType(200)]
@@ -112,10 +115,46 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [Authorize(Roles = "user")]
-        public async Task<Comment> Get([FromRoute]Guid newsId, [FromRoute]Guid userId)
+        public async Task<Comment> GetComment([FromRoute]Guid newsId, [FromRoute]Guid userId)
         {
             var comment = await _commentBuilder.Get(newsId, userId);
             return comment;
+        }
+
+        /// <summary>
+        /// Метод на получение всех комментариев к данной новости
+        /// </summary>
+        /// <param name="newsId">Уникальный идентификатор новости</param>
+        /// <param name="count">Количество записей на странице</param>
+        /// <param name="page">Страница</param>
+        /// <returns>Список комментариев новости</returns>
+        [HttpGet("getComments/newsId={newsId}/pageSize={count}/pageNum={page}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [AllowAnonymous]
+        public async Task<CommentsListVM> GetCommentsNews([FromRoute]Guid newsId, [FromRoute]int count, [FromRoute]int page)
+        {
+            var comments = await _commentBuilder.GetCommentsNews(newsId, count, page);
+            return comments;
+        }
+
+        /// <summary>
+        /// Метод на получение всех комментариев данного пользователя
+        /// </summary>
+        /// <param name="userId">Уникальный идентификатор пользователя</param>
+        /// <param name="count">Количество записей на странице</param>
+        /// <param name="page">Страница</param>
+        /// <returns>Список комментариев новости</returns>
+        [HttpGet("getComments/userId={userId}/pageSize={count}/pageNum={page}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [Authorize(Roles = "admin")]
+        public async Task<CommentsListVM> GetCommentsUser([FromRoute]Guid userId, [FromRoute]int count, [FromRoute]int page)
+        {
+            var comments = await _commentBuilder.GetCommentsUser(userId, count, page);
+            return comments;
         }
 
         /// <summary>
@@ -127,7 +166,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Authorize(Roles = "user")]
-        public async Task<OperationResult> Add([FromBody]CommentVM commentVM)
+        public async Task<OperationResult> AddComment([FromBody]CommentVM commentVM)
         {
             var result = await _commentBuilder.Add(commentVM);
             return result;
@@ -142,7 +181,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Authorize(Roles = "user")]
-        public async Task Put([FromBody]CommentVM commentVM)
+        public async Task PutComment([FromBody]CommentVM commentVM)
         {
             await _commentBuilder.Update(commentVM);
         }
@@ -157,7 +196,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Authorize(Roles = "admin")]
-        public async Task Delete([FromRoute]Guid newsId, [FromRoute]Guid userId)
+        public async Task DeleteComment([FromRoute]Guid newsId, [FromRoute]Guid userId)
         {
             await _commentStorage.Delete(newsId, userId);
         }

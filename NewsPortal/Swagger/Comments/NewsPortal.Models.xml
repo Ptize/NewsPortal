@@ -89,6 +89,16 @@
             Идентификатор сущности пользователя, коорый оставил комментарий
             </summary>
         </member>
+        <member name="P:NewsPortal.Models.VeiwModels.CommentsListVM.CountPage">
+            <summary>
+            Количество страниц
+            </summary>
+        </member>
+        <member name="P:NewsPortal.Models.VeiwModels.CommentsListVM.CommentsList">
+            <summary>
+            Список комментариев 
+            </summary>
+        </member>
         <member name="T:NewsPortal.Models.VeiwModels.NewsVM">
             <summary>
             Класс описывает Новость

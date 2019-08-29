@@ -8,6 +8,8 @@
             <summary>
             Метод на получение списка новостей
             </summary>
+            <param name="count">Количество записей на странице</param>
+            <param name="page">Страница</param>
             <returns>Список всех новостей</returns>
         </member>
         <member name="M:NewsPortal.Controllers.NewsController.Get(System.Guid)">
@@ -38,7 +40,7 @@
             <param name="newsId">Уникальный идентификатор новости</param>
             <returns></returns>
         </member>
-        <member name="M:NewsPortal.Controllers.NewsController.Get(System.Guid,System.Guid)">
+        <member name="M:NewsPortal.Controllers.NewsController.GetComment(System.Guid,System.Guid)">
             <summary>
             Метод на получение информации по конкретному комментарию
             </summary>
@@ -46,21 +48,39 @@
             <param name="userId">Уникальный идентификатор пользователя</param>
             <returns>Модель искомого комментария</returns>
         </member>
-        <member name="M:NewsPortal.Controllers.NewsController.Add(NewsPortal.Models.VeiwModels.CommentVM)">
+        <member name="M:NewsPortal.Controllers.NewsController.GetCommentsNews(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Метод на получение всех комментариев к данной новости
+            </summary>
+            <param name="newsId">Уникальный идентификатор новости</param>
+            <param name="count">Количество записей на странице</param>
+            <param name="page">Страница</param>
+            <returns>Список комментариев новости</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.GetCommentsUser(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Метод на получение всех комментариев данного пользователя
+            </summary>
+            <param name="userId">Уникальный идентификатор пользователя</param>
+            <param name="count">Количество записей на странице</param>
+            <param name="page">Страница</param>
+            <returns>Список комментариев новости</returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.NewsController.AddComment(NewsPortal.Models.VeiwModels.CommentVM)">
             <summary>
             Добавление нового комментария
             </summary>
             <param name="commentVM">Модель нового комментария</param>
             <returns></returns>
         </member>
-        <member name="M:NewsPortal.Controllers.NewsController.Put(NewsPortal.Models.VeiwModels.CommentVM)">
+        <member name="M:NewsPortal.Controllers.NewsController.PutComment(NewsPortal.Models.VeiwModels.CommentVM)">
             <summary>
             Метод на редактирование комментария
             </summary>
             <param name="commentVM">Изменённая модель комментария</param>
             <returns></returns>
         </member>
-        <member name="M:NewsPortal.Controllers.NewsController.Delete(System.Guid,System.Guid)">
+        <member name="M:NewsPortal.Controllers.NewsController.DeleteComment(System.Guid,System.Guid)">
             <summary>
             Метод на удаление комментария
             </summary>
