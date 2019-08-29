@@ -58,7 +58,7 @@ namespace NewsPortal.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        [Authorize(Roles = "user")]
+        [AllowAnonymous]
         public async Task<News> Get([FromRoute]Guid newsId)
         {
             var news = await _newsBuilder.Get(newsId);
