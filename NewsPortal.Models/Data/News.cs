@@ -10,5 +10,6 @@ namespace NewsPortal.Models.Data
         public string Headline { get; set; }
         public string Review { get; set; }
         public string Text { get; set; }
+        public bool ForUser { get; set; }
     }
 }

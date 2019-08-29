@@ -13,6 +13,7 @@ namespace NewsPortal.Domain.Storage.Interfaces
         Task Delete(Guid newsId);
         Task<News> Update(NewsVM newsVM);
         Task<NewsListVM> GetAll(int count, int page);
+        Task<NewsListVM> GetLimitAll(int count, int page);
         Task<News> Get(Guid newsId);
     }
 }

@@ -41,7 +41,11 @@ namespace NewsPortal.Controllers
         [AllowAnonymous]
         public async Task<NewsListVM> GetAll([FromRoute]int count, [FromRoute]int page)
         {
-            var news = await _newsBuilder.GetAll(count, page);
+            NewsListVM news = null;
+            if (Request.HttpContext.User.IsInRole("user"))
+                news = await _newsBuilder.GetAll(count, page);
+            else
+                news = await _newsBuilder.GetLimitAll(count, page);
             return news;
         }
 

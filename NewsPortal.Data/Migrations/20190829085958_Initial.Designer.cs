@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NewsPortal.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190828085057_Initial")]
+    [Migration("20190829085958_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,6 +199,8 @@ namespace NewsPortal.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreateDate");
+
+                    b.Property<bool>("ForUser");
 
                     b.Property<string>("Headline");
 

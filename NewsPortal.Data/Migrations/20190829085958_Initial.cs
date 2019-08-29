@@ -70,7 +70,8 @@ namespace NewsPortal.Data.Migrations
                     Photo = table.Column<byte[]>(nullable: true),
                     Headline = table.Column<string>(nullable: true),
                     Review = table.Column<string>(nullable: true),
-                    Text = table.Column<string>(nullable: true)
+                    Text = table.Column<string>(nullable: true),
+                    ForUser = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
