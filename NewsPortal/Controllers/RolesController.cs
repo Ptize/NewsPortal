@@ -41,6 +41,21 @@ namespace NewsPortal.Controllers
         }
 
         /// <summary>
+        /// Проверка на членство в роли
+        /// </summary>
+        /// <param name="role">Роль</param>
+        /// <returns>Состояние в роли</returns>
+        [HttpGet("checkInRole/{role}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<bool> CheckInRole([FromRoute]string role)
+        {
+            var result = Request.HttpContext.User.IsInRole(role);
+            return result;
+        }
+
+        /// <summary>
         /// Метод на получение информации по ролям конкретного пользователя через логин
         /// </summary>
         /// <param name="login">Логин пользователя</param>

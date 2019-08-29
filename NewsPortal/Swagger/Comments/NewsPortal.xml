@@ -101,6 +101,13 @@
             <param name="userId">Уникальный идентификатор пользователя</param>
             <returns>Модель искомого изменяемой роли</returns>
         </member>
+        <member name="M:NewsPortal.Controllers.RolesController.CheckInRole(System.String)">
+            <summary>
+            Проверка на членство в роли
+            </summary>
+            <param name="role">Роль</param>
+            <returns>Состояние в роли</returns>
+        </member>
         <member name="M:NewsPortal.Controllers.RolesController.GetMyRole(System.String)">
             <summary>
             Метод на получение информации по ролям конкретного пользователя через логин
@@ -168,6 +175,12 @@
         <member name="M:NewsPortal.Controllers.UserController.Logout">
             <summary>
             Выход
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NewsPortal.Controllers.UserController.CheckAuth">
+            <summary>
+            Проверка авторизованности
             </summary>
             <returns></returns>
         </member>

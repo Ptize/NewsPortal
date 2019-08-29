@@ -117,6 +117,20 @@ namespace NewsPortal.Controllers
         }
 
         /// <summary>
+        /// Проверка авторизованности
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("checkAuth")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [AllowAnonymous]
+        public async Task<bool> CheckAuth()
+        {
+            var result = Request.HttpContext.User.Identity.IsAuthenticated;
+            return result;
+        }
+
+        /// <summary>
         /// Изменение пароля пользователя
         /// </summary>
         /// <param name="changePasswordVM">Модель изменения пароля</param>
